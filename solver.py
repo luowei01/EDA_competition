@@ -36,8 +36,8 @@ class PolicyNet(torch.nn.Module):
         x = F.relu(self.conv1(x))
         x = F.relu(self.conv2(x))
         x = F.relu(self.conv3(x))
-        return F.softmax(x, dim=1)
-        # return x
+        # return F.softmax(x, dim=1)
+        return x
 
 
 """train"""
