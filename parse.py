@@ -24,5 +24,4 @@ def parse(path):
 
 
 if __name__ == "__main__":
-    mos_list = parse('test.txt')
-if 
+    mos_list = parse('test1.nets')
