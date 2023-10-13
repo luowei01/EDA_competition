@@ -3,8 +3,13 @@ import re
 
 class Mos:
     def __init__(self, name, type, left, mid, right, w, l):
-        self.index = 0
-        pass
+        self.name=name
+        self.left = left
+        self.mid = mid
+        self.right = right
+        self.type = type
+        self.w = w
+        self.l = l
 
 
 def parse(path):
