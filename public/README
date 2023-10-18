@@ -1,0 +1,8 @@
+
+cells.spi: cell netlist.
+
+example_NAND2V4.json: example of output placement file.
+
+evaluator.py : placement evaluator. Usage: python3 evaluator.py %placement_file $cell_name cells.spi
+	Please try this cmd: python3 evaluator.py example_NAND2V4.json NAND2V4 cells.spi
+
