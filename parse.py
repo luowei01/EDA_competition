@@ -35,4 +35,5 @@ class Parser:
 if __name__ == "__main__":
     paser = Parser()
     paser.pattern=re.compile(r"(.*\s)(.*\s)(.*\s)(.*\s)(.*\s).*\sW=(.*)u\sL=(.*)n\n")
-    mos_list,words_list = paser.parse('test1.nets')
+    # mos_list,words_list = paser.parse('public/cells.spi')
+    mos_list,words_list = paser.parse('test.txt')
