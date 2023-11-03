@@ -149,7 +149,6 @@ class Cell:
             self.upper[x] = t
         else:
             self.lower[x] = t
-
         self.add_net(t.source(), x - 0.5)
         self.add_net(t.gate(), x)
         self.add_net(t.drain(), x + 0.5)
@@ -324,7 +323,6 @@ def load_netlist(file, cell_name):
                 if word[0] == 'w' or word[0] == 'W':
                     w = get_channel_width(word)
                     break
-
             t = Transistor(get_channel_type(words[5]), words[3], words[2], words[1], w, words[0][1:])
             transistor_dic[t.name] = t
 
@@ -359,6 +357,52 @@ def extract_subckt(file, cell_re):
         if len(words) > 1 and re.match(cell_re, words[1]):
             output_stream.write(line)
             find_cell = True
+
+def get_score(placement_file,cell_name,netlist_file):
+    import json
+    # read placement file
+    placement_stream = open(placement_file, "r")
+    placement_dic = json.load(placement_stream)
+    placement = placement_dic["placement"]
+    # get transistor properties from netlist
+    transistor_dic, pins = load_netlist(netlist_file, cell_name)
+    try:
+        # get ref width
+        ref_width = 0
+        for transistor_name, t in transistor_dic.items():
+            if t.channel_width > 220:
+                ref_width += t.channel_width // 200
+            else:
+                ref_width += 1
+
+        cell = Cell(cell_name, pins)
+        # get cell width
+        width = 0
+        for transistor_name, properties in placement.items():
+            if width < int(properties["x"]) + 1:
+                width = int(properties["x"]) + 1
+        cell.reset(width)
+        # add transistor
+        for transistor_name, properties in placement.items():
+            tname, finger = decompose_transistor_name(transistor_name)
+            transistor = transistor_dic[tname]
+            ref = TransistorRef(transistor, not str_equal(transistor.source_net, properties["source"]), int(properties["width"]))
+            cell.add_transistor(ref, int(properties["x"]))
+
+        # set ref width
+        upper_graph = EulerGraph(cell.upper)
+        lower_graph = EulerGraph(cell.lower)
+        min_gap = max(0.0, (upper_graph.get_odd_num() + lower_graph.get_odd_num() - 4) / 2)
+        cell.ref_width = (min_gap + ref_width) / 2
+
+        # check and get score
+        if cell.check(transistor_dic):
+            cell.evaluate(runtime=0)
+        return cell.score
+    except:
+        return 0
+
+
 
 
 if __name__ == "__main__":
