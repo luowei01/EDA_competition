@@ -1,0 +1,14 @@
+.SUBCKT MUX2 Y S D1 D0
+MM0 VDD S 3 VDD pch_mac W=0.12u L=30.00n
+MM1 11 D1 VDD VDD pch_mac W=0.12u L=30.00n
+MM2 7 3 11 VDD pch_mac W=0.12u L=30.00n
+MM3 12 S 7 VDD pch_mac W=0.12u L=30.00n
+MM4 VDD D0 12 VDD pch_mac W=0.12u L=30.00n
+MM5 Y 7 VDD VDD pch_mac W=0.12u L=30.00n
+MM6 VSS S 3 VSS nch_mac W=0.12u L=30.00n
+MM7 9 D1 VSS VSS nch_mac W=0.12u L=30.00n
+MM8 7 S 9 VSS nch_mac W=0.12u L=30.00n
+MM9 10 3 7 VSS nch_mac W=0.12u L=30.00n
+MM10 VSS D0 10 VSS nch_mac W=0.12u L=30.00n
+MM11 Y 7 VSS VSS nch_mac W=0.12u L=30.00n
+.ENDS
