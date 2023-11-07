@@ -1,14 +1,42 @@
-.SUBCKT MUX2 Y S D1 D0
-MM0 VDD S 3 VDD pch_mac W=0.12u L=30.00n
-MM1 11 D1 VDD VDD pch_mac W=0.12u L=30.00n
-MM2 7 3 11 VDD pch_mac W=0.12u L=30.00n
-MM3 12 S 7 VDD pch_mac W=0.12u L=30.00n
-MM4 VDD D0 12 VDD pch_mac W=0.12u L=30.00n
-MM5 Y 7 VDD VDD pch_mac W=0.12u L=30.00n
-MM6 VSS S 3 VSS nch_mac W=0.12u L=30.00n
-MM7 9 D1 VSS VSS nch_mac W=0.12u L=30.00n
-MM8 7 S 9 VSS nch_mac W=0.12u L=30.00n
-MM9 10 3 7 VSS nch_mac W=0.12u L=30.00n
-MM10 VSS D0 10 VSS nch_mac W=0.12u L=30.00n
-MM11 Y 7 VSS VSS nch_mac W=0.12u L=30.00n
-.ENDS
+.SUBCKT SNDSRNQV4 CKN D Q RDN SDN SE SI VDD VSS
+MM7 net106 RDN VDD VDD pch_mac W=120.00n L=30.00n
+MM8 net185 cn net106 VDD pch_mac W=120.00n L=30.00n
+MM20 net189 c net166 VDD pch_mac W=120.00n L=30.00n
+MM6 net106 net198 VDD VDD pch_mac W=120.00n L=30.00n
+MM19 net166 net202 VDD VDD pch_mac W=120.00n L=30.00n
+MM25 net166 SDN VDD VDD pch_mac W=120.00n L=30.00n
+MM40 SEN SE VDD VDD pch_mac W=120.00n L=30.00n
+MM13 cn c VDD VDD pch_mac W=200.00n L=30.00n
+MM11 c CKN VDD VDD pch_mac W=200.00n L=30.00n
+MM23 Q net202 VDD VDD pch_mac W=400.00n L=30.00n
+MM24 net198 SDN VDD VDD pch_mac W=120.00n L=30.00n
+MM5 net198 net185 VDD VDD pch_mac W=200.00n L=30.00n
+MM27 net202 RDN VDD VDD pch_mac W=120.00n L=30.00n
+MM21 net202 net189 VDD VDD pch_mac W=200.00n L=30.00n
+MM35 net190 SEN net133 VDD pch_mac W=120.00n L=30.00n
+MM38 net190 D net129 VDD pch_mac W=200.00n L=30.00n
+MM15 net198 cn net189 VDD pch_mac W=200.00n L=30.00n
+MM0 net190 c net185 VDD pch_mac W=200.00n L=30.00n
+MM36 net133 SI VDD VDD pch_mac W=120.00n L=30.00n
+MM37 net129 SE VDD VDD pch_mac W=200.00n L=30.00n
+MM14 net198 c net189 VSS nch_mac W=200.00n L=30.00n
+MM3 net190 cn net185 VSS nch_mac W=200.00n L=30.00n
+MM26 net226 SDN VSS VSS nch_mac W=200.00n L=30.00n
+MM29 net178 SDN VSS VSS nch_mac W=120.00n L=30.00n
+MM16 net174 net202 net178 VSS nch_mac W=120.00n L=30.00n
+MM17 net189 cn net174 VSS nch_mac W=120.00n L=30.00n
+MM18 net202 RDN net214 VSS nch_mac W=200.00n L=30.00n
+MM2 net218 SI VSS VSS nch_mac W=120.00n L=30.00n
+MM33 net210 SEN VSS VSS nch_mac W=200.00n L=30.00n
+MM22 Q net202 VSS VSS nch_mac W=400.00n L=30.00n
+MM1 net190 SE net218 VSS nch_mac W=120.00n L=30.00n
+MM30 net214 net189 VSS VSS nch_mac W=200.00n L=30.00n
+MM44 net222 RDN VSS VSS nch_mac W=120.00n L=30.00n
+MM4 net198 net185 net226 VSS nch_mac W=200.00n L=30.00n
+MM43 net230 net198 net222 VSS nch_mac W=120.00n L=30.00n
+MM34 net190 D net210 VSS nch_mac W=200.00n L=30.00n
+MM39 SEN SE VSS VSS nch_mac W=120.00n L=30.00n
+MM9 net185 c net230 VSS nch_mac W=120.00n L=30.00n
+MM12 cn c VSS VSS nch_mac W=200.00n L=30.00n
+MM10 c CKN VSS VSS nch_mac W=200.00n L=30.00n
+.ENDS SNDSRNQV4
