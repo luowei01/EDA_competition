@@ -439,7 +439,7 @@ MM45 mq_x clkbb net103 VDD pch_mac l=30.0n w=0.295u
 MM70 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM74 net172 qf_x VDD VDD pch_mac l=30.0n w=0.17u
-MM60 net0170 CDN VDD VDD pch_mac l=30.0n w=100n
+MM60 net0170 CDN VDD VDD pch_mac l=30.0n w=120n
 MM0 mq mq_x VDD VDD pch_mac l=30.0n w=0.295u
 MM61 net0170 mq VDD VDD pch_mac l=30.0n w=0.12u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
@@ -472,7 +472,7 @@ MM47 net212 D VSS VSS nch_mac l=30.0n w=0.185u
 MM3 qf clkbb net097 VDD pch_mac l=30.0n w=0.295u
 MM2 net097 qf_x VDD VDD pch_mac l=30.0n w=0.17u
 MM45 mq_x clkbb net103 VDD pch_mac l=30.0n w=0.295u
-MM60 net0143 CDN VDD VDD pch_mac l=30.0n w=100n
+MM60 net0143 CDN VDD VDD pch_mac l=30.0n w=120n
 MM0 mq mq_x VDD VDD pch_mac l=30.0n w=0.295u
 MM61 net0143 mq VDD VDD pch_mac l=30.0n w=0.12u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
@@ -513,8 +513,8 @@ MM45 mq_x clkbb net103 VDD pch_mac l=30.0n w=0.295u
 MM70 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM74 net172 qf_x VDD VDD pch_mac l=30.0n w=0.17u
-MM3 net172 SDN VDD VDD pch_mac l=30.0n w=0.115u
-MM60 net0172 CDN VDD VDD pch_mac l=30.0n w=100n
+MM3 net172 SDN VDD VDD pch_mac l=30.0n w=0.12u
+MM60 net0172 CDN VDD VDD pch_mac l=30.0n w=120n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.285u
 MM61 net0172 mq VDD VDD pch_mac l=30.0n w=0.12u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
@@ -523,7 +523,7 @@ MM78_2 qf_x CDN VDD VDD pch_mac l=30.0n w=0.17u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM77_2 qf_x qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM44 net103 D VDD VDD pch_mac l=30.0n w=0.295u
-MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.115u
+MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.12u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM79 mq_x clkb net0172 VDD pch_mac l=30.0n w=0.12u
@@ -553,8 +553,8 @@ MM75 net208 CDN VSS VSS nch_mac l=30.0n w=140.0n
 MM47 net212 D VSS VSS nch_mac l=30.0n w=0.185u
 MM45 mq_x clkbb net103 VDD pch_mac l=30.0n w=0.295u
 MM74 net172 qf_x VDD VDD pch_mac l=30.0n w=0.17u
-MM3 net172 SDN VDD VDD pch_mac l=30.0n w=0.115u
-MM60 net0161 CDN VDD VDD pch_mac l=30.0n w=100n
+MM3 net172 SDN VDD VDD pch_mac l=30.0n w=0.12u
+MM60 net0161 CDN VDD VDD pch_mac l=30.0n w=120n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.285u
 MM61 net0161 mq VDD VDD pch_mac l=30.0n w=0.12u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
@@ -563,7 +563,7 @@ MM78_2 qf_x CDN VDD VDD pch_mac l=30.0n w=0.17u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM77_2 qf_x qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM44 net103 D VDD VDD pch_mac l=30.0n w=0.295u
-MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.115u
+MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.12u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM79 mq_x clkb net0161 VDD pch_mac l=30.0n w=0.12u
@@ -579,8 +579,8 @@ MM69 QN net172 VSS VSS nch_mac l=30.0n w=0.14u
 MM69_2 QN net172 VSS VSS nch_mac l=30.0n w=0.14u 
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=100n
-MM66 net176 mq VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=120n
+MM66 net176 mq VSS VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=0.14u
 MM46 mq_x clkb net212 VSS nch_mac l=30.0n w=0.175u
 MM76 qf_x qf VSS VSS nch_mac l=30.0n w=140.0n
@@ -591,7 +591,7 @@ MM45 mq_x clkbb net103 VDD pch_mac l=30.0n w=0.26u
 MM70 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM74 net172 qf_x VDD VDD pch_mac l=30.0n w=0.26u
-MM60 net0132 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net0132 mq VDD VDD pch_mac l=30.0n w=120n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.175u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=170.0n
@@ -599,7 +599,7 @@ MM44 net103 D VDD VDD pch_mac l=30.0n w=0.26u
 MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.175u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq_x clkb net0132 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkb net0132 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.175u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 .ENDS
@@ -625,7 +625,7 @@ MM3 net172 qf_x VDD VDD pch_mac l=30.0n w=0.185u
 MM45 mq_x clkbb net090 VDD pch_mac l=30.0n w=0.175u
 MM70 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
-MM60 net0143 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net0143 mq VDD VDD pch_mac l=30.0n w=120n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.185u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=0.185u
@@ -633,7 +633,7 @@ MM44 net090 D VDD VDD pch_mac l=30.0n w=0.175u
 MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.185u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq_x clkb net0143 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkb net0143 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.185u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 .ENDS
@@ -693,7 +693,7 @@ MM7 net172 qf_x VDD VDD pch_mac l=30.0n w=0.185u
 MM45 mq_x clkbb net090 VDD pch_mac l=30.0n w=0.215u
 MM70 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
-MM60 net0163 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net0163 mq VDD VDD pch_mac l=30.0n w=120n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.185u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=0.185u
@@ -701,7 +701,7 @@ MM44 net090 D net0144 VDD pch_mac l=30.0n w=0.215u
 MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.185u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq_x clkb net0163 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkb net0163 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.185u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 .ENDS
@@ -729,7 +729,7 @@ MM7 net172 qf_x VDD VDD pch_mac l=30.0n w=0.185u
 MM45 mq_x clkbb net212 VDD pch_mac l=30.0n w=0.215u
 MM70 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
-MM60 net0153 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net0153 mq VDD VDD pch_mac l=30.0n w=120n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.185u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=0.185u
@@ -737,7 +737,7 @@ MM44 net212 D net0144 VDD pch_mac l=30.0n w=0.17u
 MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.185u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq_x clkb net0153 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkb net0153 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.185u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 .ENDS
@@ -753,8 +753,8 @@ MM69 QN net172 VSS VSS nch_mac l=30.0n w=0.14u
 MM69_2 QN net172 VSS VSS nch_mac l=30.0n w=0.14u 
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=100n
-MM66 net176 mq VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=120n
+MM66 net176 mq VSS VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkb net212 VSS nch_mac l=30.0n w=0.175u
 MM76 qf_x qf VSS VSS nch_mac l=30.0n w=140.0n
@@ -769,7 +769,7 @@ MM45 mq_x clkbb net090 VDD pch_mac l=30.0n w=0.24u
 MM70 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM74 net172 qf_x VDD VDD pch_mac l=30.0n w=0.26u
-MM60 net0171 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net0171 mq VDD VDD pch_mac l=30.0n w=120n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.175u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.175u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=170.0n
@@ -777,7 +777,7 @@ MM44 net090 SA net0231 VDD pch_mac l=30.0n w=0.27u
 MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.25u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq_x clkb net0171 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkb net0171 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.175u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=135.0n
 .ENDS
@@ -845,7 +845,7 @@ MM45 mq_x clkb net103 VDD pch_mac l=30.0n w=0.295u
 MM70 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM74 net172 qf_x VDD VDD pch_mac l=30.0n w=0.17u
-MM60 net0170 CDN VDD VDD pch_mac l=30.0n w=100n
+MM60 net0170 CDN VDD VDD pch_mac l=30.0n w=120n
 MM0 mq mq_x VDD VDD pch_mac l=30.0n w=0.295u
 MM61 net0170 mq VDD VDD pch_mac l=30.0n w=0.12u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
@@ -883,8 +883,8 @@ MM45 mq_x clkb net103 VDD pch_mac l=30.0n w=0.295u
 MM70 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM74 net172 qf_x VDD VDD pch_mac l=30.0n w=0.17u
-MM3 net172 SDN VDD VDD pch_mac l=30.0n w=0.115u
-MM60 net0172 CDN VDD VDD pch_mac l=30.0n w=100n
+MM3 net172 SDN VDD VDD pch_mac l=30.0n w=0.12u
+MM60 net0172 CDN VDD VDD pch_mac l=30.0n w=120n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.285u
 MM61 net0172 mq VDD VDD pch_mac l=30.0n w=0.12u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
@@ -893,7 +893,7 @@ MM78_2 qf_x CDN VDD VDD pch_mac l=30.0n w=0.17u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM77_2 qf_x qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM44 net103 D VDD VDD pch_mac l=30.0n w=0.295u
-MM68 net172 clkb qf VDD pch_mac l=30.0n w=0.115u
+MM68 net172 clkb qf VDD pch_mac l=30.0n w=0.12u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM79 mq_x clkbb net0172 VDD pch_mac l=30.0n w=0.12u
@@ -909,8 +909,8 @@ MM69 QN net172 VSS VSS nch_mac l=30.0n w=0.14u
 MM69_2 QN net172 VSS VSS nch_mac l=30.0n w=0.14u 
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM64 mq_x clkb net176 VSS nch_mac l=30.0n w=100n
-MM66 net176 mq VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkb net176 VSS nch_mac l=30.0n w=120n
+MM66 net176 mq VSS VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=0.14u
 MM46 mq_x clkbb net212 VSS nch_mac l=30.0n w=0.175u
 MM76 qf_x qf VSS VSS nch_mac l=30.0n w=140.0n
@@ -921,7 +921,7 @@ MM45 mq_x clkb net103 VDD pch_mac l=30.0n w=0.26u
 MM70 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM74 net172 qf_x VDD VDD pch_mac l=30.0n w=0.26u
-MM60 net0132 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net0132 mq VDD VDD pch_mac l=30.0n w=120n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.175u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=170.0n
@@ -929,7 +929,7 @@ MM44 net103 D VDD VDD pch_mac l=30.0n w=0.26u
 MM68 net172 clkb qf VDD pch_mac l=30.0n w=0.175u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq_x clkbb net0132 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkbb net0132 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf clkbb mq VDD pch_mac l=30.0n w=0.175u
 MM54 clkb CPN VDD VDD pch_mac l=30.0n w=0.17u
 .ENDS
@@ -961,7 +961,7 @@ MM61 net0144 mq VDD VDD pch_mac l=30.0n w=0.17u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=170.0n
 MM44 net103 D VDD VDD pch_mac l=30.0n w=0.2u
-MM68 net172 clkb qf VDD pch_mac l=30.0n w=0.11u
+MM68 net172 clkb qf VDD pch_mac l=30.0n w=0.12u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM79 mq_x clkbb net0144 VDD pch_mac l=30.0n w=0.17u
@@ -1025,7 +1025,7 @@ MM61 net0144 mq VDD VDD pch_mac l=30.0n w=0.17u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=170.0n
 MM44 net103 D VDD VDD pch_mac l=30.0n w=0.2u
-MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.11u
+MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.12u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM79 mq_x clkb net0144 VDD pch_mac l=30.0n w=0.17u
@@ -1057,7 +1057,7 @@ MM61 net0144 mq VDD VDD pch_mac l=30.0n w=0.17u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=170.0n
 MM44 net103 D VDD VDD pch_mac l=30.0n w=0.2u
-MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.11u
+MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.12u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM79 mq_x clkb net0144 VDD pch_mac l=30.0n w=0.17u
@@ -1081,8 +1081,8 @@ MM69 QN net172 VSS VSS nch_mac l=30.0n w=0.14u
 MM69_2 QN net172 VSS VSS nch_mac l=30.0n w=0.14u 
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=100n
-MM66 net176 mq net0201 VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=120n
+MM66 net176 mq net0201 VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkb net212 VSS nch_mac l=30.0n w=0.17u
 MM76 qf_x qf net0209 VSS nch_mac l=30.0n w=140.0n
@@ -1127,8 +1127,8 @@ MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=275.00n
 MM67 net172 clkb qf VSS nch_mac l=30.0n w=0.195u
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=100n
-MM66 net176 mq net0201 VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=120n
+MM66 net176 mq net0201 VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkb net212 VSS nch_mac l=30.0n w=0.17u
 MM76 qf_x qf net0196 VSS nch_mac l=30.0n w=140.0n
@@ -1169,8 +1169,8 @@ MM69 QN net172 VSS VSS nch_mac l=30.0n w=0.275u
 MM69_2 QN net172 VSS VSS nch_mac l=30.0n w=0.275u 
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=100n
-MM66 net176 mq VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=120n
+MM66 net176 mq VSS VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkb net212 VSS nch_mac l=30.0n w=0.17u
 MM14 qf_x qf VSS VSS nch_mac l=30.0n w=0.14u
@@ -1185,7 +1185,7 @@ MM15 net172 qf_x VDD VDD pch_mac l=30.0n w=0.17u
 MM45 mq_x clkbb net090 VDD pch_mac l=30.0n w=0.265u
 MM70 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net172 VDD VDD pch_mac l=30.0n w=0.17u 
-MM60 net0173 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net0173 mq VDD VDD pch_mac l=30.0n w=120n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.275u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.275u
 MM13 qf_x qf VDD VDD pch_mac l=30.0n w=0.17u
@@ -1193,7 +1193,7 @@ MM44 net090 E net0144 VDD pch_mac l=30.0n w=0.27u
 MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.12u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq_x clkb net0173 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkb net0173 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.275u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=135.0n
 .ENDS
@@ -1207,8 +1207,8 @@ MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=275.00n
 MM67 net172 clkb qf VSS nch_mac l=30.0n w=0.275u
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=100n
-MM66 net176 mq VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net176 VSS nch_mac l=30.0n w=120n
+MM66 net176 mq VSS VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkb net212 VSS nch_mac l=30.0n w=0.17u
 MM14 qf_x qf VSS VSS nch_mac l=30.0n w=0.14u
@@ -1221,7 +1221,7 @@ MM6 net0144 net172 VDD VDD pch_mac l=30.0n w=0.27u
 MM1 net090 net0176 net0184 VDD pch_mac l=30.0n w=0.27u
 MM45 mq_x clkbb net090 VDD pch_mac l=30.0n w=0.265u
 MM74 net172 qf_x VDD VDD pch_mac l=30.0n w=0.17u
-MM60 net0173 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net0173 mq VDD VDD pch_mac l=30.0n w=120n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.275u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.275u
 MM13 qf_x qf VDD VDD pch_mac l=30.0n w=0.17u
@@ -1229,7 +1229,7 @@ MM44 net090 E net0144 VDD pch_mac l=30.0n w=0.27u
 MM68 net172 clkbb qf VDD pch_mac l=30.0n w=0.12u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq_x clkb net0173 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkb net0173 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.275u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=135.0n
 .ENDS
@@ -1906,18 +1906,18 @@ MM6 net0111 clkbb qf_x VDD pch_mac l=30.0n w=0.22u
 MM1 clkb E VDD VDD pch_mac l=30.0n w=0.17u
 .ENDS
 .SUBCKT LHQOPTDAD2 D E Q VDD VSS
-MM9 net92 EB net090 VSS nch_mac l=30n w=100n
+MM9 net92 EB net090 VSS nch_mac l=30n w=120n
 MM12_1 net0123 EP VSS VSS nch_mac l=30n w=210.0n
 MM12_2 net0123 EP VSS VSS nch_mac l=30n w=210.0n
 MM11 net92 D net0123 VSS nch_mac l=30n w=210.0n
 MM7 EP EB VSS VSS nch_mac l=30n w=140.0n
 MM10 net0240 net92 VSS VSS nch_mac l=30n w=140.0n
 MN11 EB E VSS VSS nch_mac l=30n w=140.0n
-MM8 net090 net0240 VSS VSS nch_mac l=30n w=100n
+MM8 net090 net0240 VSS VSS nch_mac l=30n w=120n
 MM13_1 Q net92 VSS VSS nch_mac l=30n w=140.0n
 MM13_2 Q net92 VSS VSS nch_mac l=30n w=140.0n
 MM0 net92 D net0199 VDD pch_mac l=30n w=135.0n
-MM3 net200 net0240 VDD VDD pch_mac l=30n w=100n
+MM3 net200 net0240 VDD VDD pch_mac l=30n w=120n
 MM1 net0240 net92 VDD VDD pch_mac l=30n w=170.0n
 MM2_1 Q net92 VDD VDD pch_mac l=30n w=170.0n
 MM2_2 Q net92 VDD VDD pch_mac l=30n w=170.0n
@@ -1925,7 +1925,7 @@ MM6 EP EB VDD VDD pch_mac l=30n w=170.0n
 MM5 EB E VDD VDD pch_mac l=30n w=170.0n
 MP12_1 net0199 EB VDD VDD pch_mac l=30n w=135.0n
 MP12_2 net0199 EB VDD VDD pch_mac l=30n w=135.0n
-MM4 net92 EP net200 VDD pch_mac l=30n w=100n
+MM4 net92 EP net200 VDD pch_mac l=30n w=120n
 .ENDS
 .SUBCKT LHSNDD2 D E SDN Q QN VDD VSS
 MM7 clkb E VSS VSS nch_mac l=30.0n w=0.14u
@@ -2933,17 +2933,17 @@ MM2 net28 A4 net27 VDD pch_mac l=30.0n w=0.17u
 MM0 net0110 CDN VSS VSS nch_mac l=30.0n w=0.14u
 MM1 qf_x qf net0110 VSS nch_mac l=30.0n w=0.14u
 MM47 net82 net0237 net13 VSS nch_mac l=30.0n w=0.175u
-MM51 net85 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net85 SI VSS VSS nch_mac l=30.0n w=120n
 MM75 net18 CDN VSS VSS nch_mac l=30.0n w=0.14u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140n
 MM49 mq mq_x VSS VSS nch_mac l=30.0n w=0.15u
 MM76 qf_x qf net18 VSS nch_mac l=30.0n w=0.14u
 MM46 mq_x clkb net82 VSS nch_mac l=30.0n w=0.165u
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140n
-MM66 net42 CDN VSS VSS nch_mac l=30.0n w=100n
-MM64 mq_x clkbb net54 VSS nch_mac l=30.0n w=100n
+MM66 net42 CDN VSS VSS nch_mac l=30.0n w=120n
+MM64 mq_x clkbb net54 VSS nch_mac l=30.0n w=120n
 MM57 net0237 SE VSS VSS nch_mac l=30.0n w=0.12u
-MM65 net54 mq net42 VSS nch_mac l=30.0n w=100n
+MM65 net54 mq net42 VSS nch_mac l=30.0n w=120n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM69 QN net66 VSS VSS nch_mac l=30.0n w=0.14u 
@@ -2952,7 +2952,7 @@ MM67 net66 clkb qf VSS nch_mac l=30.0n w=0.15u
 MM48 net13 D VSS VSS nch_mac l=30.0n w=0.175u
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.15u
 MM73 net66 qf_x VSS VSS nch_mac l=30.0n w=0.14u
-MM52 net82 SE net85 VSS nch_mac l=30.0n w=100n
+MM52 net82 SE net85 VSS nch_mac l=30.0n w=120n
 MM2 qf_x CDN VDD VDD pch_mac l=30.0n w=0.17u 
 MM2_2 qf_x CDN VDD VDD pch_mac l=30.0n w=0.17u 
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
@@ -2981,17 +2981,17 @@ MM42 net158 net0237 net161 VDD pch_mac l=30.0n w=0.12u
 MM0 net0110 CDN VSS VSS nch_mac l=30.0n w=0.245u
 MM1 qf_x qf net0110 VSS nch_mac l=30.0n w=0.245u
 MM47 net82 net0237 net13 VSS nch_mac l=30.0n w=0.175u
-MM51 net85 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net85 SI VSS VSS nch_mac l=30.0n w=120n
 MM75 net18 CDN VSS VSS nch_mac l=30.0n w=0.245u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
 MM49 mq mq_x VSS VSS nch_mac l=30.0n w=0.245u
 MM76 qf_x qf net18 VSS nch_mac l=30.0n w=0.245u
 MM46 mq_x clkb net82 VSS nch_mac l=30.0n w=0.165u
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
-MM66 net42 CDN VSS VSS nch_mac l=30.0n w=100n
-MM64 mq_x clkbb net54 VSS nch_mac l=30.0n w=100n
+MM66 net42 CDN VSS VSS nch_mac l=30.0n w=120n
+MM64 mq_x clkbb net54 VSS nch_mac l=30.0n w=120n
 MM57 net0237 SE VSS VSS nch_mac l=30.0n w=0.12u
-MM65 net54 mq net42 VSS nch_mac l=30.0n w=100n
+MM65 net54 mq net42 VSS nch_mac l=30.0n w=120n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM69 QN net66 VSS VSS nch_mac l=30.0n w=0.14u 
@@ -3000,7 +3000,7 @@ MM67 net66 clkb qf VSS nch_mac l=30.0n w=0.155u
 MM48 net13 D VSS VSS nch_mac l=30.0n w=0.175u
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.155u
 MM73 net66 qf_x VSS VSS nch_mac l=30.0n w=0.14u
-MM52 net82 SE net85 VSS nch_mac l=30.0n w=100n
+MM52 net82 SE net85 VSS nch_mac l=30.0n w=120n
 MM2 qf_x CDN VDD VDD pch_mac l=30.0n w=0.12u
 MM2B qf_x CDN VDD VDD pch_mac l=30.0n w=0.295u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
@@ -3026,18 +3026,18 @@ MM45 mq_x clkbb net158 VDD pch_mac l=30.0n w=0.22u
 MM42 net158 net0237 net161 VDD pch_mac l=30.0n w=0.12u
 .ENDS
 .SUBCKT SDFCNOPTBD2 SI D SE CP CDN Q QN VDD VSS
-MM66 net0111 CDN VSS VSS nch_mac l=30n w=100n
-MM64 ml_ax clkbb net0110 VSS nch_mac l=30n w=100n
-MM65 net0110 ml_b net0111 VSS nch_mac l=30n w=100n
+MM66 net0111 CDN VSS VSS nch_mac l=30n w=120n
+MM64 ml_ax clkbb net0110 VSS nch_mac l=30n w=120n
+MM65 net0110 ml_b net0111 VSS nch_mac l=30n w=120n
 MM53 clkb CP VSS VSS nch_mac l=30n w=140.0n
 MM55 clkbb clkb VSS VSS nch_mac l=30n w=140.0n
 MM47_1 net034 D VSS VSS nch_mac l=30n w=135.0n
 MM47_2 net034 D VSS VSS nch_mac l=30n w=135.0n
 MM49_1 ml_b ml_ax VSS VSS nch_mac l=30n w=240.00n
 MM49_2 ml_b ml_ax VSS VSS nch_mac l=30n w=240.00n
-MM51 net0109 SI VSS VSS nch_mac l=30n w=100n
+MM51 net0109 SI VSS VSS nch_mac l=30n w=120n
 MM57 net027 SE VSS VSS nch_mac l=30n w=135.0n
-MM52 net031 SE net0109 VSS nch_mac l=30n w=100n
+MM52 net031 SE net0109 VSS nch_mac l=30n w=120n
 MM73 net66 qf_x VSS VSS nch_mac l=30n w=140.0n
 MSLTn1 qf clkbb ml_b VSS nch_mac l=30n w=155.00n
 MM67 net66 clkb qf VSS nch_mac l=30n w=155.00n
@@ -3071,8 +3071,8 @@ MSLTp1 qf clkb ml_b VDD pch_mac l=30n w=295.00n
 MM17 net034 D VDD VDD pch_mac l=30n w=170.0n
 MM44_1 net032 SE net034 VDD pch_mac l=30n w=240.00n
 MM44_2 net032 SE net034 VDD pch_mac l=30n w=240.00n
-MM41 net0107 SI VDD VDD pch_mac l=30n w=100n
-MM42 net032 net027 net0107 VDD pch_mac l=30n w=100n
+MM41 net0107 SI VDD VDD pch_mac l=30n w=120n
+MM42 net032 net027 net0107 VDD pch_mac l=30n w=120n
 MM50_1 ml_b ml_ax VDD VDD pch_mac l=30n w=335.00n
 MM50_2 ml_b ml_ax VDD VDD pch_mac l=30n w=335.00n
 MM26 net034 D VDD VDD pch_mac l=30n w=170.0n
@@ -3083,22 +3083,22 @@ MM3 net89 CDN VSS VSS nch_mac l=30.0n w=0.14u
 MM2 qf_x qf net89 VSS nch_mac l=30.0n w=0.14u
 MM5 net108 qf_x VSS VSS nch_mac l=30.0n w=0.14u
 MM7 qf clkb net108 VSS nch_mac l=30.0n w=0.15u
-MM52 net109 SE net112 VSS nch_mac l=30.0n w=100n
+MM52 net109 SE net112 VSS nch_mac l=30.0n w=120n
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.15u
 MM48 net0220 D VSS VSS nch_mac l=30.0n w=0.175u
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM65 net132 mq net133 VSS nch_mac l=30.0n w=100n
+MM65 net132 mq net133 VSS nch_mac l=30.0n w=120n
 MM57 net0219 SE VSS VSS nch_mac l=30.0n w=0.12u
-MM64 mq_x clkbb net132 VSS nch_mac l=30.0n w=100n
-MM66 net133 CDN VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net132 VSS nch_mac l=30.0n w=120n
+MM66 net133 CDN VSS VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140n
 MM46 mq_x clkb net109 VSS nch_mac l=30.0n w=0.165u
 MM76 qf_x qf net157 VSS nch_mac l=30.0n w=0.14u
 MM49 mq mq_x VSS VSS nch_mac l=30.0n w=0.15u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140n
 MM75 net157 CDN VSS VSS nch_mac l=30.0n w=0.14u
-MM51 net112 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net112 SI VSS VSS nch_mac l=30.0n w=120n
 MM47 net109 net0219 net0220 VSS nch_mac l=30.0n w=0.175u
 MM1 qf_x qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM1_2 qf_x qf VDD VDD pch_mac l=30.0n w=0.17u 
@@ -3127,22 +3127,22 @@ MM3 net89 CDN VSS VSS nch_mac l=30.0n w=0.245u
 MM2 qf_x qf net89 VSS nch_mac l=30.0n w=245.00n
 MM5 net108 qf_x VSS VSS nch_mac l=30.0n w=0.12u
 MM7 qf clkb net108 VSS nch_mac l=30.0n w=0.12u
-MM52 net109 SE net112 VSS nch_mac l=30.0n w=100n
+MM52 net109 SE net112 VSS nch_mac l=30.0n w=120n
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.155u
 MM48 net0220 D VSS VSS nch_mac l=30.0n w=0.175u
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM65 net132 mq net133 VSS nch_mac l=30.0n w=100n
+MM65 net132 mq net133 VSS nch_mac l=30.0n w=120n
 MM57 net0219 SE VSS VSS nch_mac l=30.0n w=0.12u
-MM64 mq_x clkbb net132 VSS nch_mac l=30.0n w=100n
-MM66 net133 CDN VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net132 VSS nch_mac l=30.0n w=120n
+MM66 net133 CDN VSS VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkb net109 VSS nch_mac l=30.0n w=0.165u
 MM76 qf_x qf net157 VSS nch_mac l=30.0n w=0.245u
 MM49 mq mq_x VSS VSS nch_mac l=30.0n w=0.245u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
 MM75 net157 CDN VSS VSS nch_mac l=30.0n w=0.245u
-MM51 net112 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net112 SI VSS VSS nch_mac l=30.0n w=120n
 MM47 net109 net0219 net0220 VSS nch_mac l=30.0n w=0.175u
 MM1 qf_x qf VDD VDD pch_mac l=30.0n w=0.295u 
 MM1_2 qf_x qf VDD VDD pch_mac l=30.0n w=0.295u 
@@ -3169,14 +3169,14 @@ MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 .SUBCKT SDFCNQOPTBD2 SI D SE CP CDN Q VDD VSS
 MM49_1 ml_b ml_ax VSS VSS nch_mac l=30n w=240.00n
 MM49_2 ml_b ml_ax VSS VSS nch_mac l=30n w=240.00n
-MM65 net0101 ml_b net0100 VSS nch_mac l=30n w=100n
+MM65 net0101 ml_b net0100 VSS nch_mac l=30n w=120n
 MM53 clkb CP VSS VSS nch_mac l=30n w=140.0n
-MM52 net029 SE net0104 VSS nch_mac l=30n w=100n
-MM51 net0104 SI VSS VSS nch_mac l=30n w=100n
+MM52 net029 SE net0104 VSS nch_mac l=30n w=120n
+MM51 net0104 SI VSS VSS nch_mac l=30n w=120n
 MM47_1 net032 D VSS VSS nch_mac l=30n w=135.0n
 MM47_2 net032 D VSS VSS nch_mac l=30n w=135.0n
-MM64 ml_ax clkbb net0101 VSS nch_mac l=30n w=100n
-MM66 net0100 CDN VSS VSS nch_mac l=30n w=100n
+MM64 ml_ax clkbb net0101 VSS nch_mac l=30n w=120n
+MM66 net0100 CDN VSS VSS nch_mac l=30n w=120n
 MM46 ml_ax clkb net029 VSS nch_mac l=30n w=165.00n
 MM55 clkbb clkb VSS VSS nch_mac l=30n w=140.0n
 MM75 net0106 CDN VSS VSS nch_mac l=30n w=240.00n
@@ -3194,8 +3194,8 @@ MM3 net0120 CDN VSS VSS nch_mac l=30n w=240.00n
 MM61 net0102 ml_b VDD VDD pch_mac l=30n w=120.0n
 MM50_1 ml_b ml_ax VDD VDD pch_mac l=30n w=335.00n
 MM50_2 ml_b ml_ax VDD VDD pch_mac l=30n w=335.00n
-MM42 net030 net025 net0103 VDD pch_mac l=30n w=100n
-MM41 net0103 SI VDD VDD pch_mac l=30n w=100n
+MM42 net030 net025 net0103 VDD pch_mac l=30n w=120n
+MM41 net0103 SI VDD VDD pch_mac l=30n w=120n
 MM54 clkb CP VDD VDD pch_mac l=30n w=170.0n
 MSLTp1 sl_a clkb ml_b VDD pch_mac l=30n w=295.00n
 MM45 ml_ax clkbb net030 VDD pch_mac l=30n w=240.0n
@@ -3220,7 +3220,7 @@ MM6 net0399 SDN net99 VSS nch_mac l=30.0n w=0.155u
 MM7 net99 qf_x VSS VSS nch_mac l=30.0n w=0.155u
 MM3 net103 SDN VSS VSS nch_mac l=30.0n w=0.22u
 MM2 mq mq_x net103 VSS nch_mac l=30.0n w=0.14u
-MM52 net111 SE net171 VSS nch_mac l=30.0n w=100n
+MM52 net111 SE net171 VSS nch_mac l=30.0n w=120n
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.155u
 MM48 net79 D VSS VSS nch_mac l=30.0n w=0.175u
 MM67 net0399 clkb qf VSS nch_mac l=30.0n w=0.155u
@@ -3228,16 +3228,16 @@ MM69 QN net0399 VSS VSS nch_mac l=30.0n w=0.14u
 MM69_2 QN net0399 VSS VSS nch_mac l=30.0n w=0.14u 
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM65 net135 mq net138 VSS nch_mac l=30.0n w=100n
+MM65 net135 mq net138 VSS nch_mac l=30.0n w=120n
 MM57 net0236 SE VSS VSS nch_mac l=30.0n w=0.12u
-MM64 mq_x clkbb net135 VSS nch_mac l=30.0n w=100n
-MM66 net138 CDN VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net135 VSS nch_mac l=30.0n w=120n
+MM66 net138 CDN VSS VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkb net111 VSS nch_mac l=30.0n w=0.165u
 MM76 qf_x qf net167 VSS nch_mac l=30.0n w=0.22u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
 MM75 net167 CDN VSS VSS nch_mac l=30.0n w=0.22u
-MM51 net171 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net171 SI VSS VSS nch_mac l=30.0n w=120n
 MM47 net111 net0236 net79 VSS nch_mac l=30.0n w=0.175u
 MM5 net0399 SDN VDD VDD pch_mac l=30.0n w=0.12u
 MM4 net0399 qf_x VDD VDD pch_mac l=30.0n w=0.17u
@@ -3267,22 +3267,22 @@ MM1 mq mq_x VDD VDD pch_mac l=30.0n w=0.17u
 MM10 net0109 CDN VSS VSS nch_mac l=30.0n w=0.245u
 MM11 qf_x qf net0109 VSS nch_mac l=30.0n w=0.245u
 MM47 net86 net0245 net130 VSS nch_mac l=30.0n w=0.175u
-MM51 net89 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net89 SI VSS VSS nch_mac l=30.0n w=120n
 MM75 net49 CDN VSS VSS nch_mac l=30.0n w=0.245u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
 MM76 qf_x qf net49 VSS nch_mac l=30.0n w=0.245u
 MM46 mq_x clkb net86 VSS nch_mac l=30.0n w=0.165u
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
-MM66 net58 CDN VSS VSS nch_mac l=30.0n w=100n
-MM64 mq_x clkbb net65 VSS nch_mac l=30.0n w=100n
+MM66 net58 CDN VSS VSS nch_mac l=30.0n w=120n
+MM64 mq_x clkbb net65 VSS nch_mac l=30.0n w=120n
 MM57 net0245 SE VSS VSS nch_mac l=30.0n w=0.12u
-MM65 net65 mq net58 VSS nch_mac l=30.0n w=100n
+MM65 net65 mq net58 VSS nch_mac l=30.0n w=120n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM67 net0163 clkb qf VSS nch_mac l=30.0n w=0.155u
 MM48 net130 D VSS VSS nch_mac l=30.0n w=0.175u
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.155u
-MM52 net86 SE net89 VSS nch_mac l=30.0n w=100n
+MM52 net86 SE net89 VSS nch_mac l=30.0n w=120n
 MM2 mq mq_x net94 VSS nch_mac l=30.0n w=0.14u
 MM3 net94 SDN VSS VSS nch_mac l=30.0n w=0.245u
 MM7 net29 qf_x VSS VSS nch_mac l=30.0n w=0.155u
@@ -3316,20 +3316,20 @@ MM73 net101 qf_x VSS VSS nch_mac l=30.0n w=0.14u
 MM69 QN net101 VSS VSS nch_mac l=30.0n w=0.14u 
 MM69_2 QN net101 VSS VSS nch_mac l=30.0n w=0.14u 
 MM2 qf_x qf VSS VSS nch_mac l=30.0n w=0.14u
-MM52 net89 SE net92 VSS nch_mac l=30.0n w=100n
+MM52 net89 SE net92 VSS nch_mac l=30.0n w=120n
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.265u
 MM48 net0268 D VSS VSS nch_mac l=30.0n w=0.175u
 MM67 net101 clkb qf VSS nch_mac l=30.0n w=0.265u
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM65 mq_x clkbb net112 VSS nch_mac l=30.0n w=100n
+MM65 mq_x clkbb net112 VSS nch_mac l=30.0n w=120n
 MM57 net0196 SE VSS VSS nch_mac l=30.0n w=0.175u
-MM66 net112 mq VSS VSS nch_mac l=30.0n w=100n
+MM66 net112 mq VSS VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkb net89 VSS nch_mac l=30.0n w=0.175u
 MM49 mq mq_x VSS VSS nch_mac l=30.0n w=0.265u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
-MM51 net92 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net92 SI VSS VSS nch_mac l=30.0n w=120n
 MM47 net89 net0196 net0268 VSS nch_mac l=30.0n w=0.175u
 MM70 QN net101 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net101 VDD VDD pch_mac l=30.0n w=0.17u 
@@ -3346,7 +3346,7 @@ MM44 net25 SE net0268 VDD pch_mac l=30.0n w=0.24u
 MM68 net101 clkbb qf VDD pch_mac l=30.0n w=0.285u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 net0107 mq VDD VDD pch_mac l=30.0n w=100n
+MM79 net0107 mq VDD VDD pch_mac l=30.0n w=120n
 MM43 net0268 D VDD VDD pch_mac l=30.0n w=0.24u
 MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.285u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
@@ -3412,8 +3412,8 @@ MM69 QN qf VSS VSS nch_mac l=30.0n w=0.14u
 MM69_2 QN qf VSS VSS nch_mac l=30.0n w=0.14u 
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM65 net149 mq_x VSS VSS nch_mac l=30.0n w=100n
-MM64 mq clkbb net149 VSS nch_mac l=30.0n w=100n
+MM65 net149 mq_x VSS VSS nch_mac l=30.0n w=120n
+MM64 mq clkbb net149 VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM49 mq_x mq VSS VSS nch_mac l=30.0n w=0.18u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
@@ -3430,12 +3430,12 @@ MM2 net94 D VDD VDD pch_mac l=30.0n w=0.17u
 MM70 QN qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM74 qf qf_x VDD VDD pch_mac l=30.0n w=0.17u
-MM60 net58 mq_x VDD VDD pch_mac l=30.0n w=100n
+MM60 net58 mq_x VDD VDD pch_mac l=30.0n w=120n
 MM50 mq_x mq VDD VDD pch_mac l=30.0n w=0.275u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq clkb net58 VDD pch_mac l=30.0n w=100n
+MM79 mq clkb net58 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf_x clkb mq_x VDD pch_mac l=30.0n w=0.275u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 .ENDS
@@ -3483,8 +3483,8 @@ MM14 net120 SI VDD VDD pch_mac l=30.0n w=0.185u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
 MM49 mq_x mq VSS VSS nch_mac l=30.0n w=0.18u
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
-MM64 mq clkbb net25 VSS nch_mac l=30.0n w=100n
-MM65 net25 mq_x VSS VSS nch_mac l=30.0n w=100n
+MM64 mq clkbb net25 VSS nch_mac l=30.0n w=120n
+MM65 net25 mq_x VSS VSS nch_mac l=30.0n w=120n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MSLTn1 qf_x clkbb mq_x VSS nch_mac l=30.0n w=0.265u
@@ -3501,12 +3501,12 @@ MM16 net141 SE VSS VSS nch_mac l=30.0n w=0.145u
 MM13 net77 SI VSS VSS nch_mac l=30.0n w=0.145u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 MSLTp1 qf_x clkb mq_x VDD pch_mac l=30.0n w=0.275u
-MM79 mq clkb net92 VDD pch_mac l=30.0n w=100n
+MM79 mq clkb net92 VDD pch_mac l=30.0n w=120n
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM50 mq_x mq VDD VDD pch_mac l=30.0n w=0.275u
-MM60 net92 mq_x VDD VDD pch_mac l=30.0n w=100n
+MM60 net92 mq_x VDD VDD pch_mac l=30.0n w=120n
 MM74 qf qf_x VDD VDD pch_mac l=30.0n w=0.17u
 MM2 net69 D VDD VDD pch_mac l=30.0n w=0.17u
 MM11 net57 net141 net120 VDD pch_mac l=30.0n w=0.185u
@@ -3525,8 +3525,8 @@ MM0 net83 net99 net86 VSS nch_mac l=30.0n w=0.12u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
 MM49 mq_x mq VSS VSS nch_mac l=30.0n w=0.18u
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
-MM64 mq clkbb net35 VSS nch_mac l=30.0n w=100n
-MM65 net35 mq_x VSS VSS nch_mac l=30.0n w=100n
+MM64 mq clkbb net35 VSS nch_mac l=30.0n w=120n
+MM65 net35 mq_x VSS VSS nch_mac l=30.0n w=120n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM69 QN qf VSS VSS nch_mac l=30.0n w=0.14u 
@@ -3547,12 +3547,12 @@ MM21 net142 net99 VDD VDD pch_mac l=30.0n w=0.205u
 MM23 net99 SN VDD VDD pch_mac l=30.0n w=0.12u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 MSLTp1 qf_x clkb mq_x VDD pch_mac l=30.0n w=0.275u
-MM79 mq clkb net114 VDD pch_mac l=30.0n w=100n
+MM79 mq clkb net114 VDD pch_mac l=30.0n w=120n
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM50 mq_x mq VDD VDD pch_mac l=30.0n w=0.275u
-MM60 net114 mq_x VDD VDD pch_mac l=30.0n w=100n
+MM60 net114 mq_x VDD VDD pch_mac l=30.0n w=120n
 MM74 qf qf_x VDD VDD pch_mac l=30.0n w=0.17u
 MM70 QN qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN qf VDD VDD pch_mac l=30.0n w=0.17u 
@@ -3582,8 +3582,8 @@ MM73 qf qf_x VSS VSS nch_mac l=30.0n w=0.14u
 MSLTn1 qf_x clkbb mq_x VSS nch_mac l=30.0n w=0.265u
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM65 net165 mq_x VSS VSS nch_mac l=30.0n w=100n
-MM64 mq clkbb net165 VSS nch_mac l=30.0n w=100n
+MM65 net165 mq_x VSS VSS nch_mac l=30.0n w=120n
+MM64 mq clkbb net165 VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM49 mq_x mq VSS VSS nch_mac l=30.0n w=0.18u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
@@ -3600,12 +3600,12 @@ MM8 qf_x clkbb net224 VDD pch_mac l=30.0n w=0.275u
 MM11 net225 net201 net228 VDD pch_mac l=30.0n w=0.12u
 MM2 net121 D net232 VDD pch_mac l=30.0n w=0.205u
 MM74 qf qf_x VDD VDD pch_mac l=30.0n w=0.17u
-MM60 net256 mq_x VDD VDD pch_mac l=30.0n w=100n
+MM60 net256 mq_x VDD VDD pch_mac l=30.0n w=120n
 MM50 mq_x mq VDD VDD pch_mac l=30.0n w=0.275u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq clkb net256 VDD pch_mac l=30.0n w=100n
+MM79 mq clkb net256 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf_x clkb mq_x VDD pch_mac l=30.0n w=0.275u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 MM23 net265 SN VDD VDD pch_mac l=30.0n w=0.12u
@@ -3627,8 +3627,8 @@ MM69 QN qf VSS VSS nch_mac l=30.0n w=0.14u
 MM69_2 QN qf VSS VSS nch_mac l=30.0n w=0.14u 
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM65 net149 mq_x VSS VSS nch_mac l=30.0n w=100n
-MM64 mq clkbb net149 VSS nch_mac l=30.0n w=100n
+MM65 net149 mq_x VSS VSS nch_mac l=30.0n w=120n
+MM64 mq clkbb net149 VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM49 mq_x mq VSS VSS nch_mac l=30.0n w=0.18u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
@@ -3646,12 +3646,12 @@ MM2 net98 D net86 VDD pch_mac l=30.0n w=0.3u
 MM70 QN qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM74 qf qf_x VDD VDD pch_mac l=30.0n w=0.17u
-MM60 net73 mq_x VDD VDD pch_mac l=30.0n w=100n
+MM60 net73 mq_x VDD VDD pch_mac l=30.0n w=120n
 MM50 mq_x mq VDD VDD pch_mac l=30.0n w=0.275u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq clkb net73 VDD pch_mac l=30.0n w=100n
+MM79 mq clkb net73 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf_x clkb mq_x VDD pch_mac l=30.0n w=0.275u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 MM23 net166 SN VDD VDD pch_mac l=30.0n w=0.12u
@@ -3663,8 +3663,8 @@ MM0 net73 net9 VSS VSS nch_mac l=30.0n w=0.14u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
 MM49 mq_x mq VSS VSS nch_mac l=30.0n w=0.18u
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
-MM64 mq clkbb net33 VSS nch_mac l=30.0n w=100n
-MM65 net33 mq_x VSS VSS nch_mac l=30.0n w=100n
+MM64 mq clkbb net33 VSS nch_mac l=30.0n w=120n
+MM65 net33 mq_x VSS VSS nch_mac l=30.0n w=120n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MSLTn1 qf_x clkbb mq_x VSS nch_mac l=30.0n w=0.265u
@@ -3682,12 +3682,12 @@ MM21 net85 net9 VDD VDD pch_mac l=30.0n w=0.3u
 MM23 net9 SN VDD VDD pch_mac l=30.0n w=0.12u
 MM54 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 MSLTp1 qf_x clkb mq_x VDD pch_mac l=30.0n w=0.275u
-MM79 mq clkb net104 VDD pch_mac l=30.0n w=100n
+MM79 mq clkb net104 VDD pch_mac l=30.0n w=120n
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM50 mq_x mq VDD VDD pch_mac l=30.0n w=0.275u
-MM60 net104 mq_x VDD VDD pch_mac l=30.0n w=100n
+MM60 net104 mq_x VDD VDD pch_mac l=30.0n w=120n
 MM74 qf qf_x VDD VDD pch_mac l=30.0n w=0.17u
 MM2 net73 D net85 VDD pch_mac l=30.0n w=0.3u
 MM11 net65 net77 net157 VDD pch_mac l=30.0n w=0.12u
@@ -3704,22 +3704,22 @@ MSLTn1 qf_x clkbb net0413 VSS nch_mac l=30.0n w=0.14u
 MSLTn2 net0413 mq VSS VSS nch_mac l=30.0n w=0.14u
 MM16 net0402 qf VSS VSS nch_mac l=30.0n w=0.12u
 MM47 net167 DA net102 VSS nch_mac l=30.0n w=0.22u
-MM51 net103 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net103 SI VSS VSS nch_mac l=30.0n w=120n
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=0.275u
 MM49 mq mq_x VSS VSS nch_mac l=30.0n w=0.195u
 MM76 qf qf_x VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkb net167 VSS nch_mac l=30.0n w=0.27u
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=0.195u
-MM64 mq_x clkbb net139 VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net139 VSS nch_mac l=30.0n w=120n
 MM57 net63 SE VSS VSS nch_mac l=30.0n w=0.12u
-MM65 net139 mq VSS VSS nch_mac l=30.0n w=100n
+MM65 net139 mq VSS VSS nch_mac l=30.0n w=120n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM15 qf_x clkb net0402 VSS nch_mac l=30.0n w=0.12u
 MM48 net102 SA net182 VSS nch_mac l=30.0n w=0.22u
 MM73 QN qf VSS VSS nch_mac l=30.0n w=0.14u 
 MM73_2 QN qf VSS VSS nch_mac l=30.0n w=0.14u 
-MM52 net167 SE net103 VSS nch_mac l=30.0n w=100n
+MM52 net167 SE net103 VSS nch_mac l=30.0n w=120n
 MM7 net182 net63 VSS VSS nch_mac l=30.0n w=0.185u
 MM0 net175 SA VSS VSS nch_mac l=30.0n w=0.14u
 MM3 net179 DB net182 VSS nch_mac l=30.0n w=0.185u
@@ -3754,20 +3754,20 @@ MM2 net26 net98 net14 VSS nch_mac l=30.0n w=0.22u
 MM3 net14 DB net17 VSS nch_mac l=30.0n w=0.185u
 MM0 net98 SA VSS VSS nch_mac l=30.0n w=0.14u
 MM7 net17 net122 VSS VSS nch_mac l=30.0n w=0.185u
-MM52 net26 SE net74 VSS nch_mac l=30.0n w=100n
+MM52 net26 SE net74 VSS nch_mac l=30.0n w=120n
 MM48 net81 SA net17 VSS nch_mac l=30.0n w=0.22u
 MM15 qf_x clkb net82 VSS nch_mac l=30.0n w=0.12u
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM65 net42 mq VSS VSS nch_mac l=30.0n w=100n
+MM65 net42 mq VSS VSS nch_mac l=30.0n w=120n
 MM57 net122 SE VSS VSS nch_mac l=30.0n w=0.12u
-MM64 mq_x clkbb net42 VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net42 VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=0.195u
 MM46 mq_x clkb net26 VSS nch_mac l=30.0n w=0.27u
 MM76 qf qf_x VSS VSS nch_mac l=30.0n w=140.0n
 MM49 mq mq_x VSS VSS nch_mac l=30.0n w=0.195u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=0.275u
-MM51 net74 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net74 SI VSS VSS nch_mac l=30.0n w=120n
 MM47 net26 DA net81 VSS nch_mac l=30.0n w=0.22u
 MM16 net82 qf VSS VSS nch_mac l=30.0n w=0.12u
 MSLTn2 net93 mq VSS VSS nch_mac l=30.0n w=0.14u
@@ -3798,7 +3798,7 @@ MM13 qf_x clkbb net177 VDD pch_mac l=30.0n w=0.12u
 .SUBCKT SDFNCND2 SI D SE CPN CDN Q QN VDD VSS
 MM5 net0188 CDN VSS VSS nch_mac l=30.0n w=0.245u
 MM4 qf_x qf net0188 VSS nch_mac l=30.0n w=0.245u
-MM52 net86 SE net89 VSS nch_mac l=30.0n w=100n
+MM52 net86 SE net89 VSS nch_mac l=30.0n w=120n
 MM73 net102 qf_x VSS VSS nch_mac l=30.0n w=0.14u
 MSLTn1 qf clkb mq VSS nch_mac l=30.0n w=0.155u
 MM48 net74 D VSS VSS nch_mac l=30.0n w=0.175u
@@ -3807,10 +3807,10 @@ MM69 QN net102 VSS VSS nch_mac l=30.0n w=0.14u
 MM69_2 QN net102 VSS VSS nch_mac l=30.0n w=0.14u 
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM65 net125 mq net117 VSS nch_mac l=30.0n w=100n
+MM65 net125 mq net117 VSS nch_mac l=30.0n w=120n
 MM57 net0209 SE VSS VSS nch_mac l=30.0n w=0.12u
-MM64 mq_x clkb net125 VSS nch_mac l=30.0n w=100n
-MM66 net117 CDN VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkb net125 VSS nch_mac l=30.0n w=120n
+MM66 net117 CDN VSS VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkbb net86 VSS nch_mac l=30.0n w=0.165u
 MM76 qf_x qf net141 VSS nch_mac l=30.0n w=0.245u
@@ -3845,16 +3845,16 @@ MM54 clkb CPN VDD VDD pch_mac l=30.0n w=0.17u
 .ENDS
 .SUBCKT SDFNCSND2 SI D SE CPN CDN SDN Q QN VDD VSS
 MM47 net75 net0253 net67 VSS nch_mac l=30.0n w=0.175u
-MM51 net78 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net78 SI VSS VSS nch_mac l=30.0n w=120n
 MM75 net30 CDN VSS VSS nch_mac l=30.0n w=0.22u
 MM53 clkb CPN VSS VSS nch_mac l=30.0n w=140.0n
 MM76 qf_x qf net30 VSS nch_mac l=30.0n w=0.22u
 MM46 mq_x clkbb net75 VSS nch_mac l=30.0n w=0.165u
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
-MM66 net54 CDN VSS VSS nch_mac l=30.0n w=100n
-MM64 mq_x clkb net51 VSS nch_mac l=30.0n w=100n
+MM66 net54 CDN VSS VSS nch_mac l=30.0n w=120n
+MM64 mq_x clkb net51 VSS nch_mac l=30.0n w=120n
 MM57 net0253 SE VSS VSS nch_mac l=30.0n w=0.12u
-MM65 net51 mq net54 VSS nch_mac l=30.0n w=100n
+MM65 net51 mq net54 VSS nch_mac l=30.0n w=120n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM69 QN net0161 VSS VSS nch_mac l=30.0n w=0.14u 
@@ -3862,7 +3862,7 @@ MM69_2 QN net0161 VSS VSS nch_mac l=30.0n w=0.14u
 MM67 net0161 clkbb qf VSS nch_mac l=30.0n w=0.155u
 MM48 net67 D VSS VSS nch_mac l=30.0n w=0.175u
 MSLTn1 qf clkb mq VSS nch_mac l=30.0n w=0.155u
-MM52 net75 SE net78 VSS nch_mac l=30.0n w=100n
+MM52 net75 SE net78 VSS nch_mac l=30.0n w=120n
 MM2 mq mq_x net83 VSS nch_mac l=30.0n w=0.14u
 MM3 net83 SDN VSS VSS nch_mac l=30.0n w=0.22u
 MM7 net94 qf_x VSS VSS nch_mac l=30.0n w=0.155u
@@ -3893,14 +3893,14 @@ MM5 net0161 SDN VDD VDD pch_mac l=30.0n w=0.12u
 .ENDS
 .SUBCKT SDFND2 SI D SE CPN Q QN VDD VSS
 MM47 net69 net0208 net108 VSS nch_mac l=30.0n w=0.175u
-MM51 net72 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net72 SI VSS VSS nch_mac l=30.0n w=120n
 MM53 clkb CPN VSS VSS nch_mac l=30.0n w=140.0n
 MM49 mq mq_x VSS VSS nch_mac l=30.0n w=0.265u
 MM46 mq_x clkbb net69 VSS nch_mac l=30.0n w=0.175u
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
-MM66 net44 mq VSS VSS nch_mac l=30.0n w=100n
+MM66 net44 mq VSS VSS nch_mac l=30.0n w=120n
 MM57 net0208 SE VSS VSS nch_mac l=30.0n w=0.175u
-MM65 mq_x clkb net44 VSS nch_mac l=30.0n w=100n
+MM65 mq_x clkb net44 VSS nch_mac l=30.0n w=120n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM69 QN net53 VSS VSS nch_mac l=30.0n w=0.14u 
@@ -3909,13 +3909,13 @@ MM67 net53 clkbb qf VSS nch_mac l=30.0n w=0.265u
 MM48 net108 D VSS VSS nch_mac l=30.0n w=0.175u
 MSLTn1 qf clkb mq VSS nch_mac l=30.0n w=0.265u
 MM73 net53 qf_x VSS VSS nch_mac l=30.0n w=0.14u
-MM52 net69 SE net72 VSS nch_mac l=30.0n w=100n
+MM52 net69 SE net72 VSS nch_mac l=30.0n w=120n
 MM2 qf_x qf VSS VSS nch_mac l=30.0n w=0.14u
 MM0 mq_x clkbb net0163 VDD pch_mac l=30.0n w=0.12u
 MM54 clkb CPN VDD VDD pch_mac l=30.0n w=0.17u
 MSLTp1 qf clkbb mq VDD pch_mac l=30.0n w=0.285u
 MM43 net108 D VDD VDD pch_mac l=30.0n w=0.24u
-MM79 net0163 mq VDD VDD pch_mac l=30.0n w=100n
+MM79 net0163 mq VDD VDD pch_mac l=30.0n w=120n
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM68 net53 clkb qf VDD pch_mac l=30.0n w=0.285u
@@ -3933,14 +3933,14 @@ MM1 qf_x qf VDD VDD pch_mac l=30.0n w=0.17u
 .ENDS
 .SUBCKT SDFNSND2 SI D SE CPN SDN Q QN VDD VSS
 MM47 net165 net237 net0227 VSS nch_mac l=30.0n w=0.175u
-MM51 net113 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net113 SI VSS VSS nch_mac l=30.0n w=120n
 MM53 clkb CPN VSS VSS nch_mac l=30.0n w=140.0n
 MM76 qf_x qf VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkbb net165 VSS nch_mac l=30.0n w=0.175u
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
-MM64 mq_x clkb net136 VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkb net136 VSS nch_mac l=30.0n w=120n
 MM57 net237 SE VSS VSS nch_mac l=30.0n w=0.12u
-MM65 net136 mq VSS VSS nch_mac l=30.0n w=100n
+MM65 net136 mq VSS VSS nch_mac l=30.0n w=120n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM69 QN net153 VSS VSS nch_mac l=30.0n w=0.14u 
@@ -3948,7 +3948,7 @@ MM69_2 QN net153 VSS VSS nch_mac l=30.0n w=0.14u
 MM67 net153 clkbb qf VSS nch_mac l=30.0n w=0.22u
 MM48 net0227 D VSS VSS nch_mac l=30.0n w=0.175u
 MSLTn1 qf clkb mq VSS nch_mac l=30.0n w=0.22u
-MM52 net165 SE net113 VSS nch_mac l=30.0n w=100n
+MM52 net165 SE net113 VSS nch_mac l=30.0n w=120n
 MM2 mq SDN net173 VSS nch_mac l=30.0n w=0.22u
 MM3 net173 mq_x VSS VSS nch_mac l=30.0n w=0.22u
 MM7 net184 qf_x VSS VSS nch_mac l=30.0n w=0.14u
@@ -3958,7 +3958,7 @@ MM1 mq SDN VDD VDD pch_mac l=30.0n w=0.215u
 MM54 clkb CPN VDD VDD pch_mac l=30.0n w=0.17u
 MSLTp1 qf clkbb mq VDD pch_mac l=30.0n w=0.31u
 MM43 net0227 D VDD VDD pch_mac l=30.0n w=0.275u
-MM79 mq_x clkbb net208 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkbb net208 VDD pch_mac l=30.0n w=120n
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM68 net153 clkb qf VDD pch_mac l=30.0n w=0.12u
@@ -3966,7 +3966,7 @@ MM44 net249 SE net0227 VDD pch_mac l=30.0n w=0.275u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM0 mq mq_x VDD VDD pch_mac l=30.0n w=0.215u
 MM41 net252 SI VDD VDD pch_mac l=30.0n w=0.12u
-MM60 net208 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net208 mq VDD VDD pch_mac l=30.0n w=120n
 MM58 net237 SE VDD VDD pch_mac l=30.0n w=0.275u
 MM70 QN net153 VDD VDD pch_mac l=30.0n w=0.17u 
 MM70_2 QN net153 VDD VDD pch_mac l=30.0n w=0.17u 
@@ -3976,15 +3976,15 @@ MM4 net153 qf_x VDD VDD pch_mac l=30.0n w=0.17u
 MM5 net153 SDN VDD VDD pch_mac l=30.0n w=0.12u
 .ENDS
 .SUBCKT SDFOPTBD2 SI D SE CP Q QN VDD VSS
-MM65 ml_ax clkbb net092 VSS nch_mac l=30n w=100n
-MM66 net092 ml_b VSS VSS nch_mac l=30n w=100n
+MM65 ml_ax clkbb net092 VSS nch_mac l=30n w=120n
+MM66 net092 ml_b VSS VSS nch_mac l=30n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30n w=140.0n
 MM53 clkb CP VSS VSS nch_mac l=30n w=140.0n
-MM52 net027 SE net095 VSS nch_mac l=30n w=100n
+MM52 net027 SE net095 VSS nch_mac l=30n w=120n
 MM57 net023 SE VSS VSS nch_mac l=30n w=135.0n
 MM47_1 net030 D VSS VSS nch_mac l=30n w=135.0n
 MM47_2 net030 D VSS VSS nch_mac l=30n w=135.0n
-MM51 net095 SI VSS VSS nch_mac l=30n w=100n
+MM51 net095 SI VSS VSS nch_mac l=30n w=120n
 MM27_1 net027 net023 net030 VSS nch_mac l=30n w=210.0n
 MM27_2 net027 net023 net030 VSS nch_mac l=30n w=210.0n
 MM46 ml_ax clkb net027 VSS nch_mac l=30n w=200n
@@ -3998,8 +3998,8 @@ MM2 sl_bx sl_a VSS VSS nch_mac l=30n w=140.0n
 MM69_1 QN net101 VSS VSS nch_mac l=30n w=140.0n
 MM69_2 QN net101 VSS VSS nch_mac l=30n w=140.0n
 MM73 net101 sl_bx VSS VSS nch_mac l=30n w=140.0n
-MM0 ml_ax clkb net093 VDD pch_mac l=30n w=100n
-MM79 net093 ml_b VDD VDD pch_mac l=30n w=100n
+MM0 ml_ax clkb net093 VDD pch_mac l=30n w=120n
+MM79 net093 ml_b VDD VDD pch_mac l=30n w=120n
 MM56 clkbb clkb VDD VDD pch_mac l=30n w=325.00n
 MM54 clkb CP VDD VDD pch_mac l=30n w=170.0n
 MSLTp1 sl_a clkb ml_b VDD pch_mac l=30n w=285.00n
@@ -4016,10 +4016,10 @@ MM74 net101 sl_bx VDD VDD pch_mac l=30n w=330.0n
 MM70_1 QN net101 VDD VDD pch_mac l=30n w=170.0n
 MM70_2 QN net101 VDD VDD pch_mac l=30n w=170.0n
 MM17 net030 D VDD VDD pch_mac l=30n w=170.0n
-MM42 net028 net023 net094 VDD pch_mac l=30n w=100n
+MM42 net028 net023 net094 VDD pch_mac l=30n w=120n
 MM44_1 net028 SE net030 VDD pch_mac l=30n w=240.00n
 MM44_2 net028 SE net030 VDD pch_mac l=30n w=240.00n
-MM41 net094 SI VDD VDD pch_mac l=30n w=100n
+MM41 net094 SI VDD VDD pch_mac l=30n w=120n
 .ENDS
 .SUBCKT SDFQD2 SI D SE CP Q VDD VSS
 MM10 net79 qf_x VSS VSS nch_mac l=30.0n w=0.19u
@@ -4064,8 +4064,8 @@ MM10 net76 qf_x VSS VSS nch_mac l=30.0n w=0.12u
 MM9 qf clkb net76 VSS nch_mac l=30.0n w=0.12u
 MM49 mq mq_x VSS VSS nch_mac l=30.0n w=0.265u
 MM76 qf_x qf VSS VSS nch_mac l=30.0n w=140.0n
-MM64 mq_x clkbb net96 VSS nch_mac l=30.0n w=100n
-MM65 net96 mq VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net96 VSS nch_mac l=30.0n w=120n
+MM65 net96 mq VSS VSS nch_mac l=30.0n w=120n
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.265u
 MM0 clkbb clkb VSS VSS nch_mac l=30.0n w=0.14u
 MM1 mq_x clkb net132 VSS nch_mac l=30.0n w=0.175u
@@ -4080,10 +4080,10 @@ MM2_2 QN qf VDD VDD pch_mac l=30.0n w=0.17u
 MM4 qf clkbb net16 VDD pch_mac l=30.0n w=0.285u
 MM5 net16 qf_x VDD VDD pch_mac l=30.0n w=0.12u
 MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.285u
-MM79 mq_x clkb net27 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkb net27 VDD pch_mac l=30.0n w=120n
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=170.0n
 MM50 mq mq_x VDD VDD pch_mac l=30.0n w=0.285u
-MM60 net27 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net27 mq VDD VDD pch_mac l=30.0n w=120n
 MM19 net120 SE VDD VDD pch_mac l=30.0n w=0.24u
 MM20 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 MM21 mq_x clkbb net64 VDD pch_mac l=30.0n w=0.2u
@@ -4095,13 +4095,13 @@ MM29 net68 SI VDD VDD pch_mac l=30.0n w=0.12u
 .ENDS
 .SUBCKT SDFQOPTBD2 SI D SE CP Q VDD VSS
 MM14 net68 SE VSS VSS nch_mac l=30n w=135.0n
-MM3 net088 SI VSS VSS nch_mac l=30n w=100n
-MM2 net124 SE net088 VSS nch_mac l=30n w=100n
+MM3 net088 SI VSS VSS nch_mac l=30n w=120n
+MM2 net124 SE net088 VSS nch_mac l=30n w=120n
 MM0_1 Q sl_bx VSS VSS nch_mac l=30n w=140.0n
 MM0_2 Q sl_bx VSS VSS nch_mac l=30n w=140.0n
 MSLTn1 sl_a clkbb ml_b VSS nch_mac l=30n w=220.0n
-MM65 net091 ml_b VSS VSS nch_mac l=30n w=100n
-MM64 ml_ax clkbb net091 VSS nch_mac l=30n w=100n
+MM65 net091 ml_b VSS VSS nch_mac l=30n w=120n
+MM64 ml_ax clkbb net091 VSS nch_mac l=30n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30n w=130.0n
 MM46 ml_ax clkb net124 VSS nch_mac l=30n w=200n
 MM76 sl_bx sl_a VSS VSS nch_mac l=30n w=140.0n
@@ -4112,28 +4112,28 @@ MM47_1 net0202 D VSS VSS nch_mac l=30n w=135.0n
 MM47_2 net0202 D VSS VSS nch_mac l=30n w=135.0n
 MM27_1 net124 net68 net0202 VSS nch_mac l=30n w=210.0n
 MM27_2 net124 net68 net0202 VSS nch_mac l=30n w=210.0n
-MM9 sl_a clkb net087 VSS nch_mac l=30n w=100n
-MM10 net087 sl_bx VSS VSS nch_mac l=30n w=100n
+MM9 sl_a clkb net087 VSS nch_mac l=30n w=120n
+MM10 net087 sl_bx VSS VSS nch_mac l=30n w=120n
 MM17 net0202 D VDD VDD pch_mac l=30n w=170.0n
 MM13 net68 SE VDD VDD pch_mac l=30n w=170.0n
 MM1_1 Q sl_bx VDD VDD pch_mac l=30n w=170.0n
 MM1_2 Q sl_bx VDD VDD pch_mac l=30n w=170.0n
 MM8 clkb CP VDD VDD pch_mac l=30n w=170.0n
 MM45 ml_ax clkbb net12 VDD pch_mac l=30n w=200n
-MM60 net089 ml_b VDD VDD pch_mac l=30n w=100n
+MM60 net089 ml_b VDD VDD pch_mac l=30n w=120n
 MM50_1 ml_b ml_ax VDD VDD pch_mac l=30n w=205.00n
 MM50_2 ml_b ml_ax VDD VDD pch_mac l=30n w=205.00n
 MM56 clkbb clkb VDD VDD pch_mac l=30n w=300n
 MM77 sl_bx sl_a VDD VDD pch_mac l=30n w=170.0n
 MM44_1 net12 SE net0202 VDD pch_mac l=30n w=240.00n
 MM44_2 net12 SE net0202 VDD pch_mac l=30n w=240.00n
-MM79 ml_ax clkb net089 VDD pch_mac l=30n w=100n
+MM79 ml_ax clkb net089 VDD pch_mac l=30n w=120n
 MSLTp1 sl_a clkb ml_b VDD pch_mac l=30n w=190.0n
 MM26 net0202 D VDD VDD pch_mac l=30n w=170.0n
-MM5 net086 sl_bx VDD VDD pch_mac l=30n w=100n
-MM4 sl_a clkbb net086 VDD pch_mac l=30n w=100n
-MM7 net12 net68 net090 VDD pch_mac l=30n w=100n
-MM6 net090 SI VDD VDD pch_mac l=30n w=100n
+MM5 net086 sl_bx VDD VDD pch_mac l=30n w=120n
+MM4 sl_a clkbb net086 VDD pch_mac l=30n w=120n
+MM7 net12 net68 net090 VDD pch_mac l=30n w=120n
+MM6 net090 SI VDD VDD pch_mac l=30n w=120n
 .ENDS
 .SUBCKT SDFSND2 SI D SE CP SDN Q QN VDD VSS
 MM32 net86 clkb qf VSS nch_mac l=30.0n w=0.22u
@@ -4147,8 +4147,8 @@ MM5 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u
 MM5_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM12 net74 D VSS VSS nch_mac l=30.0n w=0.175u
 MM76 qf_x qf VSS VSS nch_mac l=30.0n w=140.0n
-MM64 mq_x clkbb net126 VSS nch_mac l=30.0n w=100n
-MM65 net126 mq VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net126 VSS nch_mac l=30.0n w=120n
+MM65 net126 mq VSS VSS nch_mac l=30.0n w=120n
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.22u
 MM11 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
 MM1 mq_x clkb net142 VSS nch_mac l=30.0n w=0.175u
@@ -4167,9 +4167,9 @@ MM4_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u
 MM10 mq SDN VDD VDD pch_mac l=30.0n w=0.215u
 MM13 mq mq_x VDD VDD pch_mac l=30.0n w=0.215u
 MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.31u
-MM79 mq_x clkb net45 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkb net45 VDD pch_mac l=30.0n w=120n
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=170.0n
-MM60 net45 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net45 mq VDD VDD pch_mac l=30.0n w=120n
 MM20 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 MM21 mq_x clkbb net78 VDD pch_mac l=30.0n w=0.22u
 MM19 net62 SE VDD VDD pch_mac l=30.0n w=0.275u
@@ -4188,8 +4188,8 @@ MM18 net25 SE net28 VSS nch_mac l=30.0n w=0.12u
 MM1 mq_x clkb net25 VSS nch_mac l=30.0n w=0.175u
 MM11 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.22u
-MM65 net48 mq VSS VSS nch_mac l=30.0n w=100n
-MM64 mq_x clkbb net48 VSS nch_mac l=30.0n w=100n
+MM65 net48 mq VSS VSS nch_mac l=30.0n w=120n
+MM64 mq_x clkbb net48 VSS nch_mac l=30.0n w=120n
 MM76 qf_x qf VSS VSS nch_mac l=30.0n w=140.0n
 MM12 net20 D VSS VSS nch_mac l=30.0n w=0.175u
 MM5 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
@@ -4207,9 +4207,9 @@ MM22 clkbb clkb VDD VDD pch_mac l=30.0n w=0.17u
 MM19 net9 SE VDD VDD pch_mac l=30.0n w=0.275u
 MM21 mq_x clkbb net85 VDD pch_mac l=30.0n w=0.22u
 MM20 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
-MM60 net113 mq VDD VDD pch_mac l=30.0n w=100n
+MM60 net113 mq VDD VDD pch_mac l=30.0n w=120n
 MM77 qf_x qf VDD VDD pch_mac l=30.0n w=170.0n
-MM79 mq_x clkb net113 VDD pch_mac l=30.0n w=100n
+MM79 mq_x clkb net113 VDD pch_mac l=30.0n w=120n
 MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.31u
 MM13 mq mq_x VDD VDD pch_mac l=30.0n w=0.215u
 MM10 mq SDN VDD VDD pch_mac l=30.0n w=0.215u
@@ -4276,7 +4276,7 @@ MM2 net35 net27 net23 VSS nch_mac l=30.0n w=0.14u
 MM3 net23 net25 net26 VSS nch_mac l=30.0n w=0.25u
 MM0 net27 E VSS VSS nch_mac l=30.0n w=0.275u
 MM7 net26 net67 VSS VSS nch_mac l=30.0n w=0.145u
-MM52 net35 SE net103 VSS nch_mac l=30.0n w=100n
+MM52 net35 SE net103 VSS nch_mac l=30.0n w=120n
 MM73 net25 qf_x VSS VSS nch_mac l=30.0n w=0.15u
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.15u
 MM48 net47 E net26 VSS nch_mac l=30.0n w=0.145u
@@ -4285,17 +4285,17 @@ MM69 QN net25 VSS VSS nch_mac l=30.0n w=0.14u
 MM69_2 QN net25 VSS VSS nch_mac l=30.0n w=0.14u 
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
-MM65 net74 mq net66 VSS nch_mac l=30.0n w=100n
+MM65 net74 mq net66 VSS nch_mac l=30.0n w=120n
 MM57 net67 SE VSS VSS nch_mac l=30.0n w=145.00n
-MM64 mq_x clkbb net74 VSS nch_mac l=30.0n w=100n
-MM66 net66 CDN VSS VSS nch_mac l=30.0n w=100n
+MM64 mq_x clkbb net74 VSS nch_mac l=30.0n w=120n
+MM66 net66 CDN VSS VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkb net35 VSS nch_mac l=30.0n w=0.185u
 MM76 qf_x qf net90 VSS nch_mac l=30.0n w=140.0n
 MM49 mq mq_x VSS VSS nch_mac l=30.0n w=0.26u
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
 MM75 net90 CDN VSS VSS nch_mac l=30.0n w=140.0n
-MM51 net103 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net103 SI VSS VSS nch_mac l=30.0n w=120n
 MM47 net35 D net47 VSS nch_mac l=30.0n w=0.14u
 MM8 clkb CP VDD VDD pch_mac l=30.0n w=0.17u
 MM1 net27 E VDD VDD pch_mac l=30.0n w=0.12u
@@ -4325,24 +4325,24 @@ MSLTp1 qf clkb mq VDD pch_mac l=30.0n w=0.275u
 .ENDS
 .SUBCKT SEDFCNQD2 E SE CP SI D CDN Q VDD VSS
 MM47 net166 D net154 VSS nch_mac l=30.0n w=0.14u
-MM51 net169 SI VSS VSS nch_mac l=30.0n w=100n
+MM51 net169 SI VSS VSS nch_mac l=30.0n w=120n
 MM75 net106 CDN VSS VSS nch_mac l=30.0n w=140.0n
 MM53 clkb CP VSS VSS nch_mac l=30.0n w=140.0n
 MM49 mq mq_x VSS VSS nch_mac l=30.0n w=0.26u
 MM76 qf_x qf net106 VSS nch_mac l=30.0n w=140.0n
 MM46 mq_x clkb net166 VSS nch_mac l=30.0n w=0.185u
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
-MM66 net130 CDN VSS VSS nch_mac l=30.0n w=100n
-MM64 mq_x clkbb net137 VSS nch_mac l=30.0n w=100n
+MM66 net130 CDN VSS VSS nch_mac l=30.0n w=120n
+MM64 mq_x clkbb net137 VSS nch_mac l=30.0n w=120n
 MM57 net138 SE VSS VSS nch_mac l=30.0n w=145.00n
-MM65 net137 mq net130 VSS nch_mac l=30.0n w=100n
+MM65 net137 mq net130 VSS nch_mac l=30.0n w=120n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.14u 
 MM67 net180 clkb qf VSS nch_mac l=30.0n w=120.0n
 MM48 net154 E net181 VSS nch_mac l=30.0n w=0.145u
 MSLTn1 qf clkbb mq VSS nch_mac l=30.0n w=0.15u
 MM73 net180 qf_x VSS VSS nch_mac l=30.0n w=0.15u
-MM52 net166 SE net169 VSS nch_mac l=30.0n w=100n
+MM52 net166 SE net169 VSS nch_mac l=30.0n w=120n
 MM7 net181 net138 VSS VSS nch_mac l=30.0n w=0.145u
 MM0 net90 E VSS VSS nch_mac l=30.0n w=0.275u
 MM3 net185 net180 net181 VSS nch_mac l=30.0n w=0.25u
@@ -4380,8 +4380,8 @@ MM73_2 QN qf VSS VSS nch_mac l=30.0n w=0.275u
 MM48 net157 net174 VSS VSS nch_mac l=30.0n w=140.0n
 MM71 Q qf_x VSS VSS nch_mac l=30.0n w=0.275u 
 MM71_2 Q qf_x VSS VSS nch_mac l=30.0n w=0.275u 
-MM65 net126 mq_x VSS VSS nch_mac l=30.0n w=100n
-MM64 mq clkbb net126 VSS nch_mac l=30.0n w=100n
+MM65 net126 mq_x VSS VSS nch_mac l=30.0n w=120n
+MM64 mq clkbb net126 VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq clkb net154 VSS nch_mac l=30.0n w=190.0n
 MM76 qf qf_x VSS VSS nch_mac l=30.0n w=0.275u
@@ -4406,14 +4406,14 @@ MM17 net30 qf VDD VDD pch_mac l=30.0n w=0.155u
 MM45 mq clkbb net94 VDD pch_mac l=30.0n w=200n
 MM74 QN qf VDD VDD pch_mac l=30.0n w=0.17u 
 MM74_2 QN qf VDD VDD pch_mac l=30.0n w=0.17u 
-MM60 net42 mq_x VDD VDD pch_mac l=30.0n w=100n
+MM60 net42 mq_x VDD VDD pch_mac l=30.0n w=120n
 MM50 mq_x mq VDD VDD pch_mac l=30.0n w=0.295u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.33u
 MM77 qf qf_x VDD VDD pch_mac l=30.0n w=170.0n
 MM44 net94 net106 net61 VDD pch_mac l=30.0n w=170.0n
 MM72 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
 MM72_2 Q qf_x VDD VDD pch_mac l=30.0n w=0.17u 
-MM79 mq clkb net42 VDD pch_mac l=30.0n w=100n
+MM79 mq clkb net42 VDD pch_mac l=30.0n w=120n
 MM43 net61 SE VDD VDD pch_mac l=30.0n w=0.285u
 MM30 net85 qf VDD VDD pch_mac l=30.0n w=0.12u
 MSLTp1 qf_x clkb mq_x VDD pch_mac l=30.0n w=0.295u
@@ -4479,8 +4479,8 @@ MM24 net24 E VSS VSS nch_mac l=30.0n w=0.22u
 MM23 net21 D net24 VSS nch_mac l=30.0n w=0.155u
 MSLTn1 qf_x clkbb mq_x VSS nch_mac l=30.0n w=0.26u
 MM48 net29 net165 VSS VSS nch_mac l=30.0n w=140.0n
-MM65 net40 mq_x VSS VSS nch_mac l=30.0n w=100n
-MM64 mq clkbb net40 VSS nch_mac l=30.0n w=100n
+MM65 net40 mq_x VSS VSS nch_mac l=30.0n w=120n
+MM64 mq clkbb net40 VSS nch_mac l=30.0n w=120n
 MM55 clkbb clkb VSS VSS nch_mac l=30.0n w=140.0n
 MM46 mq clkb net61 VSS nch_mac l=30.0n w=190.0n
 MM76 qf qf_x VSS VSS nch_mac l=30.0n w=140.0n
@@ -4505,12 +4505,12 @@ MM8 clkb CP VDD VDD pch_mac l=30.0n w=0.33u
 MM18 net21 E net125 VDD pch_mac l=30.0n w=0.155u
 MM17 net125 qf VDD VDD pch_mac l=30.0n w=0.155u
 MM45 mq clkbb net169 VDD pch_mac l=30.0n w=200n
-MM60 net156 mq_x VDD VDD pch_mac l=30.0n w=100n
+MM60 net156 mq_x VDD VDD pch_mac l=30.0n w=120n
 MM50 mq_x mq VDD VDD pch_mac l=30.0n w=0.295u
 MM56 clkbb clkb VDD VDD pch_mac l=30.0n w=0.33u
 MM77 qf qf_x VDD VDD pch_mac l=30.0n w=170.0n
 MM44 net169 net21 net157 VDD pch_mac l=30.0n w=170.0n
-MM79 mq clkb net156 VDD pch_mac l=30.0n w=100n
+MM79 mq clkb net156 VDD pch_mac l=30.0n w=120n
 MM43 net157 SE VDD VDD pch_mac l=30.0n w=0.285u
 MSLTp1 qf_x clkb mq_x VDD pch_mac l=30.0n w=0.295u
 MM15 net165 SI VDD VDD pch_mac l=30.0n w=0.17u
@@ -4758,8 +4758,8 @@ MM44 net0262 D net0266 VDD pch_mac l=30n w=0.21u
 MM15 mq_x clkbb net0234 VDD pch_mac l=30n w=0.17u
 MM8 net0234 net0200 VDD VDD pch_mac l=30n w=0.17u
 MM17 net0266 SE VDD VDD pch_mac l=30n w=0.21u
-MM18 net0262 net0183 net0258 VDD pch_mac l=30n w=100n
-MM19 net0258 SI VDD VDD pch_mac l=30n w=100n
+MM18 net0262 net0183 net0258 VDD pch_mac l=30n w=120n
+MM19 net0258 SI VDD VDD pch_mac l=30n w=120n
 .ENDS
 .SUBCKT SDFNSYNCSND2 SI D SE CPN CDN SDN Q QN VDD VSS
 MM21 net18 net23 VDD VDD pch_mac l=30n w=0.17u
@@ -4851,10 +4851,10 @@ MM8 net200 clkb qf VDD pch_mac l=30n w=0.17u
 MM44 net291 D net251 VDD pch_mac l=30n w=0.21u
 MM56 clkbb clkb VDD VDD pch_mac l=30n w=0.17u
 MM50 net275 mq_x VDD VDD pch_mac l=30n w=0.17u
-MM41 net279 SI VDD VDD pch_mac l=30n w=100n
+MM41 net279 SI VDD VDD pch_mac l=30n w=120n
 MM58 net283 SE VDD VDD pch_mac l=30n w=0.21u
 MM45 mq_x clkb net291 VDD pch_mac l=30n w=0.17u
-MM42 net291 net283 net279 VDD pch_mac l=30n w=100n
+MM42 net291 net283 net279 VDD pch_mac l=30n w=120n
 MM16 mq_x clkbb net298 VDD pch_mac l=30n w=0.17u
 MM1 qf_x qf VDD VDD pch_mac l=30n w=0.17u
 MM74 net200 qf_x VDD VDD pch_mac l=30n w=0.17u
@@ -4866,8 +4866,8 @@ MM35 net10 net111 VDD VDD pch_mac l=30n w=0.17u
 MM34 qf clkbb net10 VDD pch_mac l=30n w=0.17u
 MM27 net166 net111 VDD VDD pch_mac l=30n w=0.17u
 MM50 net111 mq VDD VDD pch_mac l=30n w=0.17u
-MM29 net57 SI VDD VDD pch_mac l=30n w=100n
-MM28 net54 net139 net57 VDD pch_mac l=30n w=100n
+MM29 net57 SI VDD VDD pch_mac l=30n w=120n
+MM28 net54 net139 net57 VDD pch_mac l=30n w=120n
 MM24 net58 SE VDD VDD pch_mac l=30n w=0.21u
 MM23 net54 D net58 VDD pch_mac l=30n w=0.21u
 MM22 clkbb clkb VDD VDD pch_mac l=30n w=0.17u
@@ -4958,8 +4958,8 @@ MM44 net0262 D net0266 VDD pch_mac l=30n w=0.21u
 MM15 mq_x clkb net0234 VDD pch_mac l=30n w=0.17u
 MM8 net0234 net0200 VDD VDD pch_mac l=30n w=0.17u
 MM17 net0266 SE VDD VDD pch_mac l=30n w=0.21u
-MM18 net0262 net0183 net0258 VDD pch_mac l=30n w=100n
-MM19 net0258 SI VDD VDD pch_mac l=30n w=100n
+MM18 net0262 net0183 net0258 VDD pch_mac l=30n w=120n
+MM19 net0258 SI VDD VDD pch_mac l=30n w=120n
 .ENDS
 .SUBCKT SDFSYNCNQD2 SI D SE CP CDN Q VDD VSS
 MM19 net13 SI VDD VDD pch_mac l=30n w=0.12u
@@ -5025,13 +5025,13 @@ MM78 qf_x qf VDD VDD pch_mac l=30n w=0.33u
 MM56 clkbb clkb VDD VDD pch_mac l=30n w=0.17u
 MM12 net59 clkb net91 VDD pch_mac l=30n w=0.17u
 MM0 mq SDN VDD VDD pch_mac l=30n w=0.17u
-MM41 net58 SI VDD VDD pch_mac l=30n w=100n
+MM41 net58 SI VDD VDD pch_mac l=30n w=120n
 MM13 net91 net167 VDD VDD pch_mac l=30n w=0.17u
 MM58 net172 SE VDD VDD pch_mac l=30n w=0.21u
 MM70 QN net132 VDD VDD pch_mac l=30n w=0.17u 
 MM70_2 QN net132 VDD VDD pch_mac l=30n w=0.17u 
 MM45 net59 clkbb net55 VDD pch_mac l=30n w=0.17u
-MM42 net55 net172 net58 VDD pch_mac l=30n w=100n
+MM42 net55 net172 net58 VDD pch_mac l=30n w=120n
 MM4 net132 qf_x VDD VDD pch_mac l=30n w=0.33u
 MM5 net132 SDN VDD VDD pch_mac l=30n w=0.33u
 MM18 qf clkbb net108 VSS nch_mac l=30n w=0.14u
@@ -5296,8 +5296,8 @@ MM35 net10 net111 VDD VDD pch_mac l=30n w=0.17u
 MM34 qf clkb net10 VDD pch_mac l=30n w=0.17u
 MM27 net166 net111 VDD VDD pch_mac l=30n w=0.17u
 MM50 net111 mq VDD VDD pch_mac l=30n w=0.17u
-MM29 net57 SI VDD VDD pch_mac l=30n w=100n
-MM28 net54 net139 net57 VDD pch_mac l=30n w=100n
+MM29 net57 SI VDD VDD pch_mac l=30n w=120n
+MM28 net54 net139 net57 VDD pch_mac l=30n w=120n
 MM24 net58 SE VDD VDD pch_mac l=30n w=0.21u
 MM23 net54 D net58 VDD pch_mac l=30n w=0.21u
 MM22 clkbb clkb VDD VDD pch_mac l=30n w=0.17u

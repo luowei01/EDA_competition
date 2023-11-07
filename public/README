@@ -5,6 +5,6 @@ example_NAND2V4.json: example of output placement file.
 
 evaluator.py : placement evaluator. Usage: python3 evaluator.py %placement_file $cell_name cells.spi
 	Please try this cmd: python public/evaluator.py public/example_NAND2V4.json NAND2V4 public/cells.spi
-python public/evaluator.py test_case/output.json MUX2 test_case/cells.spi
-python public/evaluator.py test.json NAND2V4 test.spi
+python public/evaluator.py error.json SNDSRNQV4 test_case/cells.spi
+python public/evaluator.py best.json SNDSRNQV4 test_case/cells.spi
 

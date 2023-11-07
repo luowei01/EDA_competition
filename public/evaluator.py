@@ -359,48 +359,47 @@ def extract_subckt(file, cell_re):
             find_cell = True
 
 def get_score(placement_file,cell_name,netlist_file):
-    import json
+    import sys,json
+    sys.stdout = None
     # read placement file
     placement_stream = open(placement_file, "r")
     placement_dic = json.load(placement_stream)
     placement = placement_dic["placement"]
     # get transistor properties from netlist
     transistor_dic, pins = load_netlist(netlist_file, cell_name)
-    try:
-        # get ref width
-        ref_width = 0
-        for transistor_name, t in transistor_dic.items():
-            if t.channel_width > 220:
-                ref_width += t.channel_width // 200
-            else:
-                ref_width += 1
-
-        cell = Cell(cell_name, pins)
-        # get cell width
-        width = 0
-        for transistor_name, properties in placement.items():
-            if width < int(properties["x"]) + 1:
-                width = int(properties["x"]) + 1
-        cell.reset(width)
-        # add transistor
-        for transistor_name, properties in placement.items():
-            tname, finger = decompose_transistor_name(transistor_name)
-            transistor = transistor_dic[tname]
-            ref = TransistorRef(transistor, not str_equal(transistor.source_net, properties["source"]), int(properties["width"]))
-            cell.add_transistor(ref, int(properties["x"]))
-
-        # set ref width
-        upper_graph = EulerGraph(cell.upper)
-        lower_graph = EulerGraph(cell.lower)
-        min_gap = max(0.0, (upper_graph.get_odd_num() + lower_graph.get_odd_num() - 4) / 2)
-        cell.ref_width = (min_gap + ref_width) / 2
-
-        # check and get score
-        if cell.check(transistor_dic):
-            cell.evaluate(runtime=0)
+    # get ref width
+    ref_width = 0
+    for transistor_name, t in transistor_dic.items():
+        if t.channel_width > 220:
+            ref_width += t.channel_width // 200
+        else:
+            ref_width += 1
+    cell = Cell(cell_name, pins)
+    # get cell width
+    width = 0
+    for transistor_name, properties in placement.items():
+        if width < int(properties["x"]) + 1:
+            width = int(properties["x"]) + 1
+    cell.reset(width)
+    # add transistor
+    for transistor_name, properties in placement.items():
+        tname, finger = decompose_transistor_name(transistor_name)
+        transistor = transistor_dic[tname]
+        ref = TransistorRef(transistor, not str_equal(transistor.source_net, properties["source"]), int(properties["width"]))
+        cell.add_transistor(ref, int(properties["x"]))
+    # set ref width
+    upper_graph = EulerGraph(cell.upper)
+    lower_graph = EulerGraph(cell.lower)
+    min_gap = max(0.0, (upper_graph.get_odd_num() + lower_graph.get_odd_num() - 4) / 2)
+    cell.ref_width = (min_gap + ref_width) / 2
+    # check and get score
+    if cell.check(transistor_dic):
+        cell.evaluate(runtime=0)
+        sys.stdout = sys.__stdout__
         return cell.score
-    except:
-        return 0
+    else:
+        sys.stdout = sys.__stdout__
+        return -100
 
 
 
