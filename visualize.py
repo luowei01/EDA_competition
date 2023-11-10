@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-18 18:42:38
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-09 17:09:07
+LastEditTime : 2023-11-10 16:38:10
 FilePath     : \EDA_competition\visualize.py
 Description  : 
 '''
@@ -76,6 +76,10 @@ if __name__ == "__main__":
             cv2.putText(result, mos.name, (real_x-text_size[0]//2, 80+text_size[1]//2 if mos.y == 1 else 580 +
                         text_size[1]//2), None, 0.3, (0, 0, 0), thickness=1, lineType=cv2.LINE_8, bottomLeftOrigin=None)
         last_mos_pair = mos_pair
+    # cv2.imshow("result", result)  # 显示窗口
+    # cv2.waitKey(0)  # 等待按键
+    # cv2.destroyAllWindows()  # 释放窗口
     cv2.imwrite('result.jpg',result)
+    print("可视化结果已保存至./result.png")
 
     
