@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-10 15:59:59
+LastEditTime : 2023-11-10 18:29:48
 FilePath     : \EDA_competition\solver.py
 Description  : 
 '''
@@ -307,7 +307,7 @@ def get_score(mos_list_encode1, pins_code, echo_flag=False, runtime=0):
     return score
 
 
-Action_num = 4
+Action_num = 5
 
 
 def v_compute(s_old, action):
@@ -341,11 +341,11 @@ def v_compute(s_old, action):
         a = rd.randint(0, len(s_new[0])-1)
         channel_type = rd.randint(0, 1)
         s_new[channel_type][a][2], s_new[channel_type][a][4] = s_new[channel_type][a][4], s_new[channel_type][a][2]
-    # elif action == 2:  # 交换相邻一处管对
-    #     a = rd.randint(0, len(s_new[0])-1)
-    #     b = a-1 if a > 0 else 1
-    #     s_new[0][a], s_new[0][b] = s_new[0][b], s_new[0][a]
-    #     s_new[1][a], s_new[1][b] = s_new[1][b], s_new[1][a]
+    elif action == 4:  # 交换相邻一处管对
+        a = rd.randint(0, len(s_new[0])-1)
+        b = a-1 if a > 0 else 1
+        s_new[0][a], s_new[0][b] = s_new[0][b], s_new[0][a]
+        s_new[1][a], s_new[1][b] = s_new[1][b], s_new[1][a]
     # elif action == 5:  # 交换左右线网不一样的管子
     #     channel_type = rd.randint(0, 1)
     #     indexs = [i for i in range(1, len(
