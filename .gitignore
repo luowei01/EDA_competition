@@ -1,7 +1,9 @@
-*.pyc
-*.json
-*.jpg
-*.pt
-./output/*.json
-./_pycache_/
-log.txt
+./*.pyc
+./*.json
+./*.jpg
+./*.pt
+output/*.json
+__pycache__/
+./log.txt
+result.jpg
+difficult_case
