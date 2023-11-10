@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-07 16:17:42
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-09 21:34:40
+LastEditTime : 2023-11-10 19:19:26
 FilePath     : \EDA_competition\train.py
 Description  : 
 '''
@@ -13,7 +13,6 @@ from tqdm import tqdm
 from data_parse import Parser
 from solver import encode, decode, REINFORCE, v_compute, get_score, Action_num
 from data_parse import Parser
-from public.evaluator import evaluator_case
 cell_spi_path, test_case_name = "public/cells.spi", "SNDSRNQV4"
 paser = Parser()
 mos_list, pins = paser.parse(cell_spi_path, test_case_name)
@@ -35,14 +34,8 @@ if __name__ == "__main__":
                                 dtype=torch.float32, device=device)
     print(
         f"测试网络输入输出：\n  input:{state_tensor.shape}\n  out:{agent.policy_net(state_tensor)}\n"+"*"*100)
-    """测试结果输出:test_case/test.json"""
-    with open('test_case/test.json', 'w') as f:
-        json.dump(decode(state, decode_dict),
-                  f, sort_keys=False, indent=4)
-    print(f"测试结果译码:test_case/test.json \n"+"*"*100)
-    """测试初始结果得分："""
     print(f"初始布局评分:")
-    evaluator_case('test_case/test.json', test_case_name, cell_spi_path)
+    reward = get_score(state, pins_code, True)
     print("*"*100)
     """train"""
     best_reward = 0
@@ -60,8 +53,8 @@ if __name__ == "__main__":
                 }
                 state = encode(mos_list, encode_dict)
                 count = 0
-                # while count < 10*len(mos_list):
-                while reward > 90:
+                while count < 10*len(mos_list):
+                    # while reward < 90:
                     action = agent.take_action(state)
                     # next_state, reward, done, _ = env.step(action)
                     next_state = v_compute(state, action)
