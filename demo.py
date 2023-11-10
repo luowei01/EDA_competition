@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-07 14:48:53
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-10 16:39:37
+LastEditTime : 2023-11-10 20:14:51
 FilePath     : \EDA_competition\demo.py
 Description  : 
 '''
@@ -48,6 +48,7 @@ def init_SA():
 
 if __name__ == "__main__":
     start_time = time.time()
+    rd.seed(start_time)
     if len(sys.argv) < 3:
         print(
             "ERROR: No enough file provided.\nUsage: python demo.py  <netlist> <cell_name>")
@@ -170,13 +171,16 @@ if __name__ == "__main__":
                     #         reward = new_reward
             count += 1
         T = a*T
+    with open(f'./output/{test_case_name}.json', 'w') as f:
+        json.dump(decode(best_state, decode_dict),
+                  f, sort_keys=False, indent=4)
     runtime = round(time.time()-start_time, 2)
     # 输出结果
+    if best_reward < 70:
+        with open('low_score_case.txt', 'a') as f:
+            f.write(f"{test_case_name}:{best_reward}\n")
     print(f"迭代次数: {t}\n耗时  : "+"%.2fs" % (runtime))
     print(f"优化后得分:")
     # evaluator_case('best.json', test_case_name, cell_spi_path, runtime)
     get_score(best_state, pins_code, True, runtime)
-    with open(f'./output/{test_case_name}.json', 'w') as f:
-        json.dump(decode(best_state, decode_dict),
-                  f, sort_keys=False, indent=4)
     print(f"布局结果已保存至 ./output/{test_case_name}.json\n"+"*"*150)
