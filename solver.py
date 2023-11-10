@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-10 11:58:53
+LastEditTime : 2023-11-10 15:59:59
 FilePath     : \EDA_competition\solver.py
 Description  : 
 '''
@@ -307,7 +307,7 @@ def get_score(mos_list_encode1, pins_code, echo_flag=False, runtime=0):
     return score
 
 
-Action_num = 11
+Action_num = 4
 
 
 def v_compute(s_old, action):
@@ -330,61 +330,44 @@ def v_compute(s_old, action):
         b = rd.randint(0, len(s_new[0])-1)
         s_new[0][a], s_new[0][b] = s_new[0][b], s_new[0][a]
         s_new[1][a], s_new[1][b] = s_new[1][b], s_new[1][a]
-    elif action == 2:  # 交换相邻一处管对
+    elif action == 2:  # 交换栅极相同的管子即重新配对
+        channel_type = rd.randint(0, 1)
         a = rd.randint(0, len(s_new[0])-1)
-        b = a-1 if a > 0 else 1
-        s_new[0][a], s_new[0][b] = s_new[0][b], s_new[0][a]
-        s_new[1][a], s_new[1][b] = s_new[1][b], s_new[1][a]
+        indexs = [i for i in range(len(
+            s_new[channel_type])) if s_new[channel_type][i][3] == s_new[channel_type][a][3]]
+        b = rd.choice(indexs)
+        s_new[channel_type][a], s_new[channel_type][b] = s_new[channel_type][b], s_new[channel_type][a]
     elif action == 3:  # 随机选取一个管子旋转
         a = rd.randint(0, len(s_new[0])-1)
-        channel_type = 0
+        channel_type = rd.randint(0, 1)
         s_new[channel_type][a][2], s_new[channel_type][a][4] = s_new[channel_type][a][4], s_new[channel_type][a][2]
-    elif action == 4:
-        a = rd.randint(0, len(s_new[0])-1)
-        channel_type = 1
-        s_new[channel_type][a][2], s_new[channel_type][a][4] = s_new[channel_type][a][4], s_new[channel_type][a][2]
-    elif action == 5:  # 交换栅极相同的管子即重新配对
-        channel_type = 0
-        a = rd.randint(0, len(s_new[0])-1)
-        indexs = [i for i in range(len(
-            s_new[channel_type])) if s_new[channel_type][i][3] == s_new[channel_type][a][3]]
-        b = rd.choice(indexs)
-        s_new[channel_type][a], s_new[channel_type][b] = s_new[channel_type][b], s_new[channel_type][a]
-    elif action == 6:  # 交换栅极相同的管子即重新配对
-        channel_type = 1
-        a = rd.randint(0, len(s_new[0])-1)
-        indexs = [i for i in range(len(
-            s_new[channel_type])) if s_new[channel_type][i][3] == s_new[channel_type][a][3]]
-        b = rd.choice(indexs)
-        s_new[channel_type][a], s_new[channel_type][b] = s_new[channel_type][b], s_new[channel_type][a]
-    elif action == 7:  # 旋转左右线网不连续的管子
-        channel_type = 0
-        indexs = [i for i in range(1, len(
-            s_new[channel_type])) if s_new[channel_type][i][2] == s_new[channel_type][i-1][4]]
-        a = rd.choice(indexs)
-        s_new[channel_type][a][2], s_new[channel_type][a][4] = s_new[channel_type][a][4], s_new[channel_type][a][2]
-    elif action == 8:  # 旋转左右线网不连续的管子
-        channel_type = 1
-        indexs = [i for i in range(1, len(
-            s_new[channel_type])) if s_new[channel_type][i][2] == s_new[channel_type][i-1][4]]
-        a = rd.choice(indexs)
-        s_new[channel_type][a][2], s_new[channel_type][a][4] = s_new[channel_type][a][4], s_new[channel_type][a][2]
-    elif action == 9:  # 移动左右线网不一样的管子
-        channel_type = 0
-        indexs = [i for i in range(1, len(
-            s_new[channel_type])) if s_new[channel_type][i][2] == s_new[channel_type][i-1][4]]
-        a = rd.choice(indexs)
-        b = rd.choice(indexs)
-        s_new[0].insert(b, s_new[0].pop(a))
-        s_new[1].insert(b, s_new[1].pop(a))
-    elif action == 10:
-        channel_type = 1
-        indexs = [i for i in range(1, len(
-            s_new[channel_type])) if s_new[channel_type][i][2] == s_new[channel_type][i-1][4]]
-        a = rd.choice(indexs)
-        b = rd.choice(indexs)
-        s_new[0].insert(b, s_new[0].pop(a))
-        s_new[1].insert(b, s_new[1].pop(a))
+    # elif action == 2:  # 交换相邻一处管对
+    #     a = rd.randint(0, len(s_new[0])-1)
+    #     b = a-1 if a > 0 else 1
+    #     s_new[0][a], s_new[0][b] = s_new[0][b], s_new[0][a]
+    #     s_new[1][a], s_new[1][b] = s_new[1][b], s_new[1][a]
+    # elif action == 5:  # 交换左右线网不一样的管子
+    #     channel_type = rd.randint(0, 1)
+    #     indexs = [i for i in range(1, len(
+    #         s_new[channel_type])) if s_new[channel_type][i][2] == s_new[channel_type][i-1][4]]
+    #     a = rd.choice(indexs) if indexs else rd.randint(0, len(s_new[0])-1)
+    #     b = rd.choice(indexs) if indexs else rd.randint(0, len(s_new[0])-1)
+    #     s_new[0][a], s_new[0][b] = s_new[0][b], s_new[0][a]
+    #     s_new[1][a], s_new[1][b] = s_new[1][b], s_new[1][a]
+    # elif action == 6:  # 旋转左右线网不连续的管子
+    #     channel_type = rd.randint(0, 1)
+    #     indexs = [i for i in range(1, len(
+    #         s_new[channel_type])) if s_new[channel_type][i][2] == s_new[channel_type][i-1][4]]
+    #     a = rd.choice(indexs) if indexs else rd.randint(0, len(s_new[0])-1)
+    #     s_new[channel_type][a][2], s_new[channel_type][a][4] = s_new[channel_type][a][4], s_new[channel_type][a][2]
+    # elif action == 7:  # 移动左右线网不一样的管子
+    #     channel_type = rd.randint(0, 1)
+    #     indexs = [i for i in range(1, len(
+    #         s_new[channel_type])) if s_new[channel_type][i][2] == s_new[channel_type][i-1][4]]
+    #     a = rd.choice(indexs) if indexs else rd.randint(0, len(s_new[0])-1)
+    #     b = rd.choice(indexs) if indexs else rd.randint(0, len(s_new[0])-1)
+    #     s_new[0].insert(b, s_new[0].pop(a))
+    #     s_new[1].insert(b, s_new[1].pop(a))
     return s_new
 
 
