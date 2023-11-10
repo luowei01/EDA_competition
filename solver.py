@@ -1,148 +1,38 @@
+'''
+Author       : luoweiWHUT 1615108374@qq.com
+Date         : 2023-10-12 11:47:36
+LastEditors  : luoweiWHUT 1615108374@qq.com
+LastEditTime : 2023-11-10 11:58:53
+FilePath     : \EDA_competition\solver.py
+Description  : 
+'''
 import numpy as np
 import torch
-import json
 import copy
+import math
 import random as rd
+import networkx as nx
 import torch.nn.functional as F
-from tqdm import tqdm
-from parse import Parser, Mos
-from public.evaluator import get_score
-"""求解目标max(V)及对应的s"""
 
 
-def encode(mos_list, words_list):
-    encode_dict = {}
-    words_list = np.array(words_list)
-    encode_dict['name'] = dict(
-        zip(words_list[:, 0], [i for i in range(1,len(words_list[:, 0])+1)]))#0表示虚拟mos
-    nets = set(sum(words_list[:, 1:4].tolist(), []))
-    encode_dict['net'] = dict(zip(nets, [i for i in range(len(nets))]))
-    mos_list_encode = {}  # 6维(name,y,left, mid, right,w)的n个晶体管
-    for mos in mos_list:
-        temp = []
-        # for item in ['name','left', 'mid', 'right', 'type', 'w', 'l',]:
-        for item in ['name','type', 'left', 'mid', 'right', 'w']:
-            if mos.name == 0:
-                code_number = 0
-            elif item == 'name':
-                code_number = encode_dict['name'][mos.name]
-            elif item == 'left':
-                code_number = encode_dict['net'][mos.left]
-            elif item == 'mid':
-                code_number = encode_dict['net'][mos.mid]
-            elif item == 'right':
-                code_number = encode_dict['net'][mos.right]
-            elif item == 'type':
-                code_number = 0 if mos.type == 'VDD' else 1
-            elif item == 'w':
-                code_number = mos.w
-            elif item == 'l':
-                code_number = mos.l
-            temp.append(code_number)
-        if temp[3] in mos_list_encode:
-            mos_list_encode[temp[3]].append(temp)
-        else:
-            mos_list_encode[temp[3]]=[temp]
-    pmos_list = []
-    nmos_list = []
-    for mid,temp in mos_list_encode.items():
-        for mos in temp:
-            if mos[1]==1:
-                pmos_list.append(mos)
-            else:
-                nmos_list.append(mos)
-        dif = len(pmos_list) - len(nmos_list)
-        if  dif == 0:
-            continue
-        elif dif >0:
-            for i in range(dif):
-                nmos_list.append([0,0] + pmos_list[i][2:])
-        else:
-            for i in range(abs(dif)):
-                pmos_list.append([0,1] + pmos_list[i][2:])
-    return [pmos_list,nmos_list]
+class EulerGraph:
 
+    def __init__(self, refs):
+        self.refs = refs
+        self.graph = nx.MultiGraph()
+        self.build_graph()
 
-def decode(mos_list_encode1, words_list):
-    '''
-    description : 
-    param        mos_list
-    param        {*} mos_list_encode 6维(name,y,left, mid, right,w)的n个晶体管
-    param        {*} words_list 
-    return       mos_list_decode #{"placement": {
-                                                "M0": {"x": "0","y": "1","source": "VDD","gate": "A2","drain": "ZN","width": "200"},
-                                                }
-    '''
-    mos_list_encode = copy.deepcopy(mos_list_encode1)
-    encode_dict = {}
-    words_list = np.array(words_list)
-    encode_dict['name'] = dict(
-        zip(words_list[:, 0], [i for i in range(1,len(words_list[:, 0])+1)]))#0表示虚拟mos
-    nets = set(sum(words_list[:, 1:4].tolist(), []))
-    encode_dict['net'] = dict(zip(nets, [i for i in range(len(nets))]))
+    def build_graph(self):
+        for r in self.refs:
+            if r[0]:
+                self.graph.add_node(r[3])
+                self.graph.add_node(r[5])
+                self.graph.add_edge(r[3], r[5])
 
-    decode_dict ={}
-    decode_dict['net'] = {value: key for key, value in encode_dict['net'].items()}
-    decode_dict['name'] = {value: key for key, value in encode_dict['name'].items()}
-
-    for i in range(len(mos_list_encode[0])):
-        if i == 0:
-            unit_x = 0
-        else: 
-            left_net = [ mos[5] for mos in [mos_list_encode[0][i-1],mos_list_encode[1][i-1]] if mos[0]>0 ]
-            right_net = [ mos[2] for mos in [mos_list_encode[0][i],mos_list_encode[1][i]] if mos[0]>0 ]
-            min_index = min(len(right_net),len(left_net))
-            unit_x+= (1 if right_net[:min_index] == left_net[:min_index] else 2) 
-        mos_list_encode[0][i].insert(1,unit_x)
-        mos_list_encode[1][i].insert(1,unit_x)
-    mos_list = sum(mos_list_encode,[])
-    mos_list_decode = {"placement": {}}
-    mos_list.sort(key=lambda x:x[1])
-    for mos in mos_list:
-        if mos[0] == 0:
-            continue
-        else:
-            mos_list_decode['placement'][decode_dict['name'][mos[0]][1:]] = dict(zip(["x", "y", "source", "gate", "drain","width"],
-                                                              [str(i) for i in mos[1:3]]+list(map(lambda x: decode_dict['net'][x], mos[3:6]))+[str(mos[6])]))
-    return mos_list_decode
-
-
-def v_compute(s_old, action):
-    """根据赛题规则进行计算新状态的价值
-        method 0:任选一个管对，移动该管对到新位置
-        method 1:任选两个管对交换位置,输出每个管对需要被交换
-        method 2:任选一个管对,改变该管对中一个或一对管子的放置方向
-    """
-    # 创建一个新的的张量数组，用于存储交换后的结果
-    s_new = copy.deepcopy(s_old)
-    a=rd.randint(0, len(s_new[0])-1)
-    if action == 0:#随机选择一个管对，移动到新位置
-        b = rd.randint(0, len(s_new[0])-1)
-        s_new[0].insert(b,s_new[0].pop(a))
-        s_new[1].insert(b,s_new[1].pop(a))
-    # elif action==1:#随机交换两个管对
-    #     s_new[0][a],s_new[0][b]=s_new[0][b],s_new[0][a]
-    #     s_new[1][a],s_new[1][b]=s_new[1][b],s_new[1][a]
-    elif action==1:#随机选取一个管子旋转
-        channel_type = rd.randint(0,1)
-        s_new[channel_type][a][2],s_new[channel_type][a][4]=s_new[channel_type][a][4],s_new[channel_type][a][2]
-        # if a<b:
-        #     s_new[0][a][2],s_new[0][a][4]=s_new[0][a][4],s_new[0][a][2]
-        # else:
-        #     s_new[1][a][2],s_new[1][a][4]=s_new[1][a][4],s_new[1][a][2]
-    elif action==2:#交换栅极相同的管子即重新配对
-        channel_type = rd.randint(0,1)
-        indexs = [i for i in range(len(s_new[channel_type])) if s_new[channel_type][i][3]==s_new[channel_type][a][3]]
-        b = rd.choice(indexs)
-        s_new[channel_type][a],s_new[channel_type][b]=s_new[channel_type][b],s_new[channel_type][a]
-
-    with open('temp.json', 'w') as f:
-        json.dump(decode(s_new, words_list),
-                  f, sort_keys=False, indent=4)
-    reward = get_score('temp.json', 'SNDSRNQV4', 'test_case/cells.spi')
-    return s_new, reward
-    # raise NotImplementedError
-
+    def get_odd_num(self):
+        odd_nodes = [node for node,
+                     degree in self.graph.degree if degree % 2 != 0]
+        return len(odd_nodes)
 
 class IntegerRangeOutputLayer(torch.nn.Module):
     def __init__(self, max_value=10):
@@ -175,11 +65,11 @@ class PolicyNet(torch.nn.Module):
 
     def forward(self, x):
         # x = x.permute(2, 0, 1).unsqueeze(0)  # [2,2,5]->[1,5,2,2]
-        x = x.permute(0,3, 1, 2)  # [1,2,2,5]->[1,5,2,2]
-        desired_shape = (1,6, 2, 30)
-        desired_shape = (1,6, 2, 30)
-        padded_input = torch.zeros(desired_shape,device="cuda:0")
-        padded_input[:,:, :, :x.shape[-1]] = x
+        x = x.permute(0, 3, 1, 2)  # [1,2,2,5]->[1,5,2,2]
+        desired_shape = (1, 6, 2, 30)
+        desired_shape = (1, 6, 2, 30)
+        padded_input = torch.zeros(desired_shape, device="cuda:0")
+        padded_input[:, :, :, :x.shape[-1]] = x
         x = padded_input
         x = F.relu(self.conv1(x))
         x = x.view(x.size(0), -1)  # Flatten the output
@@ -226,83 +116,287 @@ class REINFORCE:
         self.optimizer.step()  # 梯度下降
 
 
-if __name__ == "__main__":
-    rd.seed(1)
-    learning_rate = 1e-3
-    num_episodes = 1000
-    gamma = 0.98
-    device = torch.device(
-        "cuda") if torch.cuda.is_available() else torch.device("cpu")
-    paser = Parser()
-    mos_list, words_list = paser.parse('test_case/cells.spi')
-    print(f"晶体管数量:{len(mos_list)}\n"+"*"*100)
-    state_dim = 6
-    action_dim = 3
-    agent = REINFORCE(state_dim, action_dim, learning_rate, gamma, device)
-    """测试网络输入输出"""
-    state = torch.tensor([encode(mos_list, words_list)],
-                     dtype=torch.float32, device=agent.device, requires_grad=True)
-    print(f"测试网络输入输出：\n  input:{state.shape}\n  out:{agent.policy_net(state)}\n"+"*"*100)
-    """测试结果输出:test_case/test.json"""
-    with open('test_case/test.json', 'w') as f:
-        json.dump(decode(state[0].int().tolist(), words_list),
-                  f, sort_keys=False, indent=4)
-    print(f"测试结果译码:test_case/test.json \n"+"*"*100)
-    """测试初始结果得分："""
-    reward = get_score('test_case/test.json', 'SNDSRNQV4', 'test_case/cells.spi')
-    print(f"初始布局得分：{reward}\n"+"*"*100)
-    """train"""
-    best_reward = 0
-    return_list = []
-    for i in range(10):
-        with tqdm(total=int(num_episodes / 10), desc='Iteration %d' % i) as pbar:
-            for i_episode in range(int(num_episodes / 10)):
-                episode_return = 0
-                transition_dict = {
-                    'states': [],
-                    'actions': [],
-                    'next_states': [],
-                    'rewards': [],
-                    'dones': []
-                }
-                state = encode(mos_list, words_list)
-                count = 0
-                while count<10*len(mos_list):
-                    if reward == -100:
-                        print(f"{state[0]}\n{state[1]}")
-                        with open('error.json', 'w') as f:
-                            json.dump(decode(state, words_list),
-                                      f, sort_keys=False, indent=4)
-                        exit()
-                    elif reward>80:
-                        with open('best.json', 'w') as f:
-                            json.dump(decode(state, words_list),
-                                      f, sort_keys=False, indent=4)
-                    elif reward>best_reward:
-                        best_reward = reward
-                        with open('best.json', 'w') as f:
-                            json.dump(decode(state, words_list),
-                                      f, sort_keys=False, indent=4)
-                    action = agent.take_action(state)
-                    # next_state, reward, done, _ = env.step(action)
-                    next_state, reward = v_compute(state, action)
-                    transition_dict['states'].append(state)
-                    transition_dict['actions'].append(action)
-                    transition_dict['next_states'].append(next_state)
-                    transition_dict['rewards'].append(reward)
-                    # transition_dict['dones'].append(done)
-                    state = next_state
-                    episode_return += reward
-                    count+=1
-                return_list.append(episode_return)
-                agent.update(transition_dict)
-                if (i_episode + 1) % 10 == 0:
-                    pbar.set_postfix({
-                        'episode':
-                        '%d' % (num_episodes / 10 * i + i_episode + 1),
-                        'return':
-                        '%.3f' % np.mean(return_list[-10:])
-                    })
-                pbar.update(1)
-    torch.save(agent.policy_net, 'model.pt')
-    """"""
+def encode(mos_list, encode_dict):
+    """
+    将字符串类型的mos管列表编码为int类型
+    """
+    mos_list_encode = {}  # 6维(name,y,left, mid, right,w)的n个晶体管
+    for mos in mos_list:
+        temp = []
+        # for item in ['name','left', 'mid', 'right', 'type', 'w', 'l',]:
+        for item in ['name', 'type', 'left', 'mid', 'right', 'w']:
+            if mos.name == 0:
+                code_number = 0
+            elif item == 'name':
+                code_number = encode_dict['name'][mos.name]
+            elif item == 'left':
+                code_number = encode_dict['net'][mos.left]
+            elif item == 'mid':
+                code_number = encode_dict['net'][mos.mid]
+            elif item == 'right':
+                code_number = encode_dict['net'][mos.right]
+            elif item == 'type':
+                code_number = 0 if mos.type == 'VDD' else 1
+            elif item == 'w':
+                code_number = mos.w
+            elif item == 'l':
+                code_number = mos.l
+            temp.append(code_number)
+        if temp[3] in mos_list_encode:
+            mos_list_encode[temp[3]].append(temp)
+        else:
+            mos_list_encode[temp[3]] = [temp]
+    pmos_list = []
+    nmos_list = []
+    for mid, temp in mos_list_encode.items():
+        for mos in temp:
+            if mos[1] == 1:
+                pmos_list.append(mos)
+            else:
+                nmos_list.append(mos)
+        dif = len(pmos_list) - len(nmos_list)
+        if dif == 0:
+            continue
+        elif dif > 0:
+            for i in range(dif):
+                nmos_list.append([0, 0] + pmos_list[i][2:])
+        else:
+            for i in range(abs(dif)):
+                pmos_list.append([0, 1] + pmos_list[i][2:])
+    return [pmos_list, nmos_list]
+
+
+def decode(mos_list_encode1, decode_dict):
+    '''
+    description : 将编码后的解还原成可以人工理解的json格式字典
+    param        mos_list
+    param        {*} mos_list_encode 6维(name,y,left, mid, right,w)的n个晶体管
+    param        {*} decode_dict
+    return       mos_list_decode #{"placement": {
+                                                "M0": {"x": "0","y": "1","source": "VDD","gate": "A2","drain": "ZN","width": "200"},
+                                                }
+    '''
+    mos_list_encode = copy.deepcopy(mos_list_encode1)
+    for i in range(len(mos_list_encode[0])):
+        if i == 0:
+            unit_x = 0
+        else:
+            if (mos_list_encode[0][i-1][0]*mos_list_encode[0][i][0] == 0 or mos_list_encode[0][i-1][5] == mos_list_encode[0][i][2]) and (mos_list_encode[1][i-1][0]*mos_list_encode[1][i][0] == 0 or mos_list_encode[1][i-1][5] == mos_list_encode[1][i][2]):
+                unit_x += 1
+            else:
+                unit_x += 2
+        mos_list_encode[0][i].insert(1, unit_x)
+        mos_list_encode[1][i].insert(1, unit_x)
+    mos_list = sum(mos_list_encode, [])
+    mos_list_decode = {"placement": {}}
+    mos_list.sort(key=lambda x: x[1])
+    for mos in mos_list:
+        if mos[0] == 0:
+            continue
+        else:
+            mos_list_decode['placement'][decode_dict['name'][mos[0]][1:]] = dict(zip(["x", "y", "source", "gate", "drain", "width"],
+                                                                                     [str(i) for i in mos[1:3]]+list(map(lambda x: decode_dict['net'][x], mos[3:6]))+[str(mos[6])]))
+    return mos_list_decode
+
+
+def get_score(mos_list_encode1, pins_code, echo_flag=False, runtime=0):
+    """
+    计算当前解(encode后的解)的最终得分
+    """
+    mos_list_encode = copy.deepcopy(mos_list_encode1)
+    # 计算x坐标并set symmetric
+    symmetric = 10
+    for i in range(len(mos_list_encode[0])):
+        if i == 0:
+            unit_x = 0
+        else:
+            if (mos_list_encode[0][i-1][0]*mos_list_encode[0][i][0] == 0 or mos_list_encode[0][i-1][5] == mos_list_encode[0][i][2]) and (mos_list_encode[1][i-1][0]*mos_list_encode[1][i][0] == 0 or mos_list_encode[1][i-1][5] == mos_list_encode[1][i][2]):
+                unit_x += 1
+            else:
+                unit_x += 2
+        mos_list_encode[0][i].insert(1, unit_x)
+        mos_list_encode[1][i].insert(1, unit_x)
+        if mos_list_encode[0][i][0]*mos_list_encode[1][i][0] == 0 and mos_list_encode[0][i][0]+mos_list_encode[1][i][0] > 0:
+            symmetric -= 1
+    # set drc
+    drc = 10
+    for i in range(len(mos_list_encode[0])):
+        if 0 < i < len(mos_list_encode[0])-1:
+            if mos_list_encode[0][i+1][1] - mos_list_encode[0][i-1][1] == 2 and mos_list_encode[0][i-1][0] and mos_list_encode[0][i][0] and mos_list_encode[0][i+1][0] and mos_list_encode[0][i][-1] < mos_list_encode[0][i-1][-1] and mos_list_encode[0][i][-1] < mos_list_encode[0][i+1][-1]:
+                drc -= 10
+            if mos_list_encode[1][i+1][1] - mos_list_encode[1][i-1][1] == 2 and mos_list_encode[1][i-1][0] and mos_list_encode[1][i][0] and mos_list_encode[1][i+1][0] and mos_list_encode[1][i][-1] < mos_list_encode[1][i-1][-1] and mos_list_encode[1][i][-1] < mos_list_encode[1][i+1][-1]:
+                drc -= 10
+    # set width
+    width = unit_x+1
+    # set ref_width
+    mos_list = sum(mos_list_encode, [])
+    bbox, ref_width, net_persions = 0, 0, {}
+    for mos in mos_list:
+        ref_width += (mos[-1]//200 if mos[-1] > 200 else 1)
+        for net, posion in zip(mos[3:6], [mos[1]-0.5, mos[1], mos[1]+0.5]):
+            if net in net_persions:
+                net_persions[net].append(posion)
+            else:
+                net_persions[net] = [posion]
+    upper_graph = EulerGraph(mos_list_encode[1])
+    lower_graph = EulerGraph(mos_list_encode[0])
+    min_gap = max(0.0, (upper_graph.get_odd_num() +
+                  lower_graph.get_odd_num() - 4) / 2)
+    ref_width = (min_gap + ref_width) / 2
+    # set pin_access
+    pin_coords = []
+    for net, r in net_persions.items():
+        r.sort()
+        if net in pins_code:
+            pin_coords.append(r[0])
+            max_distance = 0
+            for pos in r:
+                distance = 0
+                another_pos = []
+                for another_n, another_r in net_persions.items():
+                    if another_n in pins_code and another_n != net:
+                        another_pos.extend(another_r)
+                if not another_pos:
+                    break
+                another_pos.sort()
+                if another_pos[0] > pos:
+                    distance = abs(another_pos[0] - pos)
+                elif another_pos[-1] < pos:
+                    distance = abs(another_pos[-1] - pos)
+                else:
+                    for i in range(0, len(another_pos) - 1):
+                        if another_pos[i] < pos < another_pos[i + 1]:
+                            distance = min(
+                                abs(another_pos[i] - pos), abs(another_pos[i + 1] - pos))
+                            break
+                if distance > max_distance:
+                    max_distance = distance
+                    pin_coords[-1] = pos
+    pin_coords.sort()
+    if not pin_coords or len(pin_coords) == 1:
+        pin_access = 1
+    else:
+        pin_spacing = []
+        left_spacing = pin_coords[0] + 0.5
+        right_spacing = width - 0.5 - pin_coords[-1]
+        if left_spacing > 1:
+            pin_spacing.append(left_spacing / width)
+        if right_spacing > 1:
+            pin_spacing.append(right_spacing / width)
+        for i in range(0, len(pin_coords) - 1):
+            pin_spacing.append(
+                (pin_coords[i + 1] - pin_coords[i]) / width)
+        pin_access = np.std(np.array(pin_spacing))
+    # set bbox
+    del net_persions[0]  # VSS
+    del net_persions[1]  # VDD
+    for net, persions in net_persions.items():
+        bbox += persions[-1]-persions[0]
+
+    # set score
+    ws = 40 * (1 - (width - ref_width) / (ref_width + 20))
+    bs = min(20.0, 20 * (1 - (bbox - ref_width * (len(pins_code) - 1)) / 60))
+    ps = 10 * (1 - pin_access)
+    rs = 10 * (1 / (1 + math.exp(runtime / 3600 - 1)))
+    score = ws+bs+symmetric+drc+rs+ps
+    if echo_flag:
+        print("Cell various indicators(width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %ds)"
+              % (width, bbox, pin_access, symmetric, drc, runtime))
+        print("Get  score   %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %d)"
+              % (score, ws, bs, ps, symmetric, drc, rs))
+    return score
+
+
+Action_num = 11
+
+
+def v_compute(s_old, action):
+    """ 根据action选择更新解的方式
+        method 0:任选一个管对，移动该管对到新位置
+        method 1:任选两个管对交换位置,输出每个管对需要被交换
+        method 2:任选一个管对,改变该管对中一个或一对管子的放置方向
+        ...
+        return new_sol
+    """
+    # 创建一个新的的张量数组，用于存储交换后的结果
+    s_new = copy.deepcopy(s_old)
+    if action == 0:  # 随机选择一个管对，移动到新位置
+        a = rd.randint(0, len(s_new[0])-1)
+        b = rd.randint(0, len(s_new[0])-1)
+        s_new[0].insert(b, s_new[0].pop(a))
+        s_new[1].insert(b, s_new[1].pop(a))
+    elif action == 1:  # 随机交换两个管对
+        a = rd.randint(0, len(s_new[0])-1)
+        b = rd.randint(0, len(s_new[0])-1)
+        s_new[0][a], s_new[0][b] = s_new[0][b], s_new[0][a]
+        s_new[1][a], s_new[1][b] = s_new[1][b], s_new[1][a]
+    elif action == 2:  # 交换相邻一处管对
+        a = rd.randint(0, len(s_new[0])-1)
+        b = a-1 if a > 0 else 1
+        s_new[0][a], s_new[0][b] = s_new[0][b], s_new[0][a]
+        s_new[1][a], s_new[1][b] = s_new[1][b], s_new[1][a]
+    elif action == 3:  # 随机选取一个管子旋转
+        a = rd.randint(0, len(s_new[0])-1)
+        channel_type = 0
+        s_new[channel_type][a][2], s_new[channel_type][a][4] = s_new[channel_type][a][4], s_new[channel_type][a][2]
+    elif action == 4:
+        a = rd.randint(0, len(s_new[0])-1)
+        channel_type = 1
+        s_new[channel_type][a][2], s_new[channel_type][a][4] = s_new[channel_type][a][4], s_new[channel_type][a][2]
+    elif action == 5:  # 交换栅极相同的管子即重新配对
+        channel_type = 0
+        a = rd.randint(0, len(s_new[0])-1)
+        indexs = [i for i in range(len(
+            s_new[channel_type])) if s_new[channel_type][i][3] == s_new[channel_type][a][3]]
+        b = rd.choice(indexs)
+        s_new[channel_type][a], s_new[channel_type][b] = s_new[channel_type][b], s_new[channel_type][a]
+    elif action == 6:  # 交换栅极相同的管子即重新配对
+        channel_type = 1
+        a = rd.randint(0, len(s_new[0])-1)
+        indexs = [i for i in range(len(
+            s_new[channel_type])) if s_new[channel_type][i][3] == s_new[channel_type][a][3]]
+        b = rd.choice(indexs)
+        s_new[channel_type][a], s_new[channel_type][b] = s_new[channel_type][b], s_new[channel_type][a]
+    elif action == 7:  # 旋转左右线网不连续的管子
+        channel_type = 0
+        indexs = [i for i in range(1, len(
+            s_new[channel_type])) if s_new[channel_type][i][2] == s_new[channel_type][i-1][4]]
+        a = rd.choice(indexs)
+        s_new[channel_type][a][2], s_new[channel_type][a][4] = s_new[channel_type][a][4], s_new[channel_type][a][2]
+    elif action == 8:  # 旋转左右线网不连续的管子
+        channel_type = 1
+        indexs = [i for i in range(1, len(
+            s_new[channel_type])) if s_new[channel_type][i][2] == s_new[channel_type][i-1][4]]
+        a = rd.choice(indexs)
+        s_new[channel_type][a][2], s_new[channel_type][a][4] = s_new[channel_type][a][4], s_new[channel_type][a][2]
+    elif action == 9:  # 移动左右线网不一样的管子
+        channel_type = 0
+        indexs = [i for i in range(1, len(
+            s_new[channel_type])) if s_new[channel_type][i][2] == s_new[channel_type][i-1][4]]
+        a = rd.choice(indexs)
+        b = rd.choice(indexs)
+        s_new[0].insert(b, s_new[0].pop(a))
+        s_new[1].insert(b, s_new[1].pop(a))
+    elif action == 10:
+        channel_type = 1
+        indexs = [i for i in range(1, len(
+            s_new[channel_type])) if s_new[channel_type][i][2] == s_new[channel_type][i-1][4]]
+        a = rd.choice(indexs)
+        b = rd.choice(indexs)
+        s_new[0].insert(b, s_new[0].pop(a))
+        s_new[1].insert(b, s_new[1].pop(a))
+    return s_new
+
+
+def selectAndUseOperator(Weight, current_sol, UseTimes):
+    """# 定义算子选择轮盘赌"""
+    Roulette = np.array(
+        Weight).cumsum()  # 轮盘赌,cumsum()把列表里之前数的和加到当前列，如a=[1,2,3,4]，comsum结果为[1,3,6,10]
+    r = rd.uniform(0, max(Roulette))  # 随机生成【0，轮盘赌列表最大数】之间的浮点数
+    for i in range(
+            len(Roulette)):
+        if Roulette[i] >= r:  # 判断是r否在算子i的对应范围内
+            Operator = i
+            UseTimes[i] += 1  # 算子i使用次数累加
+            break  # 满足其中一个范围就跳出for循环
+    return Operator

@@ -200,7 +200,6 @@ class Cell:
 
     def get_pin_access(self):
         pin_coords = []
-
         for net, r in self.net_pos.items():
             if net in self.pins:
                 pin_coords.append(r[0])
@@ -260,6 +259,8 @@ class Cell:
         self.score = ws + bs + ps + ss + ds + rs
         print("Cell score %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %ds)" \
               % (self.score, self.width, self.bbox, self.pin_access, self.symmetric, self.drc, runtime))
+        print("Cell score %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %d)"
+              % (self.score, ws, bs, ps, self.symmetric, self.drc, rs))
 
     def __repr__(self):
         return (
@@ -358,13 +359,15 @@ def extract_subckt(file, cell_re):
             output_stream.write(line)
             find_cell = True
 
-def get_score(placement_file,cell_name,netlist_file):
-    import sys,json
-    sys.stdout = None
+
+def evaluator_case(placement_file, cell_name, netlist_file, runtime=0):
+    import sys
+    import json
     # read placement file
     placement_stream = open(placement_file, "r")
     placement_dic = json.load(placement_stream)
     placement = placement_dic["placement"]
+
     # get transistor properties from netlist
     transistor_dic, pins = load_netlist(netlist_file, cell_name)
     # get ref width
@@ -374,6 +377,7 @@ def get_score(placement_file,cell_name,netlist_file):
             ref_width += t.channel_width // 200
         else:
             ref_width += 1
+
     cell = Cell(cell_name, pins)
     # get cell width
     width = 0
@@ -385,25 +389,20 @@ def get_score(placement_file,cell_name,netlist_file):
     for transistor_name, properties in placement.items():
         tname, finger = decompose_transistor_name(transistor_name)
         transistor = transistor_dic[tname]
-        ref = TransistorRef(transistor, not str_equal(transistor.source_net, properties["source"]), int(properties["width"]))
+        ref = TransistorRef(transistor, not str_equal(
+            transistor.source_net, properties["source"]), int(properties["width"]))
         cell.add_transistor(ref, int(properties["x"]))
+
     # set ref width
     upper_graph = EulerGraph(cell.upper)
     lower_graph = EulerGraph(cell.lower)
-    min_gap = max(0.0, (upper_graph.get_odd_num() + lower_graph.get_odd_num() - 4) / 2)
+    min_gap = max(0.0, (upper_graph.get_odd_num() +
+                  lower_graph.get_odd_num() - 4) / 2)
     cell.ref_width = (min_gap + ref_width) / 2
+
     # check and get score
     if cell.check(transistor_dic):
-        cell.evaluate(runtime=0)
-        sys.stdout = sys.__stdout__
-        return cell.score
-    else:
-        sys.stdout = sys.__stdout__
-        return -100
-
-
-
-
+        cell.evaluate(runtime)
 if __name__ == "__main__":
     import sys
     import json
