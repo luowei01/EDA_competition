@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-18 18:42:38
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-10 16:38:10
+LastEditTime : 2023-11-10 17:26:13
 FilePath     : \EDA_competition\visualize.py
 Description  : 
 '''
