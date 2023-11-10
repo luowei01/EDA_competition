@@ -4,3 +4,4 @@
 *.pt
 ./output/*.json
 ./_pycache_/
+log.txt
