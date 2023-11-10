@@ -2,12 +2,13 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-10 11:17:24
+LastEditTime : 2023-11-10 17:02:12
 FilePath     : \EDA_competition\data_parse.py
 Description  : 
 '''
 import re
 import numpy as np
+import copy
 
 
 class Mos:
@@ -65,8 +66,33 @@ class Parser:
                             params = [name, left, mid, right, type, int(
                                 float(w[:-1])*1000) if w[-1] == 'u' else int(float(w[:-1])), int(
                                 float(l[:-1])*1000) if l[-1] == 'u' else int(float(l[:-1]))]
-                            self.cell_dict[cell_name].append(Mos(*params))
-                            self.cell_words_dict[cell_name].append(params)
+                            if params[-2] > 220:
+                                if params[-2] % 2 == 0:
+                                    params[-2] /= 2
+                                    self.cell_dict[cell_name].append(
+                                        Mos(*params))
+                                    self.cell_words_dict[cell_name].append(
+                                        copy.deepcopy(params))
+                                    params[0] = params[0]+'_finger1'
+                                    self.cell_dict[cell_name].append(
+                                        Mos(*params))
+                                    self.cell_words_dict[cell_name].append(
+                                        params)
+                                else:
+                                    params[-2] = params[-2]/2 + 2.5
+                                    self.cell_dict[cell_name].append(
+                                        Mos(*params))
+                                    self.cell_words_dict[cell_name].append(
+                                        copy.deepcopy(params))
+                                    params[0] += '_finger1'
+                                    params[-2] -= 5
+                                    self.cell_dict[cell_name].append(
+                                        Mos(*params))
+                                    self.cell_words_dict[cell_name].append(
+                                        params)
+                            else:
+                                self.cell_dict[cell_name].append(Mos(*params))
+                                self.cell_words_dict[cell_name].append(params)
             if not find_cell:
                 print(
                     f"未能成功在 {self.path} 中搜索到名为 {cell_name} 的cell,请重新确认输入参数!\nUsage: python demo.py <netlist> <cell_name>")
@@ -93,10 +119,27 @@ class Parser:
                         params = [name, left, mid, right, type, int(
                             float(w[:-1])*1000) if w[-1] == 'u' else int(float(w[:-1])), int(
                             float(l[:-1])*1000) if l[-1] == 'u' else int(float(l[:-1]))]
-                        # if params[-2] > 220:
-                        #     print(cell_name, type, params[-2])
-                        self.cell_dict[cell_name].append(Mos(*params))
-                        self.cell_words_dict[cell_name].append(params)
+                        if params[-2] > 220:
+                            if params[-2] % 2 == 0:
+                                params[-2] /= 2
+                                self.cell_dict[cell_name].append(Mos(*params))
+                                self.cell_words_dict[cell_name].append(
+                                    copy.deepcopy(params))
+                                params[0] += '_finger1'
+                                self.cell_dict[cell_name].append(Mos(*params))
+                                self.cell_words_dict[cell_name].append(params)
+                            else:
+                                params[-2] = params[-2]/2 + 2.5
+                                self.cell_dict[cell_name].append(Mos(*params))
+                                self.cell_words_dict[cell_name].append(
+                                    copy.deepcopy(params))
+                                params[0] += '_finger1'
+                                params[-2] -= 5
+                                self.cell_dict[cell_name].append(Mos(*params))
+                                self.cell_words_dict[cell_name].append(params)
+                        else:
+                            self.cell_dict[cell_name].append(Mos(*params))
+                            self.cell_words_dict[cell_name].append(params)
             return self.cell_dict, self.cell_pins_dict
 
     def build_code_dict(self, cell_name):
@@ -119,9 +162,9 @@ class Parser:
 
 
 if __name__ == "__main__":
-    cell_spi_path, test_case_name = "public/cells.spi", "AN2D2"
+    cell_spi_path, test_case_name = "public/cells.spi", "SNDSRNQV4"
     paser = Parser()
-    paser.parse(cell_spi_path)
+    # paser.parse(cell_spi_path)
     mos_list, pins = paser.parse(cell_spi_path, test_case_name)
     encode_dict, decode_dict = paser.build_code_dict(test_case_name)
     pins_code = [encode_dict['net'][net] for net in pins]
