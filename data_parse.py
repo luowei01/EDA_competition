@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-10 17:02:12
+LastEditTime : 2023-11-10 19:56:21
 FilePath     : \EDA_competition\data_parse.py
 Description  : 
 '''
@@ -68,18 +68,18 @@ class Parser:
                                 float(l[:-1])*1000) if l[-1] == 'u' else int(float(l[:-1]))]
                             if params[-2] > 220:
                                 if params[-2] % 2 == 0:
-                                    params[-2] /= 2
+                                    params[-2] = int(params[-2]/2)
                                     self.cell_dict[cell_name].append(
                                         Mos(*params))
                                     self.cell_words_dict[cell_name].append(
                                         copy.deepcopy(params))
-                                    params[0] = params[0]+'_finger1'
+                                    params[0] += '_finger1'
                                     self.cell_dict[cell_name].append(
                                         Mos(*params))
                                     self.cell_words_dict[cell_name].append(
                                         params)
                                 else:
-                                    params[-2] = params[-2]/2 + 2.5
+                                    params[-2] = int(params[-2]/2 + 2.5)
                                     self.cell_dict[cell_name].append(
                                         Mos(*params))
                                     self.cell_words_dict[cell_name].append(
@@ -121,7 +121,7 @@ class Parser:
                             float(l[:-1])*1000) if l[-1] == 'u' else int(float(l[:-1]))]
                         if params[-2] > 220:
                             if params[-2] % 2 == 0:
-                                params[-2] /= 2
+                                params[-2] = int(params[-2]/2)
                                 self.cell_dict[cell_name].append(Mos(*params))
                                 self.cell_words_dict[cell_name].append(
                                     copy.deepcopy(params))
@@ -129,7 +129,7 @@ class Parser:
                                 self.cell_dict[cell_name].append(Mos(*params))
                                 self.cell_words_dict[cell_name].append(params)
                             else:
-                                params[-2] = params[-2]/2 + 2.5
+                                params[-2] = int(params[-2]/2 + 2.5)
                                 self.cell_dict[cell_name].append(Mos(*params))
                                 self.cell_words_dict[cell_name].append(
                                     copy.deepcopy(params))
@@ -168,3 +168,4 @@ if __name__ == "__main__":
     mos_list, pins = paser.parse(cell_spi_path, test_case_name)
     encode_dict, decode_dict = paser.build_code_dict(test_case_name)
     pins_code = [encode_dict['net'][net] for net in pins]
+    print(len(mos_list))
