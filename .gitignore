@@ -7,3 +7,4 @@ __pycache__/
 ./log.txt
 result.jpg
 difficult_case
+low_score_case.txt
