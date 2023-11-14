@@ -3,7 +3,8 @@
 ./*.jpg
 ./*.pt
 output/*.json
-__pycache__/
+output_cplus/*.json
+__pycache__/*.pyc
 ./log.txt
 result.jpg
 difficult_case
