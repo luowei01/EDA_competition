@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-10 19:56:21
+LastEditTime : 2023-11-11 11:16:01
 FilePath     : \EDA_competition\data_parse.py
 Description  : 
 '''
@@ -12,7 +12,7 @@ import copy
 
 
 class Mos:
-    __slots__ = ('name', 'type', 'left', 'mid', 'right', 'w', 'l',)
+    # __slots__ = ('name', 'type', 'left', 'mid', 'right', 'w', 'l',)
 
     def __init__(self, name, left, mid, right, type, w, l):
         self.name = name
