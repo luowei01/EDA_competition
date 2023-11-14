@@ -243,7 +243,7 @@ class Cell:
 
             self.pin_access = numpy.std(numpy.array(pin_spacing))
 
-    def evaluate(self, runtime):
+    def evaluate(self, runtime, return_flag=False):
         for net, r in self.net_pos.items():
             r.sort()
             if not is_power(net):
@@ -257,10 +257,14 @@ class Cell:
         ds = self.drc
         rs = 10 * (1 / (1 + math.exp(runtime / 3600 - 1)))
         self.score = ws + bs + ps + ss + ds + rs
-        print("Cell score %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %ds)" \
-              % (self.score, self.width, self.bbox, self.pin_access, self.symmetric, self.drc, runtime))
-        print("Cell score %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %d)"
-              % (self.score, ws, bs, ps, self.symmetric, self.drc, rs))
+        if return_flag:
+            return [self.score, ws, bs, ps, self.symmetric, self.drc, rs]
+        else:
+            print("Cell score %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %ds)"
+                  % (self.score, self.width, self.bbox, self.pin_access, self.symmetric, self.drc, runtime))
+            print("Cell score %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %d)"
+                  % (self.score, ws, bs, ps, self.symmetric, self.drc, rs))
+
 
     def __repr__(self):
         return (
@@ -402,7 +406,7 @@ def evaluator_case(placement_file, cell_name, netlist_file, runtime=0):
 
     # check and get score
     if cell.check(transistor_dic):
-        cell.evaluate(runtime)
+        cell.evaluate(runtime, return_flag=True)
 if __name__ == "__main__":
     import sys
     import json
