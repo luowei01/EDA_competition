@@ -2,13 +2,14 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-11 11:16:01
+LastEditTime : 2023-11-14 21:29:09
 FilePath     : \EDA_competition\data_parse.py
 Description  : 
 '''
 import re
 import numpy as np
 import copy
+
 
 
 class Mos:
@@ -162,10 +163,30 @@ class Parser:
 
 
 if __name__ == "__main__":
-    cell_spi_path, test_case_name = "public/cells.spi", "SNDSRNQV4"
+    from solver import encode, v_compute, get_score, decode
+    import time
+    import json
+    import random
+    start = time.time()
+    cell_spi_path, cell_name = "public/cells.spi", "SNDSRNQV4"
     paser = Parser()
-    # paser.parse(cell_spi_path)
-    mos_list, pins = paser.parse(cell_spi_path, test_case_name)
-    encode_dict, decode_dict = paser.build_code_dict(test_case_name)
+    mos_list, pins = paser.parse(cell_spi_path, cell_name)
+    encode_dict, decode_dict = paser.build_code_dict(cell_name)
     pins_code = [encode_dict['net'][net] for net in pins]
-    print(len(mos_list))
+    s = encode(mos_list, encode_dict)
+    score = get_score(s, pins_code)
+    for i in range(1000):
+        action = random.randint(0, 4)
+        new_s = v_compute(s, action)
+        new_score = get_score(new_s, pins_code)
+        if new_score < score:
+            pass
+        else:
+            s = new_s
+            score = new_score
+    result = decode(s, decode_dict)
+    save_path = 'output.json'
+    with open(save_path, 'w') as f:
+        json.dump(decode(s, decode_dict),
+                  f, sort_keys=False, indent=4)
+    print(time.time()-start)
