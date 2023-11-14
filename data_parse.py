@@ -2,14 +2,13 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-14 21:29:09
+LastEditTime : 2023-11-14 21:49:28
 FilePath     : \EDA_competition\data_parse.py
 Description  : 
 '''
 import re
 import numpy as np
 import copy
-
 
 
 class Mos:
@@ -36,8 +35,7 @@ class Parser:
         self.cell_encode_dict = {}
         self.cell_decode_dict = {}
         # self.attributes = ('name', 'type', 'left', 'mid', 'right', 'w', 'l')
-        self.pattern = re.compile(
-            r"(.*)\s(.*)\s(.*)\s(.*)\s(.*)\s.*\s(\w)=(.*\w)\s\w=(.*\w)\s*\n")
+        self.pattern = re.compile(r"(.*)\s(.*)\s(.*)\s(.*)\s(.*)\s.*\s(\w)=(.*\w)\s\w=(.*\w)\s*\n")
 
     def parse(self, path, cell_name=None):
         self.path = path
@@ -53,8 +51,7 @@ class Parser:
                         break
                     if words[0] == ".SUBCKT" and cell_name == words[1]:
                         find_cell = True
-                        self.cell_pins_dict[cell_name] = [
-                            net for net in words[2:] if net.upper() not in ["VDD", "VSS"]]
+                        self.cell_pins_dict[cell_name] = [net for net in words[2:] if net.upper() not in ["VDD", "VSS"]]
                         self.cell_dict[cell_name] = []
                         self.cell_words_dict[cell_name] = []
                         continue
@@ -65,32 +62,23 @@ class Parser:
                             if swap_wl.upper() == 'L':
                                 w, l = l, w
                             params = [name, left, mid, right, type, int(
-                                float(w[:-1])*1000) if w[-1] == 'u' else int(float(w[:-1])), int(
-                                float(l[:-1])*1000) if l[-1] == 'u' else int(float(l[:-1]))]
+                                float(w[:-1])*1000) if w[-1] == 'u' else int(float(w[:-1])), int(float(l[:-1])*1000) if l[-1] == 'u' else int(float(l[:-1]))]
                             if params[-2] > 220:
                                 if params[-2] % 2 == 0:
                                     params[-2] = int(params[-2]/2)
-                                    self.cell_dict[cell_name].append(
-                                        Mos(*params))
-                                    self.cell_words_dict[cell_name].append(
-                                        copy.deepcopy(params))
+                                    self.cell_dict[cell_name].append(Mos(*params))
+                                    self.cell_words_dict[cell_name].append(copy.deepcopy(params))
                                     params[0] += '_finger1'
-                                    self.cell_dict[cell_name].append(
-                                        Mos(*params))
-                                    self.cell_words_dict[cell_name].append(
-                                        params)
+                                    self.cell_dict[cell_name].append(Mos(*params))
+                                    self.cell_words_dict[cell_name].append(params)
                                 else:
                                     params[-2] = int(params[-2]/2 + 2.5)
-                                    self.cell_dict[cell_name].append(
-                                        Mos(*params))
-                                    self.cell_words_dict[cell_name].append(
-                                        copy.deepcopy(params))
+                                    self.cell_dict[cell_name].append(Mos(*params))
+                                    self.cell_words_dict[cell_name].append(copy.deepcopy(params))
                                     params[0] += '_finger1'
                                     params[-2] -= 5
-                                    self.cell_dict[cell_name].append(
-                                        Mos(*params))
-                                    self.cell_words_dict[cell_name].append(
-                                        params)
+                                    self.cell_dict[cell_name].append(Mos(*params))
+                                    self.cell_words_dict[cell_name].append(params)
                             else:
                                 self.cell_dict[cell_name].append(Mos(*params))
                                 self.cell_words_dict[cell_name].append(params)
@@ -107,8 +95,7 @@ class Parser:
                         continue
                     if words[0] == ".SUBCKT":
                         cell_name = words[1]
-                        self.cell_pins_dict[cell_name] = [
-                            net for net in words[2:] if net.upper() not in ["VDD", "VSS"]]
+                        self.cell_pins_dict[cell_name] = [net for net in words[2:] if net.upper() not in ["VDD", "VSS"]]
                         self.cell_dict[cell_name] = []
                         self.cell_words_dict[cell_name] = []
                         continue
@@ -118,22 +105,19 @@ class Parser:
                         if swap_wl.upper() == 'L':
                             w, l = l, w
                         params = [name, left, mid, right, type, int(
-                            float(w[:-1])*1000) if w[-1] == 'u' else int(float(w[:-1])), int(
-                            float(l[:-1])*1000) if l[-1] == 'u' else int(float(l[:-1]))]
+                            float(w[:-1])*1000) if w[-1] == 'u' else int(float(w[:-1])), int(float(l[:-1])*1000) if l[-1] == 'u' else int(float(l[:-1]))]
                         if params[-2] > 220:
                             if params[-2] % 2 == 0:
                                 params[-2] = int(params[-2]/2)
                                 self.cell_dict[cell_name].append(Mos(*params))
-                                self.cell_words_dict[cell_name].append(
-                                    copy.deepcopy(params))
+                                self.cell_words_dict[cell_name].append(copy.deepcopy(params))
                                 params[0] += '_finger1'
                                 self.cell_dict[cell_name].append(Mos(*params))
                                 self.cell_words_dict[cell_name].append(params)
                             else:
                                 params[-2] = int(params[-2]/2 + 2.5)
                                 self.cell_dict[cell_name].append(Mos(*params))
-                                self.cell_words_dict[cell_name].append(
-                                    copy.deepcopy(params))
+                                self.cell_words_dict[cell_name].append(copy.deepcopy(params))
                                 params[0] += '_finger1'
                                 params[-2] -= 5
                                 self.cell_dict[cell_name].append(Mos(*params))
@@ -146,19 +130,15 @@ class Parser:
     def build_code_dict(self, cell_name):
         self.cell_encode_dict[cell_name] = {}
         words_list = np.array(self.cell_words_dict[cell_name])
-        self.cell_encode_dict[cell_name]['name'] = dict(
-            zip(words_list[:, 0], [i for i in range(1, len(words_list[:, 0])+1)]))  # 0表示虚拟mos
+        self.cell_encode_dict[cell_name]['name'] = dict(zip(words_list[:, 0], [i for i in range(1, len(words_list[:, 0])+1)]))  # 0表示虚拟mos
         nets = set(sum(words_list[:, 1:4].tolist(), []))
         nets.remove('VDD')
         nets.remove('VSS')
         self.cell_encode_dict[cell_name]['net'] = {'VSS': 0, 'VDD': 1}
-        self.cell_encode_dict[cell_name]['net'].update(
-            dict(zip(nets, [i for i in range(2, len(nets)+2)])))
+        self.cell_encode_dict[cell_name]['net'].update(dict(zip(nets, [i for i in range(2, len(nets)+2)])))
         self.cell_decode_dict[cell_name] = {}
-        self.cell_decode_dict[cell_name]['net'] = {value: key for key,
-                                                   value in self.cell_encode_dict[cell_name]['net'].items()}
-        self.cell_decode_dict[cell_name]['name'] = {value: key for key,
-                                                    value in self.cell_encode_dict[cell_name]['name'].items()}
+        self.cell_decode_dict[cell_name]['net'] = {value: key for key, value in self.cell_encode_dict[cell_name]['net'].items()}
+        self.cell_decode_dict[cell_name]['name'] = {value: key for key, value in self.cell_encode_dict[cell_name]['name'].items()}
         return self.cell_encode_dict[cell_name], self.cell_decode_dict[cell_name]
 
 
@@ -187,6 +167,5 @@ if __name__ == "__main__":
     result = decode(s, decode_dict)
     save_path = 'output.json'
     with open(save_path, 'w') as f:
-        json.dump(decode(s, decode_dict),
-                  f, sort_keys=False, indent=4)
+        json.dump(decode(s, decode_dict), f, sort_keys=False, indent=4)
     print(time.time()-start)
