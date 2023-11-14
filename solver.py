@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-10 18:29:48
+LastEditTime : 2023-11-14 20:59:39
 FilePath     : \EDA_competition\solver.py
 Description  : 
 '''
@@ -159,10 +159,10 @@ def encode(mos_list, encode_dict):
             continue
         elif dif > 0:
             for i in range(dif):
-                nmos_list.append([0, 0] + pmos_list[i][2:])
+                nmos_list.append([0, 0] + pmos_list[-1][2:])
         else:
             for i in range(abs(dif)):
-                pmos_list.append([0, 1] + pmos_list[i][2:])
+                pmos_list.append([0, 1] + nmos_list[-1][2:])
     return [pmos_list, nmos_list]
 
 
@@ -199,7 +199,7 @@ def decode(mos_list_encode1, decode_dict):
     return mos_list_decode
 
 
-def get_score(mos_list_encode1, pins_code, echo_flag=False, runtime=0):
+def get_score(mos_list_encode1, pins_code):
     """
     计算当前解(encode后的解)的最终得分
     """
@@ -297,13 +297,15 @@ def get_score(mos_list_encode1, pins_code, echo_flag=False, runtime=0):
     ws = 40 * (1 - (width - ref_width) / (ref_width + 20))
     bs = min(20.0, 20 * (1 - (bbox - ref_width * (len(pins_code) - 1)) / 60))
     ps = 10 * (1 - pin_access)
-    rs = 10 * (1 / (1 + math.exp(runtime / 3600 - 1)))
-    score = ws+bs+symmetric+drc+rs+ps
-    if echo_flag:
-        print("Cell various indicators(width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %ds)"
-              % (width, bbox, pin_access, symmetric, drc, runtime))
-        print("Get  score   %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %d)"
-              % (score, ws, bs, ps, symmetric, drc, rs))
+    # rs = 10 * (1 / (1 + math.exp(runtime / 3600 - 1)))
+    score = ws+bs+symmetric+drc+ps
+    # if echo_flag:
+    #     # print("Cell various indicators(width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %ds)"
+    #     #       % (width, bbox, pin_access, symmetric, drc, runtime))
+    #     print("Get  score   %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %d)"
+    #           % (score, ws, bs, ps, symmetric, drc, rs))
+    #     # return {'score': score, 'width': ws, 'bbox': bs, 'pin_access': ps, 'symmetric': symmetric, 'drc': drc, 'runtime': rs}
+    #     return [score, ws, bs, ps, symmetric, drc, rs]
     return score
 
 
