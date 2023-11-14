@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-18 18:42:38
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-10 17:26:13
+LastEditTime : 2023-11-14 13:46:04
 FilePath     : \EDA_competition\visualize.py
 Description  : 
 '''
@@ -41,14 +41,8 @@ if __name__ == "__main__":
     unit = 50
     real_x_max = 100+unit*len(placement_data['placement'])
     result = numpy.full((640, real_x_max, 3), 255, numpy.uint8)
-    mos_dict = {}
-    for name,mos in  placement_data['placement'].items():
-        if int(mos['x']) not in mos_dict:
-            mos_dict[int(mos['x'])]=[Mos(name,int(mos['x']),int(mos['y']),mos['source'], mos['drain'], int(mos['width']))]
-        else:
-            mos_dict[int(mos['x'])].append(Mos(name,int(mos['x']),int(mos['y']),mos['source'], mos['drain'], int(mos['width'])))
-            mos_dict[int(mos['x'])].sort()
-    mos_dict = {k:v for k,v in sorted(mos_dict.items(), key=lambda item: item[0])}
+    mos_list = [Mos(name, int(mos['x']), int(mos['y']), mos['source'], mos['drain'], int(
+        mos['width'])) for name, mos in placement_data['placement'].items()]
     ###visulize
     cv2.rectangle(result, (10, 70), (real_x_max-10, 100), (255, 0, 0), 2)
     cv2.rectangle(result, (10, 560), (real_x_max-10, 590), (255, 0, 0), 2)
@@ -56,26 +50,18 @@ if __name__ == "__main__":
     cv2.putText(result, 'VSS', (10,590), None, 1, (0,0,255), thickness=2, lineType=cv2.LINE_8, bottomLeftOrigin=None)
     cv2.line(result, (10, 330), (real_x_max-10, 330),
              (0, 0, 0), 1, cv2.LINE_AA)
-    last_mos_pair = None
-    for persion,mos_pair in mos_dict.items():
-        if persion == 0:
-            real_x=100
-        else:
-            right_net = [mos.drain for mos in last_mos_pair] 
-            left_net = [mos.source for mos in mos_pair]
-            min_index = min(len(right_net),len(left_net))
-            real_x+= (unit if right_net[:min_index] == left_net[:min_index] else 2*unit) 
-        for mos in mos_pair:
-            rect = ((real_x,110+mos.width//2 if mos.y==1 else 550-mos.width//2),(mos_lenth,mos.width),0)
-            box = numpy.int32(cv2.boxPoints(rect))
-            cv2.drawContours(result, [box], -1, (0, 165,255), 2)
-            rect = ((real_x,330),(5,480),0)
-            box = numpy.int32(cv2.boxPoints(rect))
-            cv2.drawContours(result, [box], -1, (0, 255,0), -1)
-            text_size, _ = cv2.getTextSize(mos.name, None, 0.3, 1)
-            cv2.putText(result, mos.name, (real_x-text_size[0]//2, 80+text_size[1]//2 if mos.y == 1 else 580 +
-                        text_size[1]//2), None, 0.3, (0, 0, 0), thickness=1, lineType=cv2.LINE_8, bottomLeftOrigin=None)
-        last_mos_pair = mos_pair
+    for mos in mos_list:
+        real_x = mos.x*unit+100
+        rect = ((real_x, 110+mos.width//2 if mos.y == 1 else 550 -
+                mos.width//2), (mos_lenth, mos.width), 0)
+        box = numpy.int32(cv2.boxPoints(rect))
+        cv2.drawContours(result, [box], -1, (0, 165, 255), 2)
+        rect = ((real_x, 330), (5, 480), 0)
+        box = numpy.int32(cv2.boxPoints(rect))
+        cv2.drawContours(result, [box], -1, (0, 255, 0), -1)
+        text_size, _ = cv2.getTextSize(mos.name, None, 0.3, 1)
+        cv2.putText(result, mos.name, (real_x-text_size[0]//2, 80+text_size[1]//2 if mos.y == 1 else 580 +
+                    text_size[1]//2), None, 0.3, (0, 0, 0), thickness=1, lineType=cv2.LINE_8, bottomLeftOrigin=None)
     # cv2.imshow("result", result)  # 显示窗口
     # cv2.waitKey(0)  # 等待按键
     # cv2.destroyAllWindows()  # 释放窗口
