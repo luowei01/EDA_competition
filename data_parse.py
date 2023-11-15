@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-14 21:49:28
+LastEditTime : 2023-11-14 23:00:13
 FilePath     : \EDA_competition\data_parse.py
 Description  : 
 '''
@@ -35,7 +35,7 @@ class Parser:
         self.cell_encode_dict = {}
         self.cell_decode_dict = {}
         # self.attributes = ('name', 'type', 'left', 'mid', 'right', 'w', 'l')
-        self.pattern = re.compile(r"(.*)\s(.*)\s(.*)\s(.*)\s(.*)\s.*\s(\w)=(.*\w)\s\w=(.*\w)\s*\n")
+        self.pattern = re.compile(r"(.*)\s(.*)\s(.*)\s(.*)\s.*\s(.*)\s(\w)=(.*\w)\s\w=(.*\w)\s*\n")
 
     def parse(self, path, cell_name=None):
         self.path = path
@@ -84,7 +84,7 @@ class Parser:
                                 self.cell_words_dict[cell_name].append(params)
             if not find_cell:
                 print(
-                    f"未能成功在 {self.path} 中搜索到名为 {cell_name} 的cell,请重新确认输入参数!\nUsage: python demo.py <netlist> <cell_name>")
+                    f"未能成功在 {self.path} 中搜索到名为 {cell_name} 的cell,请重新确认输入参数!\nUsage: python TransistorPlacer.py  <netlist> <cell_name> <save_path>")
                 exit()
             return self.cell_dict[cell_name], self.cell_pins_dict[cell_name]
         else:
