@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-14 20:59:39
+LastEditTime : 2023-11-14 23:02:36
 FilePath     : \EDA_competition\solver.py
 Description  : 
 '''
@@ -136,7 +136,7 @@ def encode(mos_list, encode_dict):
             elif item == 'right':
                 code_number = encode_dict['net'][mos.right]
             elif item == 'type':
-                code_number = 0 if mos.type == 'VDD' else 1
+                code_number = 1 if mos.type == 'pch_mac' else 0
             elif item == 'w':
                 code_number = mos.w
             elif item == 'l':
