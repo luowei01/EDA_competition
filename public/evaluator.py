@@ -1,3 +1,4 @@
+#! anaconda/bin/python3
 # **************************************************************************************
 # NOTICE OF COPYRIGHT AND OWNERSHIP OF SOFTWARE:
 # This file is part of the AutoCell project.
@@ -149,6 +150,7 @@ class Cell:
             self.upper[x] = t
         else:
             self.lower[x] = t
+
         self.add_net(t.source(), x - 0.5)
         self.add_net(t.gate(), x)
         self.add_net(t.drain(), x + 0.5)
@@ -161,6 +163,10 @@ class Cell:
                 if t.transistor.name not in transistor_width.keys():
                     transistor_width[t.transistor.name] = 0
                 transistor_width[t.transistor.name] += t.width
+                if t.width > 220 or t.width < 120:
+                    print("ERROR: transistor %s width %d unlegal\n" % (t.transistor.name, t.width))
+                    self.score = 0
+                    return False
 
         for name, transistor in ref_dic.items():
             if transistor_width[name] != transistor.channel_width:
@@ -200,6 +206,7 @@ class Cell:
 
     def get_pin_access(self):
         pin_coords = []
+
         for net, r in self.net_pos.items():
             if net in self.pins:
                 pin_coords.append(r[0])
@@ -243,7 +250,7 @@ class Cell:
 
             self.pin_access = numpy.std(numpy.array(pin_spacing))
 
-    def evaluate(self, runtime, return_flag=False):
+    def evaluate(self, runtime):
         for net, r in self.net_pos.items():
             r.sort()
             if not is_power(net):
@@ -257,14 +264,8 @@ class Cell:
         ds = self.drc
         rs = 10 * (1 / (1 + math.exp(runtime / 3600 - 1)))
         self.score = ws + bs + ps + ss + ds + rs
-        if return_flag:
-            return [self.score, ws, bs, ps, self.symmetric, self.drc, rs]
-        else:
-            print("Cell score %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %ds)"
-                  % (self.score, self.width, self.bbox, self.pin_access, self.symmetric, self.drc, runtime))
-            print("Cell score %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %d)"
-                  % (self.score, ws, bs, ps, self.symmetric, self.drc, rs))
-
+        print("Cell score %f (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %ds)" \
+              % (self.score, self.width, self.bbox, self.pin_access, self.symmetric, self.drc, runtime))
 
     def __repr__(self):
         return (
@@ -328,6 +329,7 @@ def load_netlist(file, cell_name):
                 if word[0] == 'w' or word[0] == 'W':
                     w = get_channel_width(word)
                     break
+
             t = Transistor(get_channel_type(words[5]), words[3], words[2], words[1], w, words[0][1:])
             transistor_dic[t.name] = t
 
@@ -364,49 +366,6 @@ def extract_subckt(file, cell_re):
             find_cell = True
 
 
-def evaluator_case(placement_file, cell_name, netlist_file, runtime=0):
-    import sys
-    import json
-    # read placement file
-    placement_stream = open(placement_file, "r")
-    placement_dic = json.load(placement_stream)
-    placement = placement_dic["placement"]
-
-    # get transistor properties from netlist
-    transistor_dic, pins = load_netlist(netlist_file, cell_name)
-    # get ref width
-    ref_width = 0
-    for transistor_name, t in transistor_dic.items():
-        if t.channel_width > 220:
-            ref_width += t.channel_width // 200
-        else:
-            ref_width += 1
-
-    cell = Cell(cell_name, pins)
-    # get cell width
-    width = 0
-    for transistor_name, properties in placement.items():
-        if width < int(properties["x"]) + 1:
-            width = int(properties["x"]) + 1
-    cell.reset(width)
-    # add transistor
-    for transistor_name, properties in placement.items():
-        tname, finger = decompose_transistor_name(transistor_name)
-        transistor = transistor_dic[tname]
-        ref = TransistorRef(transistor, not str_equal(
-            transistor.source_net, properties["source"]), int(properties["width"]))
-        cell.add_transistor(ref, int(properties["x"]))
-
-    # set ref width
-    upper_graph = EulerGraph(cell.upper)
-    lower_graph = EulerGraph(cell.lower)
-    min_gap = max(0.0, (upper_graph.get_odd_num() +
-                  lower_graph.get_odd_num() - 4) / 2)
-    cell.ref_width = (min_gap + ref_width) / 2
-
-    # check and get score
-    if cell.check(transistor_dic):
-        cell.evaluate(runtime, return_flag=True)
 if __name__ == "__main__":
     import sys
     import json

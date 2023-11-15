@@ -1,3 +1,10 @@
 
-2023-10-10 First version of evaluator and testceses
+2023-10-10 
+	First version of evaluator and testceses
+
+2023-10-22 
+	Database Fixes:
+	1. Set w=100n/0.11u/0.115n to w=120n
+	2. Add transistor width check, which should be >= 120n and <=220n
+
 
