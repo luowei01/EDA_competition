@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-09 22:16:58
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-15 17:27:54
+LastEditTime : 2023-11-15 18:59:11
 FilePath     : \EDA_competition\main.py
 Description  : 批量运行demo,测试得分
 '''
@@ -23,7 +23,7 @@ if __name__ == "__main__":
         outcsv_path = 'result_cplus.csv'
     paser = Parser()
     paser.parse(cell_spi_path)
-    with open(outcsv_path, 'w') as f:
+    with open(outcsv_path, 'w', encoding='utf-8', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['cell name', 'score', 'width',
                          'bbox', 'pin_access', 'symmetric', 'drc', 'runtime'])
@@ -41,7 +41,7 @@ if __name__ == "__main__":
         score_list = evaluator_case(
             f'{save_dir}/{cell_name}.json', cell_name, cell_spi_path, run_time)
         if score_list:
-            with open(outcsv_path, 'a') as f:
+            with open(outcsv_path, 'a', encoding='utf-8', newline='') as f:
                 writer = csv.writer(f)
                 score_list.insert(0, cell_name)
                 writer.writerow(score_list)
