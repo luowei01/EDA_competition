@@ -10,4 +10,4 @@ __pycache__/*.pyc
 result.jpg
 difficult_case
 low_score_case.txt
-public/__pycache__/evaluator.cpython-39.pyc
+result.csv
