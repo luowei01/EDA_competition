@@ -2,6 +2,7 @@
 ./*.json
 ./*.jpg
 ./*.pt
+./*.csv
 output/*.json
 output_cplus/*.json
 __pycache__/*.pyc
@@ -9,3 +10,4 @@ __pycache__/*.pyc
 result.jpg
 difficult_case
 low_score_case.txt
+public/__pycache__/evaluator.cpython-39.pyc
