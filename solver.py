@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-14 23:02:36
+LastEditTime : 2023-11-15 21:05:02
 FilePath     : \EDA_competition\solver.py
 Description  : 
 '''
@@ -298,7 +298,8 @@ def get_score(mos_list_encode1, pins_code):
     bs = min(20.0, 20 * (1 - (bbox - ref_width * (len(pins_code) - 1)) / 60))
     ps = 10 * (1 - pin_access)
     # rs = 10 * (1 / (1 + math.exp(runtime / 3600 - 1)))
-    score = ws+bs+symmetric+drc+ps
+    rs = 7.2
+    score = ws+bs+symmetric+drc+ps+rs
     # if echo_flag:
     #     # print("Cell various indicators(width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %ds)"
     #     #       % (width, bbox, pin_access, symmetric, drc, runtime))
