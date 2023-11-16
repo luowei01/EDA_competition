@@ -2,8 +2,8 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-07 14:48:53
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-15 21:25:49
-FilePath     : \EDA_competition\TransistorPlacer.py
+LastEditTime : 2023-11-16 17:12:45
+FilePath     : \EDA_competition\main.py
 Description  : 
 '''
 # import torch
@@ -32,7 +32,7 @@ def init_SA(state, reward, best_state, best_reward):
     '''
     # state = encode(mos_list, encode_dict)
     # reward = get_score(state, pins)
-    N = 100*len(mos_list)
+    N = 5*len(mos_list)
     count, sum_cost = 0, 0
     while count < N:
         action = rd.randint(0, Action_num-1)
@@ -83,12 +83,12 @@ if __name__ == "__main__":
     best_state = copy.deepcopy(state)
     best_reward = copy.deepcopy(reward)
     """优化布局"""
-    for iter in range(200//len(mos_list)):
+    for iter in range(5):
         # for iter in range(1):
         state, reward, best_state, best_reward, T, T_min = init_SA(state, reward, best_state, best_reward)  # 利用爬山法进行参数初始化
         while T > T_min:
             count = 0
-            while count < 20*len(mos_list):
+            while count < 10*len(mos_list):
                 # 产生新解
                 if Algorithm.RL in use_algorithms:
                     state_tensor = torch.tensor(
