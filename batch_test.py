@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-09 22:16:58
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-16 17:02:33
+LastEditTime : 2023-11-16 17:20:38
 FilePath     : \EDA_competition\batch_test.py
 Description  : 批量运行demo,测试得分
 '''
@@ -16,8 +16,8 @@ from my_evaluator import evaluator_case
 if __name__ == "__main__":
     cell_spi_path = "public/cells.spi"
     if len(sys.argv) < 2:
-        save_dir = 'output'
-        outcsv_path = 'result.csv'
+        save_dir = 'output_python'
+        outcsv_path = 'result_python.csv'
     else:
         save_dir = 'output_cplus'
         outcsv_path = 'result_cplus.csv'

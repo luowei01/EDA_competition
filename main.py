@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-07 14:48:53
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-16 17:12:45
+LastEditTime : 2023-11-16 17:19:26
 FilePath     : \EDA_competition\main.py
 Description  : 
 '''
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     start = time.time()
     if len(sys.argv) < 4:
         print(
-            "ERROR: No enough file provided.\nUsage: python TransistorPlacer.py  <netlist> <cell_name> <save_path>")
+            "ERROR: No enough file provided.\nUsage: python main.py  <netlist> <cell_name> <save_path>")
         exit()
     cell_spi_path, cell_name, save_path = sys.argv[1], sys.argv[2], sys.argv[3]
     paser = Parser()
@@ -175,4 +175,4 @@ if __name__ == "__main__":
     with open(save_path, 'w') as f:
         json.dump(decode(best_state, decode_dict),
                   f, sort_keys=False, indent=4)
-    # print(f"cell name:{cell_name}\nbest_score:{best_reward}\n耗时:{time.time()-start}s\n"+'*'*150)
+    print(f"cell name:{cell_name}\n晶体管数量:{len(mos_list)}\nbest_score:{best_reward}\n耗时:{time.time()-start}s\n"+'*'*150)
