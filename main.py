@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-07 14:48:53
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-16 17:19:26
+LastEditTime : 2023-11-18 22:50:39
 FilePath     : \EDA_competition\main.py
 Description  : 
 '''
@@ -14,7 +14,8 @@ import time
 import numpy as np
 import random as rd
 from enum import Enum
-from solver import encode, decode, get_score, v_compute, selectAndUseOperator, Action_num
+from solver import encode, decode, get_score, selectAndUseOperator, Action_num  # ,v_compute
+from solver_cplus import v_compute
 from data_parse import Parser
 
 
@@ -87,8 +88,10 @@ if __name__ == "__main__":
         # for iter in range(1):
         state, reward, best_state, best_reward, T, T_min = init_SA(state, reward, best_state, best_reward)  # 利用爬山法进行参数初始化
         while T > T_min:
+            if best_reward > 89.9:
+                break
             count = 0
-            while count < 10*len(mos_list):
+            while count < 20*len(mos_list):
                 # 产生新解
                 if Algorithm.RL in use_algorithms:
                     state_tensor = torch.tensor(
@@ -172,7 +175,8 @@ if __name__ == "__main__":
                         #         reward = new_reward
                 count += 1
             T = a*T
+    print(best_state, best_reward)
     with open(save_path, 'w') as f:
         json.dump(decode(best_state, decode_dict),
                   f, sort_keys=False, indent=4)
-    print(f"cell name:{cell_name}\n晶体管数量:{len(mos_list)}\nbest_score:{best_reward}\n耗时:{time.time()-start}s\n"+'*'*150)
+    print(f"cell name:{cell_name}\n晶体管数量:{len(mos_list)}\nbest_score:{best_reward+7.31}\n耗时:{time.time()-start}s\n"+'*'*150)
