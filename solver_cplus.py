@@ -1,18 +1,20 @@
-import random
 import ctypes
 import numpy as np
 # Load the DLL
 cpp_lib = ctypes.CDLL('solver.dll', winmode=0)
 
 
-def v_compute(state, action):
-    my_list = np.array(sum(sum(state, []), []), dtype=np.int32)
-    m, n, p = 2, len(state[0]), 6
+def run_SA(init_state, pinsCode, ref_width):
+    my_list = np.array(sum(sum(init_state, []), []), dtype=np.int32)
+    m, n, p, pinsCodeSize = 2, len(init_state[0]), 6, len(pinsCode)
     my_array = (ctypes.c_int * len(my_list))(*my_list)
-    cpp_lib.v_compute.argtypes = [ctypes.POINTER(ctypes.c_int), ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int]
-    cpp_lib.v_compute.restype = ctypes.POINTER(ctypes.c_int)
+    pinsCode = (ctypes.c_int * len(pinsCode))(*pinsCode)
+    cpp_lib.run_SA.argtypes = [ctypes.POINTER(ctypes.c_int), ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                               ctypes.POINTER(ctypes.c_int), ctypes.c_int, ctypes.c_int]
+    cpp_lib.run_SA.restype = ctypes.POINTER(ctypes.c_int)
     # cpp_lib.print_array(array_ptr, ctypes.c_int(24))
-    result_ptr = cpp_lib.v_compute(my_array, ctypes.c_int(m), ctypes.c_int(n), ctypes.c_int(p), ctypes.c_int(action))
+    result_ptr = cpp_lib.run_SA(my_array, ctypes.c_int(m), ctypes.c_int(n), ctypes.c_int(p),
+                                pinsCode, ctypes.c_int(pinsCodeSize), ctypes.c_int(ref_width))
     # 使用 ctypes 的 contents 属性获取指针指向的整数数组
     result_array = ctypes.cast(result_ptr, ctypes.POINTER(ctypes.c_int * len(my_list))).contents
     # 将列表转换为 NumPy 数组
@@ -23,8 +25,3 @@ def v_compute(state, action):
     # cpp_lib.destroy_vector.argtypes = [ctypes.POINTER(ctypes.c_int)]
     cpp_lib.destroy_vector(result_ptr)
     return reshaped_list
-
-
-state = [[[3, 1, 3, 2, 1, 170], [4, 1, 3, 2, 1, 170]], [[1, 0, 3, 2, 0, 140], [2, 0, 3, 2, 0, 140]]]
-for i in range(10):
-    state = v_compute(state, 2)

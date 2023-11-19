@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-16 17:18:10
+LastEditTime : 2023-11-19 18:59:42
 FilePath     : \EDA_competition\data_parse.py
 Description  : 
 '''
@@ -34,6 +34,7 @@ class Parser:
         self.cell_words_dict = {}
         self.cell_encode_dict = {}
         self.cell_decode_dict = {}
+        self.cell_ref_width_dict = {}  # 记录布局理想宽度
         # self.attributes = ('name', 'type', 'left', 'mid', 'right', 'w', 'l')
         self.pattern = re.compile(r"(.*)\s(.*)\s(.*)\s(.*)\s.*\s(.*)\s(\w)=(.*\w)\s\w=(.*\w)\s*\n")
 
@@ -54,6 +55,7 @@ class Parser:
                         self.cell_pins_dict[cell_name] = [net for net in words[2:] if net.upper() not in ["VDD", "VSS"]]
                         self.cell_dict[cell_name] = []
                         self.cell_words_dict[cell_name] = []
+                        self.cell_ref_width_dict[cell_name] = 0
                         continue
                     if find_cell:
                         line_data = re.match(self.pattern, line)
@@ -63,6 +65,7 @@ class Parser:
                                 w, l = l, w
                             params = [name, left, mid, right, type, int(
                                 float(w[:-1])*1000) if w[-1] == 'u' else int(float(w[:-1])), int(float(l[:-1])*1000) if l[-1] == 'u' else int(float(l[:-1]))]
+                            self.cell_ref_width_dict[cell_name] += params[-2]//200 if params[-2] > 220 else 1
                             if params[-2] > 220:
                                 if params[-2] % 2 == 0:
                                     params[-2] = int(params[-2]/2)
@@ -143,29 +146,22 @@ class Parser:
 
 
 if __name__ == "__main__":
-    from solver import encode, v_compute, get_score, decode
+    from solver import encode, decode
+    from solver_cplus import run_SA
+    from my_evaluator import evaluator_case
     import time
     import json
-    import random
     start = time.time()
-    cell_spi_path, cell_name = "public/cells.spi", "SNDSRNQV4"
+    cell_spi_path, cell_name = "public/cells.spi", "INR4D2"
     paser = Parser()
     mos_list, pins = paser.parse(cell_spi_path, cell_name)
     encode_dict, decode_dict = paser.build_code_dict(cell_name)
     pins_code = [encode_dict['net'][net] for net in pins]
+    ref_width = paser.cell_ref_width_dict[cell_name]
     s = encode(mos_list, encode_dict)
-    score = get_score(s, pins_code)
-    for i in range(1000):
-        action = random.randint(0, 4)
-        new_s = v_compute(s, action)
-        new_score = get_score(new_s, pins_code)
-        if new_score < score:
-            pass
-        else:
-            s = new_s
-            score = new_score
-    result = decode(s, decode_dict)
+    best_s = run_SA(s, pins_code, ref_width)
+    result = decode(best_s, decode_dict)
     save_path = 'output.json'
     with open(save_path, 'w') as f:
-        json.dump(decode(s, decode_dict), f, sort_keys=False, indent=4)
+        json.dump(result, f, sort_keys=False, indent=4)
     print(time.time()-start)

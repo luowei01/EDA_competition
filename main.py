@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-07 14:48:53
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-18 22:50:39
+LastEditTime : 2023-11-19 18:06:02
 FilePath     : \EDA_competition\main.py
 Description  : 
 '''
@@ -13,17 +13,9 @@ import copy
 import time
 import numpy as np
 import random as rd
-from enum import Enum
-from solver import encode, decode, get_score, selectAndUseOperator, Action_num  # ,v_compute
-from solver_cplus import v_compute
+from solver import *
+from solver_cplus import run_SA
 from data_parse import Parser
-
-
-class Algorithm(Enum):
-    RD = 0  # 随机算法
-    SA = 1  # 退火算法
-    RL = 2  # 强化学习
-    Roulette = 3  # 轮盘赌
 
 
 def init_SA(state, reward, best_state, best_reward):
@@ -38,7 +30,7 @@ def init_SA(state, reward, best_state, best_reward):
     while count < N:
         action = rd.randint(0, Action_num-1)
         new_state = v_compute(state, action)
-        new_reward = get_score(new_state, pins_code)
+        new_reward = get_score(new_state, pins_code, ref_width)
         if new_reward < reward:
             count += 1
             sum_cost += reward-new_reward
@@ -62,8 +54,8 @@ if __name__ == "__main__":
     mos_list, pins = paser.parse(cell_spi_path, cell_name)
     encode_dict, decode_dict = paser.build_code_dict(cell_name)
     pins_code = [encode_dict['net'][net] for net in pins]
+    ref_width = paser.cell_ref_width_dict[cell_name]
     # print(f"cell:{cell_name}\n晶体管数量:{len(mos_list)}")
-    use_algorithms = [Algorithm.SA]
     # print(f"使用{[i.name for i in use_algorithms]}算法优化...")
     """初始化"""
     if Algorithm.RL in use_algorithms:
@@ -80,7 +72,7 @@ if __name__ == "__main__":
     if Algorithm.SA in use_algorithms:
         a = 0.95  # a(降温速度)
     state = encode(mos_list, encode_dict)
-    reward = get_score(state, pins)
+    reward = get_score(state, pins, ref_width)
     best_state = copy.deepcopy(state)
     best_reward = copy.deepcopy(reward)
     """优化布局"""
@@ -106,7 +98,7 @@ if __name__ == "__main__":
                     action = rd.randint(0, Action_num-1)
                 new_state = v_compute(state, action)
                 # 计算新解的价值
-                new_reward = get_score(new_state, pins)
+                new_reward = get_score(new_state, pins, ref_width)
                 # 更新
                 if Algorithm.SA in use_algorithms:
                     if Algorithm.Roulette in use_algorithms:
