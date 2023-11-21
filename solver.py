@@ -2,29 +2,41 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-19 18:11:41
+LastEditTime : 2023-11-21 17:23:09
 FilePath     : \EDA_competition\solver.py
 Description  : 
 '''
 import numpy as np
 import copy
-import math
+import ctypes
 import random as rd
 import networkx as nx
-from enum import Enum
+import torch
+import torch.nn.functional as F
+Action_num = 4  # 定义的晶体管更新布局的方法数量v_copmute
 
 
-class Algorithm(Enum):
-    RD = 0  # 随机算法
-    SA = 1  # 退火算法
-    RL = 2  # 强化学习
-    Roulette = 3  # 轮盘赌
+class EulerGraph:
+
+    def __init__(self, refs):
+        self.refs = refs
+        self.graph = nx.MultiGraph()
+        self.build_graph()
+
+    def build_graph(self):
+        for r in self.refs:
+            if r[0]:
+                self.graph.add_node(r[3])
+                self.graph.add_node(r[5])
+                self.graph.add_edge(r[3], r[5])
+
+    def get_odd_num(self):
+        odd_nodes = [node for node,
+                     degree in self.graph.degree if degree % 2 != 0]
+        return len(odd_nodes)
 
 
-use_algorithms = [Algorithm.SA]
-
-
-def v_compute(s_old, action):
+def sol_update(s_old, action):
     """ 根据action选择更新解的方式
         method 0:任选一个管对，移动该管对到新位置
         method 1:任选两个管对交换位置,输出每个管对需要被交换
@@ -61,30 +73,6 @@ def v_compute(s_old, action):
     #     s_new[0][a], s_new[0][b] = s_new[0][b], s_new[0][a]
     #     s_new[1][a], s_new[1][b] = s_new[1][b], s_new[1][a]
     return s_new
-
-
-Action_num = 4
-
-
-
-class EulerGraph:
-
-    def __init__(self, refs):
-        self.refs = refs
-        self.graph = nx.MultiGraph()
-        self.build_graph()
-
-    def build_graph(self):
-        for r in self.refs:
-            if r[0]:
-                self.graph.add_node(r[3])
-                self.graph.add_node(r[5])
-                self.graph.add_edge(r[3], r[5])
-
-    def get_odd_num(self):
-        odd_nodes = [node for node,
-                     degree in self.graph.degree if degree % 2 != 0]
-        return len(odd_nodes)
 
 
 def get_score(mos_list_encode1, pins_code, ref_width1):
@@ -275,99 +263,126 @@ def decode(mos_list_encode1, decode_dict):
     return mos_list_decode
 
 
-if Algorithm.RL in use_algorithms:
-    import torch
-    import torch.nn.functional as F
+def selectAndUseOperator(Weight, current_sol, UseTimes):
+    """# 定义算子选择轮盘赌"""
+    Roulette = np.array(
+        Weight).cumsum()  # 轮盘赌,cumsum()把列表里之前数的和加到当前列，如a=[1,2,3,4]，comsum结果为[1,3,6,10]
+    r = rd.uniform(0, max(Roulette))  # 随机生成【0，轮盘赌列表最大数】之间的浮点数
+    for i in range(
+            len(Roulette)):
+        if Roulette[i] >= r:  # 判断是r否在算子i的对应范围内
+            Operator = i
+            UseTimes[i] += 1  # 算子i使用次数累加
+            break  # 满足其中一个范围就跳出for循环
+    return Operator
 
-    class IntegerRangeOutputLayer(torch.nn.Module):
-        def __init__(self, max_value=10):
-            super(IntegerRangeOutputLayer, self).__init__()
-            self.max_value = max_value
 
-        def forward(self, x):
-            integer_output = torch.round(x)  # 使用四舍五入
-            integer_output[:, 0] = torch.clamp(
-                integer_output[:, 0], min=0, max=self.max_value)  # 第一列限制在0和max_value之间
-            integer_output[:, 1] = torch.clamp(
-                integer_output[:, 1], min=0, max=1)  # 第一列限制在0和1之间
-            return integer_output
+"""强化学习相关算法"""
 
-    class PolicyNet(torch.nn.Module):
-        """策略网络,输入s,输出s下动作概率的分布
-           输入:2行晶体管的y、left、mid、right、width
-           输出:method 1:任选一个管对，移动该管对到新位置，输出每个管对需要被移动的概率
-                method 2:任选两个管对交换位置,输出每个管对需要被交换的概率分布
-                method 3:任选一个管对,改变该管对中一个或一对管子的放置方向
-        """
 
-        def __init__(self, state_dim, action_dim):
-            super(PolicyNet, self).__init__()
-            self.conv1 = torch.nn.Conv2d(state_dim, 64, kernel_size=1)
-            self.fc1 = torch.nn.Linear(64*2*30, 128)
-            self.fc2 = torch.nn.Linear(128, action_dim)
-            # self.integer_output = IntegerRangeOutputLayer()
+class IntegerRangeOutputLayer(torch.nn.Module):
+    def __init__(self, max_value=10):
+        super(IntegerRangeOutputLayer, self).__init__()
+        self.max_value = max_value
 
-        def forward(self, x):
-            # x = x.permute(2, 0, 1).unsqueeze(0)  # [2,2,5]->[1,5,2,2]
-            x = x.permute(0, 3, 1, 2)  # [1,2,2,5]->[1,5,2,2]
-            desired_shape = (1, 6, 2, 30)
-            desired_shape = (1, 6, 2, 30)
-            padded_input = torch.zeros(desired_shape, device="cuda:0")
-            padded_input[:, :, :, :x.shape[-1]] = x
-            x = padded_input
-            x = F.relu(self.conv1(x))
-            x = x.view(x.size(0), -1)  # Flatten the output
-            x = F.relu(self.fc1(x))
-            # x = self.fc2(x)
-            # x = self.integer_output(x)  # 使用自定义的整数输出层
-            x = F.softmax(self.fc2(x), dim=-1)
-            return x
+    def forward(self, x):
+        integer_output = torch.round(x)  # 使用四舍五入
+        integer_output[:, 0] = torch.clamp(
+            integer_output[:, 0], min=0, max=self.max_value)  # 第一列限制在0和max_value之间
+        integer_output[:, 1] = torch.clamp(
+            integer_output[:, 1], min=0, max=1)  # 第一列限制在0和1之间
+        return integer_output
 
-    class REINFORCE:
-        def __init__(self, state_dim, action_dim, learning_rate, gamma,
-                     device):
-            self.policy_net = PolicyNet(state_dim,
-                                        action_dim).to(device)
-            self.optimizer = torch.optim.Adam(self.policy_net.parameters(),
-                                              lr=learning_rate)  # 使用Adam优化器
-            self.gamma = gamma  # 折扣因子
-            self.device = device
 
-        def take_action(self, state):  # 根据动作概率分布随机采样
-            state = torch.tensor([state], dtype=torch.float).to(self.device)
-            probs = self.policy_net(state)
-            action_dist = torch.distributions.Categorical(probs)
-            action = action_dist.sample()
-            return action.item()
+class PolicyNet(torch.nn.Module):
+    """策略网络,输入s,输出s下动作概率的分布
+       输入:2行晶体管的y、left、mid、right、width
+       输出:method 1:任选一个管对，移动该管对到新位置，输出每个管对需要被移动的概率
+            method 2:任选两个管对交换位置,输出每个管对需要被交换的概率分布
+            method 3:任选一个管对,改变该管对中一个或一对管子的放置方向
+    """
 
-        def update(self, transition_dict):
-            reward_list = transition_dict['rewards']
-            state_list = transition_dict['states']
-            action_list = transition_dict['actions']
+    def __init__(self, state_dim, action_dim):
+        super(PolicyNet, self).__init__()
+        self.conv1 = torch.nn.Conv2d(state_dim, 64, kernel_size=1)
+        self.fc1 = torch.nn.Linear(64*2*30, 128)
+        self.fc2 = torch.nn.Linear(128, action_dim)
+        # self.integer_output = IntegerRangeOutputLayer()
 
-            G = 0
-            self.optimizer.zero_grad()
-            for i in reversed(range(len(reward_list))):  # 从最后一步算起
-                reward = reward_list[i]
-                state = torch.tensor([state_list[i]],
-                                     dtype=torch.float).to(self.device)
-                action = torch.tensor([action_list[i]]).view(-1, 1).to(self.device)
-                log_prob = torch.log(self.policy_net(state).gather(1, action))
-                G = self.gamma * G + reward
-                loss = -log_prob * G  # 每一步的损失函数
-                loss.backward()  # 反向传播计算梯度
-            self.optimizer.step()  # 梯度下降
+    def forward(self, x):
+        # x = x.permute(2, 0, 1).unsqueeze(0)  # [2,2,5]->[1,5,2,2]
+        x = x.permute(0, 3, 1, 2)  # [1,2,2,5]->[1,5,2,2]
+        desired_shape = (1, 6, 2, 30)
+        desired_shape = (1, 6, 2, 30)
+        padded_input = torch.zeros(desired_shape, device="cuda:0")
+        padded_input[:, :, :, :x.shape[-1]] = x
+        x = padded_input
+        x = F.relu(self.conv1(x))
+        x = x.view(x.size(0), -1)  # Flatten the output
+        x = F.relu(self.fc1(x))
+        # x = self.fc2(x)
+        # x = self.integer_output(x)  # 使用自定义的整数输出层
+        x = F.softmax(self.fc2(x), dim=-1)
+        return x
 
-if Algorithm.Roulette in use_algorithms:
-    def selectAndUseOperator(Weight, current_sol, UseTimes):
-        """# 定义算子选择轮盘赌"""
-        Roulette = np.array(
-            Weight).cumsum()  # 轮盘赌,cumsum()把列表里之前数的和加到当前列，如a=[1,2,3,4]，comsum结果为[1,3,6,10]
-        r = rd.uniform(0, max(Roulette))  # 随机生成【0，轮盘赌列表最大数】之间的浮点数
-        for i in range(
-                len(Roulette)):
-            if Roulette[i] >= r:  # 判断是r否在算子i的对应范围内
-                Operator = i
-                UseTimes[i] += 1  # 算子i使用次数累加
-                break  # 满足其中一个范围就跳出for循环
-        return Operator
+
+class REINFORCE:
+    def __init__(self, state_dim, action_dim, learning_rate, gamma,
+                 device):
+        self.policy_net = PolicyNet(state_dim,
+                                    action_dim).to(device)
+        self.optimizer = torch.optim.Adam(self.policy_net.parameters(),
+                                          lr=learning_rate)  # 使用Adam优化器
+        self.gamma = gamma  # 折扣因子
+        self.device = device
+
+    def take_action(self, state):  # 根据动作概率分布随机采样
+        state = torch.tensor([state], dtype=torch.float).to(self.device)
+        probs = self.policy_net(state)
+        action_dist = torch.distributions.Categorical(probs)
+        action = action_dist.sample()
+        return action.item()
+
+    def update(self, transition_dict):
+        reward_list = transition_dict['rewards']
+        state_list = transition_dict['states']
+        action_list = transition_dict['actions']
+        G = 0
+        self.optimizer.zero_grad()
+        for i in reversed(range(len(reward_list))):  # 从最后一步算起
+            reward = reward_list[i]
+            state = torch.tensor([state_list[i]],
+                                 dtype=torch.float).to(self.device)
+            action = torch.tensor([action_list[i]]).view(-1, 1).to(self.device)
+            log_prob = torch.log(self.policy_net(state).gather(1, action))
+            G = self.gamma * G + reward
+            loss = -log_prob * G  # 每一步的损失函数
+            loss.backward()  # 反向传播计算梯度
+        self.optimizer.step()  # 梯度下降
+
+
+"""c++动态库调用"""
+
+
+def use_cplus_run_SA(init_state, pinsCode, ref_width):
+    cpp_lib = ctypes.CDLL('solver.dll', winmode=0)
+    my_list = np.array(sum(sum(init_state, []), []), dtype=np.int32)
+    m, n, p, pinsCodeSize = 2, len(init_state[0]), 6, len(pinsCode)
+    my_array = (ctypes.c_int * len(my_list))(*my_list)
+    pinsCode = (ctypes.c_int * len(pinsCode))(*pinsCode)
+    cpp_lib.run_SA.argtypes = [ctypes.POINTER(ctypes.c_int), ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                               ctypes.POINTER(ctypes.c_int), ctypes.c_int, ctypes.c_int]
+    cpp_lib.run_SA.restype = ctypes.POINTER(ctypes.c_int)
+    # cpp_lib.print_array(array_ptr, ctypes.c_int(24))
+    result_ptr = cpp_lib.run_SA(my_array, ctypes.c_int(m), ctypes.c_int(n), ctypes.c_int(p),
+                                pinsCode, ctypes.c_int(pinsCodeSize), ctypes.c_int(ref_width))
+    # 使用 ctypes 的 contents 属性获取指针指向的整数数组
+    result_array = ctypes.cast(result_ptr, ctypes.POINTER(ctypes.c_int * len(my_list))).contents
+    # 将列表转换为 NumPy 数组
+    original_array = np.array(list(result_array))
+    # 改变形状为二维数组
+    reshaped_list = original_array.reshape(m, n, p).tolist()
+    # 释放内存（重要步骤）
+    # cpp_lib.destroy_array.argtypes = [ctypes.POINTER(ctypes.c_int)]
+    cpp_lib.destroy_array(result_ptr)
+    return reshaped_list

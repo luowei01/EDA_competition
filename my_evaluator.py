@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-15 16:54:11
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-15 17:20:44
+LastEditTime : 2023-11-21 16:56:11
 FilePath     : \EDA_competition\my_evaluator.py
 Description  : 
 '''
@@ -11,7 +11,7 @@ from public.evaluator import *
 
 
 class Cell(Cell):
-    """ Dual row cell.
+    """ 继承并重构Cell类方法,方便获取和打印相关参数
     """
 
     def __init__(self, name, pins):

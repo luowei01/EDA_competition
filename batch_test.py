@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-09 22:16:58
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-19 12:13:27
+LastEditTime : 2023-11-21 19:18:16
 FilePath     : \EDA_competition\batch_test.py
 Description  : 批量运行demo,测试得分
 '''
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         start = time.time()
         if len(sys.argv) < 2:
             os.system(
-                f"python main.py {cell_spi_path} {cell_name} {save_dir}/{cell_name}.json")
+                f"python main.py -n {cell_spi_path} -c {cell_name} -o {save_dir}/{cell_name}.json")
         else:
             os.system(
                 f"TransistorPlacer.exe -n {cell_spi_path} -c {cell_name} -o {save_dir}/{cell_name}.json")

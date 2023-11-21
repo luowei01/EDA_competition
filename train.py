@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-07 16:17:42
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-10 19:19:26
+LastEditTime : 2023-11-21 17:08:56
 FilePath     : \EDA_competition\train.py
 Description  : 
 '''
@@ -11,13 +11,14 @@ import json
 import numpy as np
 from tqdm import tqdm
 from data_parse import Parser
-from solver import encode, decode, REINFORCE, v_compute, get_score, Action_num
+from solver import encode, decode, REINFORCE, sol_update, get_score, Action_num
 from data_parse import Parser
-cell_spi_path, test_case_name = "public/cells.spi", "SNDSRNQV4"
+cell_spi_path, cell_name = "public/cells.spi", "SNDSRNQV4"
 paser = Parser()
-mos_list, pins = paser.parse(cell_spi_path, test_case_name)
-encode_dict, decode_dict = paser.build_code_dict(test_case_name)
+mos_list, pins = paser.parse(cell_spi_path, cell_name)
+encode_dict, decode_dict = paser.build_code_dict(cell_name)
 pins_code = [encode_dict['net'][net] for net in pins]
+ref_width = paser.cell_ref_width_dict[cell_name]
 if __name__ == "__main__":
     learning_rate = 1e-3
     num_episodes = 1000
@@ -28,6 +29,7 @@ if __name__ == "__main__":
     state_dim = 6
     action_dim = Action_num
     agent = REINFORCE(state_dim, action_dim, learning_rate, gamma, device)
+    agent.policy_net = torch.load('model.pt')
     state = encode(mos_list, encode_dict)
     """测试网络输入输出"""
     state_tensor = torch.tensor([state],
@@ -57,8 +59,8 @@ if __name__ == "__main__":
                     # while reward < 90:
                     action = agent.take_action(state)
                     # next_state, reward, done, _ = env.step(action)
-                    next_state = v_compute(state, action)
-                    reward = get_score(next_state, pins_code)
+                    next_state = sol_update(state, action)
+                    reward = get_score(next_state, pins_code, ref_width)
                     transition_dict['states'].append(state)
                     transition_dict['actions'].append(action)
                     transition_dict['next_states'].append(next_state)

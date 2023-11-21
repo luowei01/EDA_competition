@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-19 18:59:42
+LastEditTime : 2023-11-21 17:18:15
 FilePath     : \EDA_competition\data_parse.py
 Description  : 
 '''
@@ -87,7 +87,7 @@ class Parser:
                                 self.cell_words_dict[cell_name].append(params)
             if not find_cell:
                 print(
-                    f"未能成功在 {self.path} 中搜索到名为 {cell_name} 的cell,请重新确认输入参数!\nUsage: python main.py  <netlist> <cell_name> <save_path>")
+                    f"未能成功在 {self.path} 中搜索到名为 {cell_name} 的cell,请重新确认输入参数!\nUsage:python main.py  -n <netlist> -c <cell_name> -o <save_path>")
                 exit()
             return self.cell_dict[cell_name], self.cell_pins_dict[cell_name]
         else:
@@ -146,22 +146,10 @@ class Parser:
 
 
 if __name__ == "__main__":
-    from solver import encode, decode
-    from solver_cplus import run_SA
-    from my_evaluator import evaluator_case
-    import time
-    import json
-    start = time.time()
-    cell_spi_path, cell_name = "public/cells.spi", "INR4D2"
+    cell_spi_path, cell_name = "public/cells.spi", "BUFFD2"
     paser = Parser()
     mos_list, pins = paser.parse(cell_spi_path, cell_name)
     encode_dict, decode_dict = paser.build_code_dict(cell_name)
     pins_code = [encode_dict['net'][net] for net in pins]
     ref_width = paser.cell_ref_width_dict[cell_name]
-    s = encode(mos_list, encode_dict)
-    best_s = run_SA(s, pins_code, ref_width)
-    result = decode(best_s, decode_dict)
-    save_path = 'output.json'
-    with open(save_path, 'w') as f:
-        json.dump(result, f, sort_keys=False, indent=4)
-    print(time.time()-start)
+    print(f"cell:{cell_name}\n晶体管数量:{len(mos_list)}")
