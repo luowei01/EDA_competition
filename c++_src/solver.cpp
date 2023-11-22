@@ -339,6 +339,10 @@ void Solver_SA::annealing()
     temperature = initialTemperature;
     while (temperature > endTemperature)
     {
+        if (best_score > 97)
+        {
+            break;
+        }
         for (int i = 0; i < iterationsPerTemperature; ++i)
         {
             int action = rand() % 4;
@@ -377,10 +381,6 @@ vector<vector<vector<int>>> Solver_SA::run_SA()
         reset();
         init_Temperature();
         annealing();
-        if (best_score > 97)
-        {
-            break;
-        }
     }
     // 持续优化15轮
     current_sol = best_sol;
@@ -389,10 +389,6 @@ vector<vector<vector<int>>> Solver_SA::run_SA()
     {
         init_Temperature();
         annealing();
-        if (best_score > 97)
-        {
-            break;
-        }
     }
     cout << "bestScore:" << best_score << endl;
     return best_sol;
