@@ -393,7 +393,7 @@ vector<vector<vector<int>>> Solver_SA::run_SA()
     cout << "bestScore:" << best_score << endl;
     return best_sol;
 }
-extern "C" int *run_SA(const int *array, const int m, const int n, const int p, const int *pinsCode, const int pinsCodeSize, const int ref_width)
+extern "C" __declspec(dllexport) int *run_SA(const int *array, const int m, const int n, const int p, const int *pinsCode, const int pinsCodeSize, const int ref_width)
 {
     Solver_SA solver = Solver_SA(array, m, n, p, pinsCode, pinsCodeSize, ref_width);
     vector<vector<vector<int>>> best_sol = solver.run_SA();
@@ -411,7 +411,7 @@ extern "C" int *run_SA(const int *array, const int m, const int n, const int p, 
     }
     return result;
 }
-extern "C" void destroy_array(int *result)
+extern "C" __declspec(dllexport) void destroy_array(int *result)
 {
     delete[] result;
 }

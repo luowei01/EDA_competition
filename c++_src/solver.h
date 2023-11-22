@@ -96,5 +96,5 @@ public:
     vector<vector<vector<int>>> run_SA(); // 运行模拟退火算法，并返回最优解
     void annealing();                     // 进行退火优化(一轮)
 };
-extern "C" int *run_SA(const int *array, const int m, const int n, const int p, const int *pinsCode, const int pinsCodeSize, const int ref_width);
-extern "C" void destroy_array(int *result);
+extern "C" __declspec(dllexport) int *run_SA(const int *array, const int m, const int n, const int p, const int *pinsCode, const int pinsCodeSize, const int ref_width);
+extern "C" __declspec(dllexport) void destroy_array(int *result);
