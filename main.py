@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-07 14:48:53
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-22 11:44:07
+LastEditTime : 2023-11-22 17:19:11
 FilePath     : \EDA_competition\main.py
 Description  : 
 '''
@@ -171,6 +171,7 @@ if __name__ == "__main__":
     ref_width = paser.cell_ref_width_dict[cell_name]
     print(f"cell:{cell_name}\n晶体管数量:{len(mos_list)}")
     print(f"使用{[i.name for i in use_algorithms]}算法优化...")
+    sys.stdout.flush()
     """初始化,定义相关算法参数"""
     if Algorithm.RL in use_algorithms:
         device = torch.device(
@@ -197,3 +198,4 @@ if __name__ == "__main__":
                   f, sort_keys=False, indent=4)
     evaluator_case(save_path, cell_name, cell_spi_path)
     print(f"耗时:{time.time()-start}s\n"+'*'*150)
+    sys.stdout.flush()

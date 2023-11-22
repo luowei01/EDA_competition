@@ -224,15 +224,12 @@ double Solver_SA::getScore(const vector<vector<vector<int>>> &mosListEncode1)
         {
             pin_spacing.push_back((pin_coords[i + 1] - pin_coords[i]) / width);
         }
-        double sum = accumulate(pin_spacing.begin(), pin_spacing.end(), 0.0,
-                                [](double acc, double val)
-                                { return acc + val; });
+        double sum = accumulate(pin_spacing.begin(), pin_spacing.end(), 0.0);
 
         double meanSpacing = sum / pin_spacing.size();
-        double sumSquaredDifferences = accumulate(pin_spacing.begin(), pin_spacing.end(), 0.0,
-                                                  [meanSpacing](double acc, double val)
-                                                  { return acc + pow(val - meanSpacing, 2); });
-
+        double sumSquaredDifferences = 0.0;
+        std::for_each(pin_spacing.begin(), pin_spacing.end(), [&](const double d)
+                      { sumSquaredDifferences += pow(d - meanSpacing, 2); });
         pin_access = sqrt(sumSquaredDifferences / pin_spacing.size());
     }
     // 设置bbox
@@ -251,7 +248,7 @@ double Solver_SA::getScore(const vector<vector<vector<int>>> &mosListEncode1)
     double min_gap = max(0.0, (upperGraph.getOddNum() + lowerGraph.getOddNum() - 4) / 2.0);
     double ref_width1 = (min_gap + ref_width) / 2.0;
     // cout << "width:" << width << " bbox:" << bbox << "ref_width" << ref_width << "pin_access" << pin_access
-    //      << " symmetric" << symmetric << " drc" << drc << endl;
+    //  << " symmetric" << symmetric << " drc" << drc << endl;
     // 设置score
     double ws = 40.0 * (1.0 - (width - ref_width1) / (ref_width1 + 20.0));
     double bs = min(20.0, 20.0 * (1.0 - (bbox - ref_width1 * (pinsCodeSize - 1)) / 60.0));
