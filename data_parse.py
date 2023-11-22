@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-21 17:18:15
+LastEditTime : 2023-11-22 11:31:06
 FilePath     : \EDA_competition\data_parse.py
 Description  : 
 '''
@@ -101,6 +101,7 @@ class Parser:
                         self.cell_pins_dict[cell_name] = [net for net in words[2:] if net.upper() not in ["VDD", "VSS"]]
                         self.cell_dict[cell_name] = []
                         self.cell_words_dict[cell_name] = []
+                        self.cell_ref_width_dict[cell_name] = 0
                         continue
                     line_data = re.match(self.pattern, line)
                     if line_data:
@@ -109,6 +110,7 @@ class Parser:
                             w, l = l, w
                         params = [name, left, mid, right, type, int(
                             float(w[:-1])*1000) if w[-1] == 'u' else int(float(w[:-1])), int(float(l[:-1])*1000) if l[-1] == 'u' else int(float(l[:-1]))]
+                        self.cell_ref_width_dict[cell_name] += params[-2]//200 if params[-2] > 220 else 1
                         if params[-2] > 220:
                             if params[-2] % 2 == 0:
                                 params[-2] = int(params[-2]/2)
@@ -135,8 +137,10 @@ class Parser:
         words_list = np.array(self.cell_words_dict[cell_name])
         self.cell_encode_dict[cell_name]['name'] = dict(zip(words_list[:, 0], [i for i in range(1, len(words_list[:, 0])+1)]))  # 0表示虚拟mos
         nets = set(sum(words_list[:, 1:4].tolist(), []))
-        nets.remove('VDD')
-        nets.remove('VSS')
+        if 'VDD' in nets:
+            nets.remove('VDD')
+        if 'VSS' in nets:
+            nets.remove('VSS')
         self.cell_encode_dict[cell_name]['net'] = {'VSS': 0, 'VDD': 1}
         self.cell_encode_dict[cell_name]['net'].update(dict(zip(nets, [i for i in range(2, len(nets)+2)])))
         self.cell_decode_dict[cell_name] = {}
@@ -146,10 +150,11 @@ class Parser:
 
 
 if __name__ == "__main__":
-    cell_spi_path, cell_name = "public/cells.spi", "BUFFD2"
+    cell_spi_path = "public/cells.spi"
     paser = Parser()
-    mos_list, pins = paser.parse(cell_spi_path, cell_name)
-    encode_dict, decode_dict = paser.build_code_dict(cell_name)
-    pins_code = [encode_dict['net'][net] for net in pins]
-    ref_width = paser.cell_ref_width_dict[cell_name]
-    print(f"cell:{cell_name}\n晶体管数量:{len(mos_list)}")
+    paser.parse(cell_spi_path)
+    for cell_name in paser.cell_dict:
+        print(f"cell:{cell_name} 晶体管数量:{len(paser.cell_dict[cell_name])}")
+        encode_dict, decode_dict = paser.build_code_dict(cell_name)
+        pins_code = [encode_dict['net'][net] for net in paser.cell_pins_dict[cell_name]]
+        ref_width = paser.cell_ref_width_dict[cell_name]

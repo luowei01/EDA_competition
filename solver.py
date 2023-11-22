@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-21 17:23:09
+LastEditTime : 2023-11-22 11:46:32
 FilePath     : \EDA_competition\solver.py
 Description  : 
 '''
@@ -165,8 +165,10 @@ def get_score(mos_list_encode1, pins_code, ref_width1):
         pin_access = np.std(np.array(pin_spacing))
     # set bbox
     bbox = 0
-    del net_persions[0]  # VSS
-    del net_persions[1]  # VDD
+    if 0 in net_persions:  # VSS,VDD不计算线长
+        del net_persions[0]  # VSS
+    if 1 in net_persions:
+        del net_persions[1]  # VDD
     for net, persions in net_persions.items():
         bbox += persions[-1]-persions[0]
 

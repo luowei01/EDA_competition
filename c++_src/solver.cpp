@@ -241,6 +241,8 @@ double Solver_SA::getScore(const vector<vector<vector<int>>> &mosListEncode1)
     net_positions.erase(1); // VDD
     for (auto &entry : net_positions)
     {
+        // if (entry.first == 0 || entry.first == 1)
+        //     continue;
         bbox += entry.second.back() - entry.second.front();
     }
     // 设置ref_width
