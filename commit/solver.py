@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-23 12:16:58
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-23 12:31:20
+LastEditTime : 2023-11-23 13:08:24
 FilePath     : \EDA_competition\commit\solver.py
 Description  : 定义算法的目标函数、邻域解生成方法、解的编解码方法
 '''
@@ -12,7 +12,6 @@ import numpy as np
 import copy
 import random as rd
 import networkx as nx
-import torch.nn.functional as F
 
 
 class EulerGraph:
