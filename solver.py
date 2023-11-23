@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-22 18:47:09
+LastEditTime : 2023-11-23 12:13:24
 FilePath     : \EDA_competition\solver.py
 Description  : 
 '''
@@ -367,7 +367,7 @@ class REINFORCE:
 
 
 def use_cplus_run_SA(init_state, pinsCode, ref_width):
-    cpp_lib = ctypes.CDLL('solver.dll', winmode=0)
+    cpp_lib = ctypes.CDLL('lib/solver.dll', winmode=0)
     my_list = np.array(sum(sum(init_state, []), []), dtype=np.int32)
     m, n, p, pinsCodeSize = 2, len(init_state[0]), 6, len(pinsCode)
     my_array = (ctypes.c_int * len(my_list))(*my_list)
