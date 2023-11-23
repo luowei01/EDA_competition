@@ -1,21 +1,21 @@
 '''
 Author       : luoweiWHUT 1615108374@qq.com
-Date         : 2023-11-15 16:54:11
+Date         : 2023-11-23 12:25:35
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-23 12:51:07
-FilePath     : \EDA_competition\my_evaluator.py
-Description  : 
+LastEditTime : 2023-11-23 12:51:22
+FilePath     : \EDA_competition\commit\my_evaluator.py
+Description  : 继承并重构Cell类方法,方便获取和打印相关参数
 '''
 import json
-from public.evaluator import *
+from evaluator import *
 
 
-class Cell(Cell):
+class my_Cell(Cell):
     """ 继承并重构Cell类方法,方便获取和打印相关参数
     """
 
     def __init__(self, name, pins):
-        super(Cell, self).__init__(name, pins)
+        super(my_Cell, self).__init__(name, pins)
 
     def evaluate(self, runtime, return_flag=False):
         for net, r in self.net_pos.items():
@@ -56,7 +56,7 @@ def evaluator_case(placement_file, cell_name, netlist_file, runtime=0):
         else:
             ref_width += 1
 
-    cell = Cell(cell_name, pins)
+    cell = my_Cell(cell_name, pins)
     # get cell width
     width = 0
     for transistor_name, properties in placement.items():
@@ -77,7 +77,6 @@ def evaluator_case(placement_file, cell_name, netlist_file, runtime=0):
     min_gap = max(0.0, (upper_graph.get_odd_num() +
                   lower_graph.get_odd_num() - 4) / 2)
     cell.ref_width = (min_gap + ref_width) / 2
-
     # check and get score
     if cell.check(transistor_dic):
         return cell.evaluate(runtime, return_flag=True)

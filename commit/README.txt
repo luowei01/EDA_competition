@@ -1,0 +1,1 @@
+Usage : python main.py - n<netlist> - c<cell_name> - o<save_path>
