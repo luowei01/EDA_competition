@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-10-12 11:47:36
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-23 12:13:24
+LastEditTime : 2023-11-24 16:31:19
 FilePath     : \EDA_competition\solver.py
 Description  : 
 '''

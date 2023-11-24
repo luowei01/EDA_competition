@@ -12,3 +12,4 @@ difficult_case
 low_score_case.txt
 result.csv
 public/__pycache__/evaluator.cpython-39.pyc
+build/
