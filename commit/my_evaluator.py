@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-23 12:25:35
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-23 12:51:22
+LastEditTime : 2023-12-05 16:12:28
 FilePath     : \EDA_competition\commit\my_evaluator.py
 Description  : 继承并重构Cell类方法,方便获取和打印相关参数
 '''
@@ -32,12 +32,12 @@ class my_Cell(Cell):
         rs = 10 * (1 / (1 + math.exp(runtime / 3600 - 1)))
         self.score = ws + bs + ps + ss + ds + rs
         if return_flag:
+            return [self.score, ws, bs, ps, self.symmetric, self.drc, rs]
+        else:
             print("Cell parms : (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %ds)"
                   % (self.width, self.bbox, self.pin_access, self.symmetric, self.drc, runtime))
             print("score %f (ws: %d, bs: %f, ps: %f, symmetric: %d, drc: %d, rd: %d)"
                   % (self.score, ws, bs, ps, self.symmetric, self.drc, rs))
-        else:
-            return [self.score, ws, bs, ps, self.symmetric, self.drc, rs]
 
 
 def evaluator_case(placement_file, cell_name, netlist_file, runtime=0):
