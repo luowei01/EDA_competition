@@ -2,7 +2,7 @@
 Author       : luoweiWHUT 1615108374@qq.com
 Date         : 2023-11-15 16:54:11
 LastEditors  : luoweiWHUT 1615108374@qq.com
-LastEditTime : 2023-11-23 12:51:07
+LastEditTime : 2023-12-05 16:05:55
 FilePath     : \EDA_competition\my_evaluator.py
 Description  : 
 '''
@@ -32,15 +32,18 @@ class Cell(Cell):
         rs = 10 * (1 / (1 + math.exp(runtime / 3600 - 1)))
         self.score = ws + bs + ps + ss + ds + rs
         if return_flag:
+            return [self.score, ws, bs, ps, self.symmetric, self.drc, rs]
+        else:
             print("Cell parms : (width: %d, bbox: %f, pin_access: %f, symmetric: %d, drc: %d, runtime: %ds)"
                   % (self.width, self.bbox, self.pin_access, self.symmetric, self.drc, runtime))
             print("score %f (ws: %d, bs: %f, ps: %f, symmetric: %d, drc: %d, rd: %d)"
                   % (self.score, ws, bs, ps, self.symmetric, self.drc, rs))
-        else:
-            return [self.score, ws, bs, ps, self.symmetric, self.drc, rs]
+
+            
+            
 
 
-def evaluator_case(placement_file, cell_name, netlist_file, runtime=0):
+def evaluator_case(placement_file, cell_name, netlist_file, runtime=0,return_flag=False):
     # read placement file
     placement_stream = open(placement_file, "r")
     placement_dic = json.load(placement_stream)
@@ -80,4 +83,4 @@ def evaluator_case(placement_file, cell_name, netlist_file, runtime=0):
 
     # check and get score
     if cell.check(transistor_dic):
-        return cell.evaluate(runtime, return_flag=True)
+        return cell.evaluate(runtime, return_flag)
