@@ -50,5 +50,6 @@
         "numeric": "cpp",
         "random": "cpp",
         "unordered_set": "cpp"
-    }
+    },
+    "workbench.tree.enableStickyScroll": true
 }
